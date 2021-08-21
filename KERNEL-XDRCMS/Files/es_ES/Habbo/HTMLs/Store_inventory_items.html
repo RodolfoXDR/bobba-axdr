@@ -1,0 +1,33 @@
+<ul id="inventory-item-list">
+<?php
+$c = 0;
+$i = [];
+if($getMyStickers && $getMyStickers->num_rows > 0):
+	while($Row = $getMyStickers->fetch_assoc()):
+		if(!isset($i[$Row['skin']]))	$i[$Row['skin']] = ['id' => $Row['id'], 'type' => $Row['type'], 'count' => 1];
+		else	$i[$Row['skin']]['count']++;
+	endwhile;
+	foreach($i as $Key => $Row):
+			if($c === 0)	header('X-JSON: [["Inventario","Tienda"],["' . $Key . '","' . $Key . '", "", "' . $Row['type'] . '",null,1]]');
+			if($c !== 20)	$c++;
+?>
+	<li id="inventory-item-<?php echo $Row['id']; ?>" title="">
+		<div class="webstore-item-preview <?php echo $Key; ?> <?php echo $Row['type']; ?>">
+			<div class="webstore-item-mask">
+				<?php if($Row['type'] !== 'Background' & $Row['count'] > 1): ?><div class="webstore-item-count"><div>x<?php echo $Row['count']; ?></div></div><?php endif; ?>
+			</div>
+		</div>
+	</li>
+<?php
+	endforeach;
+else:
+	header('X-JSON: [["Inventario","Tienda"],[]]');
+endif;
+if($c < 20):
+	while($c < 20):
+		$c++;
+		echo '<li class="webstore-item-empty"></li>';
+	endwhile;
+endif;
+?>
+</ul>

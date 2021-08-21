@@ -1,0 +1,108 @@
+<div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
+	<div class="wrapper" style="width: 1120px;">
+		<div class="column" style="width: 500px;">
+			<?php 
+				$Mquery = SQL::query('SELECT * FROM permissions_groups ORDER BY id DESC LIMIT 1,5 ');
+				if($Mquery != null && $Mquery->num_rows != 0):
+						while($Row = $Mquery->fetch_assoc()):
+			?>
+			<div class="plugin">
+				<div class="title-<?php echo $Row['tab_color']; ?>">
+					<?php echo $Row['name']; ?>
+				</div>
+				<div class="content staffs">
+				<?php 
+					$query = SQL::query('SELECT users.id, users.look, users.username, users.task, users.motto, users.online, xdr_users.web_online FROM users, xdr_users WHERE users.id = xdr_users.id AND users.rank = '. $Row['id']);
+					if($query != null && $query->num_rows != 0):
+						while($uRow = $query->fetch_assoc()):	
+							$Status = ($uRow['online'] == 1) ? 'Online' : 'Offline';
+				?>
+					<div id="character">
+						<div id="base">
+							<img src="<?php echo LOOK . $uRow['look']; ?>&direction=3&gesture=sml&size=m&headonly=0" alt="">
+						</div>
+						<div id="data">
+							<h2><?php echo $uRow['username']; ?></h2>
+							
+							<?php if($uRow['task'] != '' && $uRow['task'] != null):?>
+								<div id="task" class="blue"><?php echo $uRow['task']; ?></div>
+							<?php endif; ?>
+							
+							<div id="status" class="<?php echo $Status; ?>"></div>
+							
+							<div id="motto"><?php echo $uRow['motto']; ?></div>
+							<div id="last_visit">Última Visita: <b><?php echo Tool::ParseUnixTime($uRow['web_online']); ?></b></div>
+						</div>
+						<div id="status"></div>
+					</div>
+				<?php endwhile; 
+					else: ?>
+						<p>No hay usuarios con este rango.</p>
+				<?php endif; ?>
+				</div>
+			</div>
+			<?php
+				endwhile;
+			endif;
+			?>
+		</div>
+		
+		<div class="column" style="width: 500px;">			
+			<div class="plugin">
+				<div class="title-landing">¿Qué son los staffs?</div>
+				<div class="content">
+					<p>
+						Son los que están detrás de <?php echo HotelName; ?>, todos aquellos que pasan el día estrujándose la cabeza en busca de nuevas ideas y para sacar adelante todas esas locuras. Siempre atentos para que todo funcione sin problemas y, por encima de todo, que <?php echo HotelName; ?> sea el lugar seguro del que sentirse orgullosos.  Criticados, admirados,..... siempre tratan de hacerlo lo mejor posible.
+						<br><br>
+						Los puedes distinguir al pinchar sobre ellos, siempre llevan su respectiva placa bien visible.
+						<br><br>
+						¡Conócelos!
+					</p>
+					<div id="staffway"></div>
+				</div>
+			</div>
+			<?php 
+				$Mquery = SQL::query('SELECT * FROM permissions_groups ORDER BY id DESC LIMIT 6,2 ');
+				if($Mquery != null && $Mquery->num_rows != 0):
+						while($Row = $Mquery->fetch_assoc()):
+			?>
+			<div class="plugin">
+				<div class="title-<?php echo $Row['tab_color']; ?>"><?php echo $Row['name']; ?></div>
+				<div class="content staffs">
+				<?php 
+					$query = SQL::query('SELECT users.id, users.look, users.username, users.task, users.motto, users.online, xdr_users.web_online FROM users, xdr_users WHERE users.id = xdr_users.id AND users.rank = '. $Row['id']);
+					if($query != null && $query->num_rows != 0):
+						while($uRow = $query->fetch_assoc()):	
+							$Status = ($uRow['online'] == 1) ? 'Online' : 'Offline';
+				?>
+					<div id="character">
+						<div id="base">
+							<img src="<?php echo LOOK . $uRow['look']; ?>&direction=3&gesture=sml&size=m&headonly=0" alt="">
+						</div>
+						<div id="data">
+							<h2><?php echo $uRow['username']; ?></h2>
+							
+							<?php if($uRow['task'] != '' && $uRow['task'] != null):?>
+								<div id="task" class="blue"><?php echo $uRow['task']; ?></div>
+							<?php endif; ?>
+							
+							<div id="status" class="<?php echo $Status; ?>"></div>
+							
+							<div id="motto"><?php echo $uRow['motto']; ?></div>
+							<div id="last_visit">Última Visita: <b><?php echo Tool::ParseUnixTime($uRow['web_online']); ?></b></div>
+						</div>
+						<div id="status"></div>
+					</div>
+				<?php endwhile; 
+					else: ?>
+						<p>No hay usuarios con este rango.</p>
+				<?php endif; ?>
+				</div>
+			</div>
+			<?php
+				endwhile;
+			endif;
+			?>
+		</div>
+	</div>	
+</div>

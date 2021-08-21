@@ -1,0 +1,80 @@
+<?php
+$sql = SQL::query('SELECT users.username, users.look, users.online, xdrcms_guestbook.id, xdrcms_guestbook.userid, xdrcms_guestbook.message, xdrcms_guestbook.time FROM users, xdrcms_guestbook WHERE xdrcms_guestbook.widget_id = ' . $WidgetId . ' AND xdrcms_guestbook.userid = users.id ORDER BY xdrcms_guestbook.id DESC');
+$count = ($sql) ? $sql->num_rows : 0;
+
+$status = ($row['content'] === 'private') ? 'private' : 'public';
+?>
+
+<div class="movable widget GuestbookWidget" id="widget-<?php echo $WidgetId; ?>" style=" left: <?php echo $row['position_left']; ?>px; top: <?php echo $row['position_top']; ?>px; z-index: <?php echo $row['position_z']; ?>;">
+<div class="<?php echo $row['skin']; ?>">
+	<div class="widget-corner" id="widget-<?php echo $WidgetId; ?>-handle">
+		<div class="widget-headline"><h3>
+		<?php if($edit_mode) { ?>
+<img src="<?php echo RES; ?>images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button" id="widget-<?php echo $WidgetId; ?>-edit" />
+<script type="text/javascript">
+var editButtonCallback = function(e) { openEditMenu(e, <?php echo $WidgetId; ?>, "widget", "widget-<?php echo $WidgetId; ?>-edit"); };
+Event.observe("widget-<?php echo $WidgetId; ?>-edit", "click", editButtonCallback);
+Event.observe("widget-<?php echo $WidgetId; ?>-edit", "editButton:click", editButtonCallback); 
+</script>
+<?php } ?>
+<span class="header-left">&nbsp;</span><span class="header-middle">Mi Libro de invitados (<span id="guestbook-size"><?php echo $count; ?></span>) <span id="guestbook-type" class="<?php echo $status; ?>"><?php if($status == "private"){ ?><img src="<?php echo RES; ?>images/groups/status_exclusive.gif" title="S�lo para miembros" alt="S�lo para miembros"/><?php } ?></span></span><span class="header-right">&nbsp;</span></h3>
+
+		</div>	
+	</div>
+	<div class="widget-body">
+		<div class="widget-content">
+<div id="guestbook-wrapper" class="gb-public">
+<ul class="guestbook-entries" id="guestbook-entry-container">
+<?php if($count == 0): ?>
+	<div id="guestbook-empty-notes">Este Libro est� vac�o.</div>
+<?php
+else:
+	while ($mRow = $sql->fetch_assoc()): ?>
+		<li id="guestbook-entry-<?php echo $mRow['id']; ?>" class="guestbook-entry">
+		<div class="guestbook-author">
+			<img src="<?php echo LOOK . $mRow['look']; ?>&direction=4&head_direction=4&gesture=sml&action=&size=s" alt="<?php echo $mRow['username']; ?>" title="<?php echo $mRow['username']; ?>"/>
+		</div>
+			<div class="guestbook-actions">
+				<?php if(User::$Data['id'] == $mRow['userid'] || User::$Data['rank'] > 5): ?><img src="<?php echo RES; ?>images/myhabbo/buttons/delete_entry_button.gif" id="gbentry-delete-<?php echo $mRow['id']; ?>" class="gbentry-delete" style="cursor:pointer" alt=""/><br/><?php endif; ?>
+			</div>
+		<div class="guestbook-message">
+			<div class="<?php echo ($mRow['online'] == '1') ? 'on' : 'off'; ?>line">
+				<a href="<?php echo URL; ?>/home/<?php echo $mRow['username']; ?>"><?php echo $mRow['username']; ?></a>
+			</div>
+			<p><?php echo Tool::DecodeBBText($mRow['message']); ?></p>
+		</div>
+		<div class="guestbook-cleaner">&nbsp;</div>
+		<div class="guestbook-entry-footer metadata"><?php echo date('d-M-o G:i:s', $mRow['time']); ?></div>
+	</li>
+	<?php endwhile;	endif; ?>
+</ul></div>
+<?php if(User::$Logged):
+	if(isset($_SESSION['guestBook']['lastEntry']) && (time() - $_SESSION['guestBook']['lastEntry']) < 60):
+		echo 'You have to wait for a while before you can comment again. ';
+	else:
+?>
+	<div class="guestbook-toolbar clearfix">
+	<a href="#" class="new-button envelope-icon" id="guestbook-open-dialog">
+
+	<b><span></span>Publicar un nuevo mensaje</b><i></i>
+	</a>
+	</div>
+<?php
+	endif;
+endif;
+?>
+<script type="text/javascript">	
+	document.observe("dom:loaded", function() {
+		var gb<?php echo $WidgetId; ?> = new GuestbookWidget('<?php echo time(); ?>', '<?php echo $WidgetId; ?>', 500);
+		var editMenuSection = $('guestbook-privacy-options');
+		if (editMenuSection) {
+			gb<?php echo $WidgetId; ?>.updateOptionsList('public');
+		}
+	});
+</script>
+		<div class="clear"></div>
+		</div>
+	</div>
+</div>
+
+</div>

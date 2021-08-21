@@ -1,0 +1,443 @@
+/*  .  ,---.,-.-.,--.          */
+/*  |  |    | | |'--.          */
+/*  '  `---'` ' ''--'          */
+/* Mr.Mustache | iCMS v0.1 RESPONSIVE DESIGN ~ RELEASE 09252015 */
+/* Materialize ~ Material Design ~ Metro UI*/
+/* Revision: 01142016          */
+/* Revision: 05142016          */
+/* Revision: 05232016         */
+/* Updated Revision: 05312016
+/*---------------------------------------------------*/
+
+html, body {
+  background: #FAFAFA;
+  color: #1BBBFB;
+  font-family: sans-serif;
+  margin:0
+}
+
+h1,h2,h3,h4{
+	font-family: 'Roboto';
+}
+
+p{
+	font-family: 'Roboto';
+	font-size: 14px;
+    color: #6BD5FF;
+}
+
+a{
+ color:#fff;
+ font-family: 'Roboto';
+ border: none;
+ text-decoration: none;
+}
+
+#page {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+#actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 64px;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#actions .icon {
+  padding: 7px;
+  margin: 2px;
+  vertical-align: middle;
+}
+
+.icon p{
+	color:#fff;
+	font-size:22px;
+	font-family:'Roboto'
+}
+
+#actions .spacer {
+  flex: 1;
+}
+
+#actions svg {
+  display: inline-block;
+  pointer-events: none;
+  position: relative;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+}
+
+#title {
+  padding: 21px;
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  font-family: 'KeepCalm';
+  text-transform:lowercase;
+}
+
+#landing{
+	display: block;
+	position: relative;
+	background: #4285f4 url('http://www.sulake.com/images/red-carpet@1x-29b6be3ba6d90d8c691486826146cad8.png') no-repeat;
+	width: inherit;
+	height: 523px;
+}
+
+#hartic__form{
+	display: block;
+    position: relative;
+    float: left;
+    width: 25%;
+    height: 300px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px -6px black;
+    /* -webkit-border-radius: 4px; */
+    -moz-border-radius: 4px;
+    /* border-radius: 6px; */
+    padding: 24px;
+}
+
+#hartic__form h2{
+	font-family: 'Ubuntu Light';
+    font-weight: 100;
+}
+
+#content {
+	display: block;
+    position: relative;
+	background:#fafafa;
+    width: inherit;
+    height: 523px;
+}
+
+.table h2{
+	text-transform: uppercase;
+	color:#5795C3;
+}
+
+.table p{
+	text-indent: 30px;
+	color: #5795C3;
+	font-family: 'Roboto';
+}
+
+#sub-content{
+display: block;
+    position: relative;
+    background-color: #ECECEC;
+    float: left;
+    width: 100%;
+    height: 300px;
+}
+
+.error{
+	color: white;
+    background: #DE0032;
+    font-family: 'Roboto';
+    font-size: 10pt;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.arrow{
+	border-color: #ECECEC;
+    background: #ECECEC;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 70px;
+    margin: -55px 0 0 50px;
+    padding: 0;
+    width: 70px;
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    -moz-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    background-image: none;
+    top: 20px;
+	position:absolute;
+}
+
+@media all and (max-width: 600px){
+	#sub-content{
+		display: none;
+	}
+}
+
+@media all and (max-width: 1280px) { 
+	#hotel-bg{
+		display:none;
+	}
+	
+	.table{
+		width: 100%;
+		margin: 0 auto;
+	}
+	
+	.table h2{
+		text-align: center;
+	}
+	
+	.table{
+		font-size: 15px;
+		text-align: center;
+	}
+	
+	.card {
+		display: block;
+		position: relative;
+		width: 300px;
+		height: 300px;
+		border: none;
+		background: #fff;
+		box-shadow: 0 0 10px -6px black;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 6px;
+		margin: 26px auto;
+		padding: 24px;
+	}
+	
+	.relative{
+		display:none;
+	}
+	
+	#Habbo-group{
+		display: none;
+	}
+	
+	.register-button{
+	    background: rgba(0,0,0,0);
+		border: solid 1px #A9ABBB;
+		height: 40px;
+		width: 150px;
+		border-radius: 20px;
+		color: #8C8C8C;
+		font-family: 'Roboto';
+		font-size: 16px;
+		display: block;
+		line-height:40px;
+		text-align: center;
+		margin:0 auto;
+	}
+
+	.register-button:hover{
+		background-color: #015175;
+		border: 2px solid rgb(1, 81, 117);
+		color: white;
+	}
+	
+	.last_reg{
+		display: none;
+	}
+	
+	#last-new{
+		display:none;
+	}
+	
+	#advertisement{
+		height: 300px;
+		width: 470px;
+		padding: 20px;
+		margin-left: 65px;
+	}	
+
+}
+
+@media all and (min-width: 1280px){ 
+	#hotel-bg{
+		background-image: url('Images/Login/bg_hotel.out.png');
+		width: 960px;
+		margin-left: 240px;
+		position: absolute;
+		height: 192px; 
+		background-position: 0 -125px;
+	}
+	
+	.table{
+		width: 30%;
+		height: 480px;
+		float: left;
+		margin: 0 50px 40px 50px;
+	}
+
+	.table p{
+		font-size: 21px;
+	}
+
+	#habboway{
+		background-image: url(images/Login/credits_teaser.png);
+		display: block;
+		height: 245px;
+		width: 395px;
+		margin: 0 auto;
+	}
+
+	.card {
+		display: block;
+		position: relative;
+		float: left;
+		width: 25%;
+		height: 300px;
+		border: none;
+		background: #fff;
+		box-shadow: 0 0 10px -6px black;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 6px;
+		margin: 30px;
+		padding: 24px;
+	}
+	
+	.register-button{
+	background: rgb(21, 144, 0);
+		color: #FDFDFD;
+		font-size: 30px;
+		font-family: 'Roboto';
+		display: block;
+		width: 350px;
+		height: 80px;
+		text-align: center;
+		line-height: 80px;
+		border: 2px solid #00B900;
+		border-radius: 50px;
+		margin: 0px auto;
+	}
+
+	.register-button:hover{
+		background-color: #017501;
+		border: 2px solid rgb(17, 119, 0);
+		color: white;
+	}
+	
+	#Habbo-group{
+		background-image: url(images/Login/login_habbo_groups.png);
+		display: block;
+		height: 110px;
+		width: 315px;
+		margin: 0 auto 0;
+	}
+	
+	.last_reg{
+		width: 26%;
+		height: 480px;
+		float: left;
+		margin: 0 50px 40px 50px;
+		
+	}
+
+	.last_reg h2{
+		color: #1E86D2;
+		text-transform: uppercase;
+	}
+
+	#last_av{
+		width: 100%;
+		float: left;
+	}
+	
+	#avatar_img{
+		height: 100px;
+		width: 100px;
+		display: -webkit-inline-box;
+		overflow: hidden;
+		position: relative;
+		padding: 0;
+		margin-top: -35px;
+		float: left;
+	}
+
+	#avatar_name{
+		font-family: 'Roboto';
+		font-weight: 700;
+		font-size: 27px;
+		color: #4285F4;
+		height: 40px;
+		width: 240px;
+		float: left;
+	}
+
+	#avatar_sta{
+		float: left;
+		width: 240px;
+		height: 60px;
+		color: #929292;
+		font-size: 17px;
+		font-family: 'Roboto';
+	}
+
+	#last-new{
+	width: 40%;
+		height: 295px;
+		background: #F0F0F0;
+		margin-left: 137px;
+		border-left: solid 5px #D8D8D8;
+		padding-left: 15px;
+		padding-right: 15px;
+		padding-top: 8px;
+		float:left
+	}
+
+	#last-new h2{
+		color: #6D6D6D;
+		margin-bottom:10px
+	}
+
+	#last-new p{
+		color: #888888;
+		font-size: 14px;
+	}
+
+	#editor{
+		margin: 0;
+		height: 60px;
+	}
+
+	#editor #editor-av{
+		float: left;
+		height: 60px;
+		width: 60px;
+		background: #D8D8D8;
+		border-radius: 30px;
+	}
+
+	#editor #editor-nam{
+		color: #6D6D6D;
+		font-family: 'Roboto';
+		height: 60px;
+		line-height: 60px;
+		margin-left: 70px;
+		font-size: 14px;
+		text-transform: uppercase;
+	}
+
+	#advertisement{
+		float: left;
+		height: 300px;
+		width: 470px;
+		padding: 20px;
+		margin-left: 65px;
+	}
+	
+}

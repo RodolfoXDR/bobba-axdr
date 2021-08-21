@@ -1,0 +1,76 @@
+<div id="fb-root"></div>
+<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) 
+			return;
+		js = d.createElement(s); js.id = id;
+		js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0&appId=<?php echo Config::$FaceBook['app']['id']; ?>&autoLogAppEvents=1';
+		fjs.parentNode.insertBefore(js, fjs);
+	}
+	(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
+	<div class="wrapper">
+		<div class="column" style="width: 750px;">
+		
+		<div id="article_interface">
+			<div id="article_header" style="background: url('<?php echo $queryRow['BackGroundImage']; ?>') no-repeat #c7c7c7;">
+				<div id="article_title"><h2 style="margin: 0;font-size: 23pt;font-family: 'Roboto Light';"><?php echo $queryRow['Title']; ?></h2></div>
+				<div id="article_information"><i><div id="article_date"><?php echo (is_numeric($queryRow['TimeCreated'])) ? date('M d, Y', $queryRow['TimeCreated']) : '--';?></i> |</div><i><b><?php echo $Category; ?></b></i></div>
+				<div id="article_description">
+				<?php echo $queryRow['Summary']; ?>
+				</div>
+			</div>
+			<div id="article_content">
+				<?php echo $queryRow['Body']; ?>
+			</div>
+		</div>
+
+		<div class="plugin">
+			<div class="title-comment">Comentarios</div>
+			<div class="content">
+				<center>
+					<div class="fb-comments" data-href="http://<?php echo URL; ?>/articles/<?php echo $queryRow['Id']; ?>-<?php echo str_replace(' ', '-', strtolower($queryRow['Title'])); ?>" data-numposts="5"></div>
+				</center>
+			</div>
+		</div>
+		
+		
+		</div>
+		<div class="column" style="width: 350px;">
+			<!--<div id="selector">
+				<b>Show me news about:</b>
+				<a href="<?php echo URL; ?>/categories/all/1">All</a> |
+				<a href="#">Events</a> |
+				<a href="#">Updates</a> |
+				<a href="#">Competitions & polls</a> |
+				<a href="#">Others</a>
+			</div>-->
+			
+			
+			<div class="plugin">
+				<div class="title-landing">Últimas Noticias</div>
+				<div class="content articles">
+				<?php foreach(Cache::GetArticles() as $article): ?>
+					<li><a href="<?php echo URL; ?>/articles/<?php echo $article['Id']; ?>-<?php echo str_replace(' ', '-', strtolower($article['Title'])); ?>"><?php echo $article['Title']; ?></a> <b>(<?php echo (is_numeric($article['TimeCreated'])) ? date('M d, Y', $article['TimeCreated']) : '--';?>)</b></li>
+				<?php endforeach; ?>
+				</div>
+			</div>
+			
+			<div class="plugin">
+				<div class="title-landing">Noticias Relacionadas</div>
+				<div class="content articles">
+					<?php foreach(Cache::GetArticles() as $article): 
+							if($queryRow == $article['Category']): ?>
+						<li><a href="<?php echo URL; ?>/articles/<?php echo $article['Id']; ?>-<?php echo str_replace(' ', '-', strtolower($article['Title'])); ?>"><?php echo $article['Title']; ?></a> <b>(<?php echo (is_numeric($article['TimeCreated'])) ? date('M d, Y', $article['TimeCreated']) : '--';?>)</b></li>
+						<?php endif; endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>

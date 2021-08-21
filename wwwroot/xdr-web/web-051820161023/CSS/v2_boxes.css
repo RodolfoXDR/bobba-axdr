@@ -1,0 +1,790 @@
+/*---------------------------------------------------*/
+/*  .  ,---.,-.-.,--.          						 */
+/*  |  |    | | |'--.          						 */
+/*  '  `---'` ' ''--'          						 */
+/* Mr.Mustache | iCMS v0.1 DESIGN ~ RELEASE 09252015 */
+/* Materialize ~ Material Design ~ Metro UI 		 */
+/* Revision: 01142016          						 */
+/* Revision: 05142016          						 */
+/* Revision: 05232016          						 */
+/* Revision: 07052016          						 */
+/* Update Revision: 12262016   						 */
+/* LICENSE: PRIVATE		       						 */
+/*---------------------------------------------------*/
+
+.plugin{
+	width: inherit;
+    float: left;
+	box-shadow: -5px 5px 20px 0px #dedede;
+	border-radius: 3px;
+	background-color: #fff;
+    margin: 20px 0;	
+    color: black;
+    font-size: 12pt;
+}
+
+.plugin.maintenance{
+	background-color: #FF9800;
+}
+
+.plugin.badges{
+	margin: 140px 0 20px 0;
+}
+
+.plugin.badges:before{
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    background: url(https://habboo-a.akamaihd.net/habbo-web/america/en/assets/images/teaser_profile_badges.ca2f8790.png) no-repeat;
+    content: '';
+    display: block;
+    height: 140px;
+    width: 100%;
+    width: 100%;
+    position: relative;
+	margin: -140px 0 0 0;
+}
+
+.plugin.rooms{
+	margin: 140px 0 20px 0;
+}
+
+.plugin.rooms:before{
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    background: url(https://habboo-a.akamaihd.net/habbo-web/america/en/assets/images/teaser_profile_rooms.2596469e.png) no-repeat;
+    content: '';
+    display: block;
+    height: 140px;
+    width: 100%;
+    position: relative;
+	margin: -140px 0 0 0;
+}
+
+.plugin.fansites{
+	margin: 140px 0 20px 0;
+}
+
+.plugin.fansites:before{
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    background: url(https://habboo-a.akamaihd.net/c_images/Fansites/habbo_friends.png) no-repeat;
+    content: '';
+    display: block;
+    height: 140px;
+    width: 100%;
+    position: relative;
+	margin: -140px 0 0 0;
+}
+
+.plugin.groups{
+	margin: 140px 0 20px 0;
+}
+
+.plugin.groups:before{
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    background: url(https://habboo-a.akamaihd.net/habbo-web/america/en/assets/images/teaser_profile_groups.7bfaae43.png) no-repeat;
+    content: '';
+    display: block;
+    height: 140px;
+    width: 100%;
+    position: relative;
+	margin: -140px 0 0 0;
+}
+
+.plugin.top.respects{
+	margin: 110px 0 20px 0;
+}
+
+.plugin.top.respects:before{
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    background: url(http://images.habbo.com/c_images/catalogue/catalog_teaser_loyalty.gif) no-repeat;
+    content: '';
+    display: block;
+    height: 140px;
+    width: 100%;
+    position: relative;
+	margin: -140px 0 0 0;
+}
+
+.plugin.top.diamonds{
+	margin: 110px 0 20px 0;
+}
+
+.plugin.diamonds:before{
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    background: url(http://images.habbo.com/c_images/catalogue/catalog_teaser_diamonds.gif) no-repeat;
+    content: '';
+    display: block;
+    height: 140px;
+    width: 100%;
+    position: relative;
+	margin: -140px 0 0 0;
+}
+
+/* TITLES */
+
+[class*="title-"]{
+	position: relative;
+    color: white;
+    font-family: Ubuntu Light;
+    font-size: 15pt;
+    background-color: #c37300;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+    padding: 6px 12px;
+    text-transform: initial;
+}
+
+.title-purple{
+	background: #7e3878;
+}
+
+.title-lightpurple{
+	background: #9f00a7
+}
+
+.title-darkpurple{
+	background: #603cba
+}
+
+.title-magenta{
+	background: #ff0097
+}
+
+.title-teal{
+	background:  #00aba9
+}
+
+.title-darkteal{
+	background: #018280
+}
+
+.title-yellow{
+	background: #ffc40d
+}
+
+.title-gold{
+	background: #E0BD00
+}
+
+.title-brown{
+	background: #5d3a26
+}
+
+.title-landing{
+	background: #1f619e
+}
+
+.title-blue{
+    background: #457DFF
+}
+
+.title-darkblue{
+	background: #004d9e
+}
+
+.title-red{
+    background: #e21c49
+}
+
+.title-darkred{
+	background: #960000
+}
+
+.title-redpink{
+	background: #de0e57;
+}
+
+.title-green{
+	background: #61ad00
+}
+
+.title-lightgreen{
+	background: #99b433
+}
+
+.title-darkgreen{
+	background: #006f00
+}
+
+.title-emerald{
+	background: #018491
+}
+
+.title-lightbrown{
+	background: #FF9445
+}
+
+.title-orange{
+	background: #e3a21a
+}
+
+.title-darkorange{
+	background: #da532c
+}
+
+.title-darken{
+    background: #1d1d1d
+}
+
+.title-light{
+    background: #dedede;
+    color: #2d2d2d;
+}
+
+.title-facebook{
+	background: #3a5897
+}
+
+.title-twitter{
+	background: #1da1f2
+}
+
+.title-wine{
+    background: #480000;
+}
+
+.title-maintenance{
+	background: none;
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+
+/* CONTENT */
+
+
+.content{
+    padding: 10px 20px;
+	font-family: 'Ubuntu';
+	font-size: 12pt
+}
+
+.content.maintenance{
+	color: white;
+}
+
+.content p{
+	color: #000;
+}
+
+.content > .group{
+	float: left;
+    width: 50%;
+    padding: 15px 0;
+
+}
+
+.content > .group > #base{
+	float: left;
+}
+
+.content > .group #data{
+    float: left;
+    padding: 5px;
+}
+
+.content > .group #data > #name{
+	font-weight: bold;
+    color: #3c525d;
+}
+
+.content > .group #data > #members{
+	font-size: 10pt;
+    font-style: italic;
+    color: #607D8B;
+}
+
+.content.badges{
+	display: table-cell;
+}
+	
+.content.badges #badge{
+    text-align: center;
+    width: 95px;
+	float: left;
+}
+
+.content.badges #badge #image{
+    align-items: center;
+    border: 3px solid #960000;
+    border-radius: 50%;
+    display: flex;
+    height: 60px;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 60px;
+    margin: 0 auto;
+}
+
+.content.shop{}
+
+.content.shop > a{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+	margin: 3px 0;
+}
+
+.content.shop > a.red{
+	background: #de0025;
+}
+
+.content.shop > a.green{
+	background: #61a908;
+}
+
+.content.shop > a.blue{
+	background: #016ee6;
+}
+
+.content.shop > a.gray{
+	background: #808080;
+}
+
+.content.shop > a.orange{
+	background: #ffa900;
+}
+
+.content.rooms #room{
+	min-height: 70px;
+    float: left;
+    width: 50%;
+}
+
+.content.rooms #room #status{
+    align-items: center;
+    border: 3px solid #c37300;
+    border-radius: 50%;
+    display: flex;
+    height: 45px;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 45px;
+    float: left;
+    margin: 7px 0;
+}
+
+.content.rooms #room #information{
+	float: left;
+    height: 85px;
+    padding: 5px 0 0 15px;
+	font-family: 'Ubuntu Light'
+
+}
+
+.content.rooms #room #information #caption{
+font-size: 13pt;
+    font-family: Ubuntu;
+    font-weight: 700;
+    color: #bf7100;
+}
+
+.content.rooms #room #information #owner{
+	font-size: 10pt;
+}
+
+.content.rooms #room #information #count{
+	font-size: 10pt;
+}
+
+.content.rooms #room #access{
+	float: left;
+    height: 85px;
+    line-height: 85px;
+    padding: 0 0 0 60px;
+}
+
+.content.rooms #room #access a.enter__room{
+	color: #015d01;
+    text-decoration: none;
+    font-size: 20pt;
+}
+
+.content.settings li{
+	list-style: none;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dedede;
+}
+
+.content.settings a{
+	color: #444444;
+    text-decoration: none;
+}
+
+.content.articles li{
+    list-style: none;
+    margin-bottom: 10px;	
+}
+
+.content.articles a{
+	color: #444444;
+    text-decoration: none;
+}
+
+.content.staffs{
+	padding: 0;
+}
+
+.content.staffs #character{
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.content.staffs #character #base{
+    float: left;
+    overflow: hidden;
+    height: 70px;
+}
+
+.content.staffs #character #data{
+	float: left;
+    width: 320px;
+    margin-left: 15px;
+}
+
+.content.staffs #character #data h2{
+    color: #02216b;
+    margin: 15px 0 0 0;
+    float: left;
+	font-size: 13pt;
+}
+
+.content.staffs #character #data #task{
+	display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    font-weight: normal;
+    text-shadow: none;
+    color: white;
+    margin: 15px 0 0 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+	background: #4c4c4c;
+	float:left;
+}
+
+.content.staffs #character #data #task.red{
+	background: #C6212A;
+}
+
+.content.staffs #character #data #task.blue{
+	background: #2169c6;
+}
+
+.content.staffs #character #data #task.green{
+	background: #388c05;
+}
+
+.content.staffs #character #data #task.orange{
+	background: #d89700;
+}
+
+.content.staffs #character #data #status{
+    width: 40px;
+    height: 18px;
+    position: relative;
+    margin: 20px 0 0 10px;
+	float: left;
+}
+
+.content.staffs #character #data #status.offline{
+    background: url('Images/home_icons/offline.gif') no-repeat;
+}
+
+.content.staffs #character #data #status.online{
+	background: url('Images/home_icons/online.gif') no-repeat;
+}
+
+.content.staffs #character #data #motto{
+    color: #777777;
+    font-size: 10pt;
+    margin: 5px 0 0 0;
+    float: left;
+    width: 100%;
+}
+
+.content.staffs #character #data #last_visit{
+    color: #777777;
+    margin: 5px 0 0 0;
+	font-size: 10pt;
+    float: left;
+    width: 100%;
+}
+
+.content.staffs #character #data #count{
+    padding: 10px 0 0 0;
+    color: #7B7B7B;
+    font-family: 'Roboto';
+    font-size: 13px;
+}
+
+.content.staffs p{
+	font-size: 12pt;
+    text-align: center;
+    font-family: Segoe UI;
+}
+
+.content.tops #character{
+    float: left;
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.content.tops #character #base{
+    overflow: hidden;
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
+    float: left;
+}
+
+.content.tops #character #data{
+    float: left;
+    margin-left: 15px;
+}
+
+.content.tops #character #data h2{
+	color: #777777;
+    margin: 10px 0 0 0;
+    font-size: 11pt;
+}
+
+.content.tops #character #data #count{
+    padding: 10px 0 0 0;
+    color: #7B7B7B;
+    font-family: 'Roboto';
+    font-size: 13px;
+}
+
+/************** BASE COLOR ******************/
+.content.tops #character #base.brown{
+	background: #b3714b;
+}
+
+.content.tops #character #base.lightbrown{
+	background: #ff9445;
+}
+
+.content.tops #character #base.emerald {
+    background: #11a5b4;
+}
+/****************************************************************************/
+
+.content.settings #label{
+	font-weight: bold;
+}
+
+.content.settings #detail{
+	color: #565656;
+    font-size: 13px;
+}
+
+.content.settings input.button{
+	background: rgb(31, 97, 158);
+    height: 40px;
+    border: none;
+    width: 100px;
+    border-radius: 2px;
+    color: #ffffff;
+    font-family: 'Roboto';
+    font-size: 16px;
+    display: block;
+    line-height: 40px;
+    text-align: center;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.content.settings input.button:hover{
+    background: #2579c7;
+}
+
+
+/********************************* LOGIN **********************************/
+.login__panel{
+    margin: -50px auto;
+    left: 0;
+    right: 0;
+    background: white;
+    width: 60%;
+	max-width: 1024px;
+    box-shadow: 0 0 10px -6px black;
+    border-radius: 5px;
+    position: absolute;
+    min-height: 100px;
+    z-index: 999;
+}
+
+.login__panel > .section {
+    min-height: 150px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.login__panel > .section > .title {
+    position: relative;
+    float: left;
+    color: black;
+    width: 250px;
+    font-size: 16pt;
+    font-family: 'Ubuntu Light';
+    padding: 15px 0 0 0;
+    border-bottom: 2px solid #0067ca;
+    text-transform: uppercase;
+	float: inherit;
+}
+
+.login__panel > .section > .content {
+    float: left;
+    color: black;
+    padding: 15px 50px 50px 50px;
+    font-size: 12pt;
+    font-family: 'Ubuntu Light';
+    text-align: left;
+    line-height: 27px;
+}
+
+.login__panel > .section > .content.article{
+padding: 15px 60px 20px 20px;
+    margin: 20px 25px 0;
+    width: 80%;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.login__panel > .section > .content h2{
+	padding: 0;
+    margin: 0;
+    font-size: 14pt;
+}
+
+.login__panel > .section > .content p{
+    color: black;
+    font-family: 'Ubuntu Light';
+    font-size: 12pt;
+}
+
+.login__panel > .section > .content p.article{
+	color: #fff;
+}
+
+.login__plugin{
+    display: block;
+    position: relative;
+    float: left;
+    width: 300px;
+	min-height: 295px;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 30px 60px;
+	box-shadow: 2px 2px 10px -2px #171717;
+}
+
+.login__plugin > .error{
+    background: #cc0000;
+    color: #fff;
+    padding-left: 10px;
+    font-size: 10pt;
+    line-height: 30px;
+    border-radius: 3px;
+    font-family: Ubuntu Light;
+    margin-bottom: 10px;
+}
+
+.login__plugin a.facebook{
+	background: #3a5897;
+    border: none;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+    padding: 7px;
+    font-size: 10pt;
+}
+
+.login__plugin a.register, button.register{
+    background: rgb(0, 82, 140);
+    border: none;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px;
+    display: block;
+    font-size: 11pt;
+	border-radius: 3pt;
+}
+
+.login__plugin a.register.disabled{
+	background: rgb(181, 0, 0);
+    color: #ffffff;
+}
+
+.login__plugin hr {
+	padding: 0;
+	border: none;
+	border-top:  1px solid #CCC;
+	color: #333;
+	text-align: center;    
+	font-size:12px;
+}
+
+.login__plugin hr:after {
+	content:"Ó";
+	display: inline-block;
+	position: relative; 
+	top: -0.7em;  
+	font-size: 1.5em;
+	padding: 0 0.25em;
+	background: white;
+}
+
+.login__plugin > .title{
+    font-family: Roboto Condensed;
+    font-size: 20pt;
+    margin: 0 0 5px;
+    color: #006bb9;
+}
+
+.product{
+	float: left;
+    background: white;
+    box-shadow: 0 0 10px -1px lightgrey;
+    margin: 10px 15px;
+    border: 1px solid #dcdcdc;
+	min-height: 260px;
+}
+
+.product > .base{
+	text-align: center;
+    padding: 20px;
+}
+
+.product > .name{
+text-align: center;
+    color: white;
+    background: #1a87fa;
+    padding: 10px;
+    margin: 10px 0 0;
+}
+
+.product > .price{
+font-size: 10pt;
+    text-align: center;
+    background: #8BC34A;
+    color: #fff;
+    padding: 5px;
+    line-height: 20px;
+}

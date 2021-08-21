@@ -1,0 +1,197 @@
+<style>.payment__method__button:disabled{opacity:0.4;}.payment__method__button:active,.payment__method__button:disabled{background-color: #006743;border-color: #5abb37;}button:disabled,input:disabled,select:disabled{cursor: not-allowed;}.center,button{text-align:center}button,h1{color:#fff;text-transform:uppercase}background-attachment: fixed;body{background-image: -moz-linear-gradient(135deg,#c3c8ce,#a9a6a6);background-image: -o-linear-gradient(135deg,#c3c8ce,#a9a6a6);background-image: -webkit-linear-gradient(135deg,#c3c8ce,#a9a6a6);background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#b9babb),color-stop(1,#a9a6a6));filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr=#15507c, EndColorStr=#0c3a65)";background-image: linear-gradient(135deg,#707d88,#b0b3a9);background-repeat: no-repeat;font-family: Ubuntu,"Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;font-size: 16px;line-height: 1.4;margin: 0;}.center{left:50%;padding:24px;position:absolute;top:50%;-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.spinner{-webkit-animation:rotating 1s linear infinite;animation:rotating 1s linear infinite}.spinner.spinner--small{display:inline-block}.spinner.spinner--large{display:none}@media (min-width:719px){.spinner.spinner--small{display:none}.spinner.spinner--large{display:inline-block}}h1,p{display:block}*{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}h1{font-family:"Ubuntu Condensed","Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;font-size:32px;font-weight:400;line-height:1.2;margin:36px 0 24px;text-shadow:0 1px #333}p{margin:-12px 0 24px}button{background-color:#00813e;-moz-box-shadow:0 3px 0 1px rgba(0,0,0,.3);-webkit-box-shadow:0 3px 0 1px rgba(0,0,0,.3);box-shadow:0 3px 0 1px rgba(0,0,0,.3);cursor:pointer;display:inline-block;font-size:1em;border:2px solid #8eda55;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;line-height:1;margin-top:12px;outline:0;padding:12px 36px;white-space:nowrap}button:focus,button:hover{background-color:#00ab54;border-color:#b9f373}button:active{background-color:#006743;border-color:#5abb37;-moz-box-shadow:0 1px 0 1px rgba(0,0,0,.3);-webkit-box-shadow:0 1px 0 1px rgba(0,0,0,.3);box-shadow:0 1px 0 1px rgba(0,0,0,.3);-moz-transform:translate(0,2px);-ms-transform:translate(0,2px);-o-transform:translate(0,2px);-webkit-transform:translate(0,2px);transform:translate(0,2px)}form{display:inline}@-webkit-keyframes rotating{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@-moz-keyframes rotating{from{-moz-transform:rotate(0);transform:rotate(0)}to{-moz-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotating{from{transform:rotate(0)}to{transform:rotate(360deg)}}.habbex-container{background:rgba(000,000,000,.5);padding-bottom:10px;padding-top:10px;margin-bottom:10px}.habbex-container>p,.habbex-container>ul>li{color:#214150;}.habbex-cajas{margin-top:15px;margin-bottom:20px}.payment__method__button{box-shadow: 0 3px 0 1px rgba(0,0,0,.3);line-height: 1.2;text-align: center;background-color: #51bb55;border-color: #ffffff;color: #fff;font-size: 12px;padding: 10px 8px;border-radius: 5px;border-width: 2px;border-style: dotted;margin-bottom: 4px;display: block;font-weight: 700;margin-left: 25%;}.payment__method__button:hover{background-color:#00ab54;border-color:#b9f373}</style>
+<style>
+@media (min-width: 1200px)
+.container {
+    width: 1170px;
+}
+@media (min-width: 992px)
+.container {
+    width: 970px;
+}
+@media (min-width: 768px)
+.container {
+    width: 750px;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.text-center {
+    text-align: center;
+}
+.habbex-container {
+    background: rgba(000,000,000,.5);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.habbex-container>p, .habbex-container>ul>li {
+    color: #214150;
+}
+#error > .payment__method__button {
+    margin-left: 0;
+    width: 100%;
+    background-color: rgb(134, 204, 235);
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
+#error > .payment__method__button:hover {
+    background-color: rgb(65, 174, 222);
+    border-color: #73f3e7;
+}
+#success > .payment__method__button {
+    margin-left: 0;
+    width: 100%;
+    background-color: rgb(134, 204, 235);
+    box-shadow: none !important;
+    text-transform: uppercase;
+}
+#success > .payment__method__button:hover {
+    background-color: rgb(65, 174, 222);
+    border-color: #73f3e7;
+}
+@media (min-width: 1200px)
+.col-lg-3 {
+    width: 25%;
+}
+@media (min-width: 1200px)
+.col-lg-offset-1 {
+    margin-left: 8.33333333%;
+}
+@media (min-width: 1200px)
+.col-lg-11 {
+    width: 91.66666667%;
+}
+@media (min-width: 1200px)
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9 {
+    float: left;
+}
+@media (min-width: 1200px)
+.col-lg-12 {
+    width: 100%;
+}
+@media only screen and (max-width: 768px) {
+    .habbex-container
+    {
+	        width: 100%;
+		margin-left: 0;
+    }
+}
+@media only screen and (max-width: 370px) {
+    .habbex-container
+    {
+	        width: 100%;
+		margin-left: 0;
+    }
+}
+@media only screen and (min-width: 550px) and (max-width: 1000px) {
+    .habbex-container
+    {
+	        width: 268px;
+		margin-left: 25%;
+    }
+}
+h1, p {
+    display: block;
+}
+.h1, h1 {
+    font-size: 36px;
+}
+h1 {
+    margin: .67em 0;
+    font-size: 2em;
+}
+h1 {
+    font-family: "Ubuntu Condensed","Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 36px 0 24px;
+    text-shadow: 0 1px #333;
+}
+p {
+    margin: 0 0 10px;
+}
+button, h1 {
+    color: #fff;
+    text-transform: uppercase;
+}
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+</style>
+
+<div id="container">
+    <div id="content" style="position: relative" class="clearfix">
+    
+
+<div id="column1" class="column">
+        <div class="habblet-container ">		
+                <div class="cbb clearfix blue ">
+                    <h2 class="title">xLuck</h2>
+                    <p style="padding: 10px;">
+					<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Información: Bienvenido a la tienda. Déjese guiar, abajo encontrara una pequeña información para comprar/recibir el xLuck.  </span><br>
+<br>
+					<img src="<?php echo RES; ?>/images/v3/creditflow/icons/3.png" style="float: left;
+    margin-top: -5px;
+    margin-right: 3px;"> Nubes: Tengo <b><?php echo $myuser['gotw_points']; ?></b> Nubes.</p>
+<hr>
+
+<p style="background: #f6f6f6;
+    padding: 10px;
+    border-radius: 4px;">
+El <a>xLuck</a> Es un sistema de compras que te permite participar en una especie de <a>"sorteo"</a> automático donde podrás ganar un <a>premio especial</a>. Este sistema está compuesto por 3 dificultades de bronce hasta oro. A partir de la dificultad plata podrás ganar mega raros. <a>¡Suerte!</a> </p>
+<button target="_blank" onclick="window.open('/shopapi', this.target, 'fullscreen=0, width=1007, height=800')" ng-disabled="paymentInProgress" class="payment__method__button" ng-if="!paymentMethod.disclaimerRequired &amp;&amp; !paymentMethod.premiumSms" item="item" method="paymentMethod" style="margin-left: 40%;">Abrir xLuck</button>
+
+                </div>
+            </div>
+    </div>
+	<div id="column2" class="column">
+        <div class="habblet-container ">		
+                <div class="cbb clearfix blue ">
+	<h2 class="title">Información</h6>
+<hr>
+<p style="padding: 10px;">
+<b style="color: #ca2424;text-shadow: 0px 0px 15px rgba(226, 25, 25, 0.73)">Atención</b><br>
+<a>En caso de perdidas por estar online</a> dentro del servidor no nos hacemos responsables <a>antes de hacer tu compra sal del client para evitar bugs.</a>
+<br><br>
+		<a>Al hacer clic en alguno de los botones de compra</a>. aceptas que el contenido digital sea enviado inmediatamente una vez tengamos la confirmación 
+		del cargo. <a>También aceptas que no existe posibilidad de reintegro después de la compra.</a>
+		<br><br>
+	<b>Si Realizo una compra, ¿lo recibo automaticamente o debo esperar?</b><br>
+	Si usted realiza una compra de xLuck, lo recibira automaticamente a tan solo 1 segundo de haber completado la compra.<br><br>
+
+	<b>¿Qué recibo en los paquetes?:</b><br><br>
+	  <b>-</b> <a>Pack Bronze</a> (El sorteo te dara 1 cosa tienes mayor posibilidad de ganar un raro.)<br>
+	  <b>-</b> <a>Pack Silver</a> (El sorteo te dara 2 cosas tienes media posibilidad de ganar un megararo.)<br>
+	  <b>-</b> <a>Pack Gold</a> (El sorteo te dara 4 cosas tienes mayor posibilidad de ganar un megararo.)<br></p>
+	  </div>
+	  </div>
+	  
+
+    <script type="text/javascript">if (!$(document.body).hasClassName('process-template')) { Rounder.init(); }</script>
+
+    <?php Cache::AppendPlugin(7); ?>
+
+
+<div id="column2" class="column">
+    <?php Cache::AppendPlugin(8); ?>
+</div></div>

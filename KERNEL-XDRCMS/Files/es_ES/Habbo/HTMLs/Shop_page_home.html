@@ -1,0 +1,40 @@
+<div id="container">
+        <div id="content" style="position: relative" class="clearfix">
+            <div id="column1" class="column">
+                <div class="habblet-container ">		
+                    <div class="cbb clearfix blue">
+                            <h2 class="title">Xukys Tienda</h2>
+                            <h2 style="padding: 10px">Bienvenido a la <?php echo HotelName; ?> Tienda,</h3>
+                            <p style="padding: 10px">En esta secci&oacute;n del Hotel podr&aacute;s realizar compras externas al catalogo del cliente. Aqu&iacute; el usuario puede canjear cr&eacute;ditos &oacute; diamantes, comprar rares que solo aqu&iacute; en la WEB se encuentran, e incluso jugar juegos de azar para ganar una buena pasta.</p>
+                            <span class="cash"></span>
+                            <p style="padding: 10px">
+                                Aqu&iacute; en la <?php echo HotelName; ?> Tienda tenemos 3 secciones de venta, de: <br />	
+                            </p>    
+                                <ul style="padding: 10px">
+                                    <li><b>Placas</b></li>
+                                    <li><b>Rares</b></li>
+                                    <li><b>Sucripciones</b></li>
+                                </ul>
+                            <p style="padding: 10px">
+                                En los juegos de azar el usuario puede volverse <b>MILLONARIO</b> &oacute; <b>pobre</b> seg&uacute;n su suerte, as&iacute; que juega con medida. 
+                                <br /><br />
+                                Con nuestro sistema de Tienda <b>NO</b> es necesario estar desconectado del hotel, así que puedes hacer compras, canjeos y apuestas cuando se te antoje. 
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <div id="column2" class="column">
+                <div class="habblet-container ">		
+                    <div class="cbb clearfix red">
+                        <h2 class="title">Monedero</h2>
+                        <p style="padding: 10px; font-size:10pt;">
+                            Actualmente cuentas con:
+                            <br />
+                            <b style="font-size:8pt;"><?php echo User::$Data['credits']; ?> Créditos</b>  
+                            <br />       
+                            <b style="font-size:8pt;"><?php echo User::$Data['diamonds']; ?> Diamantes </b>  
+                        </p>
+                    </div>
+                </div>
+            </div>
+    

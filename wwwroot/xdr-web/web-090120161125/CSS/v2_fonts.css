@@ -1,0 +1,68 @@
+@ttf: format('truetype');
+
+@font-face{
+	font-family: 'Billabong';
+	src: url("@Fonts/Billabong/billabong.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Raleway';
+	src: url("@Fonts/Raleway/Raleway-Regular.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Raleway Light';
+	src: url("@Fonts/Raleway/Raleway-Light.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Raleway ExtraLight';
+	src: url("@Fonts/Raleway/Raleway-ExtraLight.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Raleway Black';
+	src: url("@Fonts/Raleway/Raleway-Black.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu';
+	src: url("@Fonts/Ubuntu/Ubuntu-R.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu Light';
+	src: url("@Fonts/Ubuntu Light/Ubuntu-L.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu Condensed';
+	src: url("@Fonts/Ubuntu Condensed/Ubuntu-C.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'KeepCalm';
+	src: url("@Fonts/KeepCalm/KeepCalm-Medium.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'KeepCalm Light';
+	src: url("@Fonts/KeepCalm/KeepCalm-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("@Fonts/Roboto/Roboto-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Light';
+  src: url("@Fonts/Roboto/Roboto-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("@Fonts/MaterializeIcons/MaterialIcons-Regular.ttf") format('truetype');
+}

@@ -1,0 +1,7 @@
+{"1": {"order":1, "value":250, "type":"credits", "caption": "250 Créditos"},
+ "2": {"order":2, "value":380, "type":"credits", "caption": "380 Créditos"}, 
+ "3": {"order":3, "value":502, "type":"credits", "caption": "502 Créditos"},
+ "4": {"order":4, "value":660, "type":"credits", "caption": "660 Créditos"},
+ "5": {"order":5, "value":900, "type":"credits", "caption": "900 Créditos"},
+ "6": {"order":6, "value":2050, "type":"credits", "caption": "2050 Créditos"}, 
+ "7": {"order":7, "value":72, "type":"diamonds", "caption": "72 Diamantes"}}

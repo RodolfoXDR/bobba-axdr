@@ -1,0 +1,129 @@
+    <div class="main">
+            <div class="container">
+                <div class="row main__view">
+                    <section class="column login__landing">
+                        <div class="login__landing">
+                            <div class="login__box">
+                                
+                                <?php if(isset($_SESSION['login']['error'])): ?>
+                                <div class="error__box">
+                                    <div class="error"><?php echo Text::Get(...$_SESSION['login']['error']); ?></div>
+                                </div>
+                                <?php endif; ?>
+
+                                <div class="login__form">
+                                    <div class="title">Iniciar Sesión</div>
+                                    <form action="account/submit" method="post">
+                                            <div class="input recaptcha">
+                                            <?php if(isset($_SESSION['login']['tries']) && $_SESSION['login']['tries'] >= 4): ?>
+                                                <div class="g-recaptcha" data-theme="dark" name="g-recaptcha-response" data-sitekey="<?php echo Config::$ReCaptcha['data']['siteKey']; ?>"></div>
+                                            <?php endif; ?>
+                                            </div>
+                                            <div class="input">
+                                                <input id="credentials.username" name="credentials.username" onkeyup="loadLook();" type="text" placeholder="Usuario" autocomplete="off" />
+                                            </div>
+                                            <div class="input">
+                                                <input id="credentials.password" name="credentials.password"  type="password" placeholder="Contraseña" maxlength="24"/>
+                                            </div>
+                                            <div class="access__buttons">
+                                                <button class="login__button" type="submit" >Conectar <i class="fas fa-sign-in-alt"></i> </button>
+                                                <button class="login__facebook" onclick="assistedLogin(FB); return false;"><i class="fab fa-facebook-f" id="fb"></i> Entrar con facebook</button>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="column reception__landing">
+                        <div class="reception__landing">
+                            <div class="bubble">
+                                <div class="welcome__title">¡Bienvenid@!</div>
+                                <div class="welcome__text">Te estabamos esperando...</div>
+                                <div class="welcome__username" id="welcome__username"></div>
+                            </div>
+                            <div class="user__figure">
+                                <img id="user__figure__img" src="https://www.habbo.com.tr/habbo-imaging/avatarimage?figure=ch-210-1211.sh-300-63.lg-285-64.ha-1002-63.hr-828-1061.hd-180-1&action=wlk,wav&direction=4&head_direction=3&gesture=sml&size=m" />
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="row lasts__view">
+                        <section class="column last__registers__landing">
+                            <div class="last__registers__landing">
+                                <div class="section__title last__registers">
+                                    Últimos Registros <i class="fas fa-users"></i>
+                                </div>
+                                <div id="bubble-gab" class="last__registers__bubble gab">
+                                    <div class="icon gab"></div> 
+                                    <b>Gab:</b> Únete, te estamos esperando...
+                                </div>
+
+                                <div id="bubble-mus" class="last__registers__bubble mus">
+                                    <div class="icon mus"></div>
+                                    <b>Mr.Mustache:</b> ¡Mira nuestros nuevos amigos!
+                                </div>
+                                
+                            <?php
+                                $lookData = [
+                                    '&action=wlk,wav,crr=9&direction=4&head_direction=3&gesture=srp&size=m',
+                                    '&action=wlk,wav,crr=3&direction=2&head_direction=3&gesture=sml&size=m',
+                                    '&action=wlk,wav&direction=4&head_direction=3&gesture=sml&size=m',
+                                    '&action=wlk,wav&direction=2&head_direction=3&gesture=srp&size=m',
+                                    '&action=wlk,wav&direction=4&head_direction=3&gesture=spk&size=m'
+                                ];
+                        
+                                $i = 0;
+                                $lasts = Cache::GetAIOConfig('LastRegisters');
+                                if(!empty($lasts)):
+                                    foreach($lasts as $dRow):
+                            ?>
+                                <div class="last__register__user__figure-<?php echo $i; ?>">
+                                    <img src="<?php echo LOOK . $dRow[2] . $lookData[$i]; ?>" />
+                                    <span class="tooltiptext">
+                                        <div class="username">
+                                            <div class="username__head">
+                                                <img src="<?php echo LOOK . $dRow[2] ?>&headonly=1&size=s" />
+                                            </div>
+                                            <div class="username__name">   
+                                                <?php echo $dRow[0]; ?>
+                                            </div>
+                                        </div>
+                                        <div class="motto">¡Nuev@ en Habbo!</div>
+                                        <div class="dateRegistered"><?php echo Tool::ParseUnixTime($dRow[4]); ?></div>
+                                    </span>
+                                </div>
+                                <?php
+                                        $i++;
+                                        endforeach;
+                                    endif;
+                                ?>
+                            </div>
+                        </section>
+                        <section class="column last__news__landing">
+                                <div class="last__news__landing">
+                                    <div class="section__title last__news">
+                                        Últimas Noticias <i class="fas fa-newspaper"></i>
+                                    </div>
+                                    <div class="last__news__box">
+                                        <?php
+                                        foreach(Cache::GetArticles(true, 3, 0) as $Articles):
+                                            $DataURL =  URL . '/articles/' . $Articles['Id'] . '-' . str_replace(' ', '-', strtolower($Articles['Title']));
+                                        ?>
+                                        <div class="new__box">
+                                            <div class="new__image">
+                                                <img src="<?php echo $Articles['BackGroundImage']; ?>" />
+                                            </div>
+                                            <div class="new__data">
+                                                    <div class="new__title"><?php echo $Articles['Title']; ?></div>
+                                                    <div class="new__date"><?php echo (is_numeric($Articles['TimeCreated'])) ? date('M d, Y', $Articles['TimeCreated']) : '--';?></div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                    </div>
+                                </div>
+                        </section>
+                </div>
+            </div>
+        </div>

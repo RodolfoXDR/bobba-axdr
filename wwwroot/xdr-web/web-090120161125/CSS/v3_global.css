@@ -1,0 +1,10 @@
+/* VERSION 3 COMPLETE REMASTER */
+
+html, body{
+	background: #14a4d9;
+    background: -webkit-linear-gradient(to bottom, #14a4d9 , #015486);
+    background: linear-gradient(to bottom, #14a4d9 , #015486);
+	font-family: 'Ubuntu';
+	color: #454545;
+	margin: 0;
+}

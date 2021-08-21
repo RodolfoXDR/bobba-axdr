@@ -1,0 +1,184 @@
+<?php
+/*=========================================================+
+|| # Azure Files of aXDRCMS. All rights reserved.
+|| # Copyright � 2014-2018 Xdr & Mr.Mustache.
+|+=========================================================+
+|| # aXDR 2018. The power of Proyects.
+|| # Este es un Software de código libre, libre edición.
+|+=========================================================+
+|| # Housekeeping by Xdr & Mr.Mustache
+|| # Copyright (C) 2018. Todos los derechos reservados.
+|+=========================================================+
+*/
+
+$_acpColors = [1 => '-blue', 2 => '-orange', 3 => '-purple', 4 => '-rainbow', 5 => '-green', 6 => '-light'];
+
+if (isset($_GET['c']) && $_GET['c'] === 'login')
+{
+	if (empty($_POST['secretKey']))
+		$msg_error = 'Ha ocurrido un error.';
+	if (strlen($_POST['secretKey']) != 5)
+		$msg_error = 'Has ingresado un Secret Key invalido. (<= 5 caracteres)';
+	if (!Config::$Restrictions['security']['secretKeys']['enabled'])
+		$msg_error = 'Secret Key esta inhabilitado.';
+	if(!checkSecurityKey(User::$Data['id'], $_POST['secretKey']))
+		$msg_error = 'Has ingresado un Secret Key equivocado.';
+	if (checkSecurityKey(User::$Data['id'], $_POST['secretKey']))
+	{
+		$_SESSION['Manage']['SecretKey'] = $_POST['secretKey'];
+		$msg_correct = 'Success';
+	}
+	
+	$msg_correct = 'Ha ocurrido un error.';
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel='shortcut icon' href='<?php echo HHURL; ?>/public/css/img/favicon_xdrcms.ico' type='image/x-icon'/>
+	<link rel="stylesheet" href="public/css/main.201806101917.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
+	<link id="subStyle" rel="stylesheet" href="<?php if(isset($_COOKIE['acpColor']) && is_numeric($_COOKIE['acpColor']) && isset($_acpColors[$_COOKIE['acpColor']])): ?>public/css/main<?php echo $_acpColors[$_COOKIE['acpColor']]; ?>.201806101917.css<?php endif; ?>?<?php echo date('l jS \of F Y h:i:s A'); ?>">
+	<link rel="stylesheet" href="public/css/icons.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="//fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+		
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="public/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript">
+		var rotatorId = 1;
+		var GUID = "<?php echo getSecurityKey(); ?>";
+		var active = <?php  echo (isset($_COOKIE['acpMenu']) && is_numeric($_COOKIE['acpMenu'])) ?  $_COOKIE['acpMenu'] : 1; ?>;
+		var uid = <?php echo User::$Data['id']; ?>;
+		var targetLeft;
+
+	</script>
+    <script src="public/js/201602172033h.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+	
+	<title>Administración: <?php echo $PageName; ?></title>
+	
+</head>
+<body>
+	<header id="jolly__upper_bar" tabindex="1">
+		<div id="title"><button id="toggle-menu" style="
+    margin:  0 20px 0 0;
+    border: none;
+    background:  none;
+    color: white;
+"><i class="fas fa-ellipsis-v"></i></button></button><?php echo LongName; ?></div>
+		<ul>
+			<li><a href="<?php echo URL; ?>/me">Volver al Hotel</a></li>
+			<li><a href="<?php echo URL; ?>/account/logout?token=<?php echo USER::$Row['token']; ?>">Cerrar sesión</a></li>
+		</ul>
+	</header>
+	<div class="container">
+		<div id="jolly__side_bar" >
+			<div id="head">
+			</div>
+			<ul>
+				<!-- DASHBOARD -->
+				<li class="tag">Acceso Rápido</li>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=dashboard">Inicio</a></li>
+
+				<!-- MODERACION -->
+				<?php if(User::hasPermission('ase.users_page')): ?>
+				<li class="tag">Moderación</li>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=users">Usuarios</a></li>
+				<?php if(User::hasPermission('ase.ban_unban')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=users&filter=3c212d2d20747970653a62616e73202d2d3e">Baneos</a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.alerts')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=alerts">Alertar</a></li>
+				<?php endif; endif; ?>
+
+				<!-- SITIO -->
+				<li class="tag">Sitio</li>
+				<?php if(User::hasPermission('ase.site')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=site">General</a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.articles')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=articles">Noticias</a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.site')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=plugins">Plugins <div id="notification">NUEVO</div></a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.uploads')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=badges">Placas</a></li>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=mpus">MPUs</a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.site')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=updates">Actualizaciones <div id="notification">NUEVO</div></a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.catalog')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=catalog">Catalogo</a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.shop_page')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=shop">Tienda</a></li>
+				<?php endif; ?>
+
+				<!-- SERVIDOR -->
+				<?php if(User::hasPermission('ase.server') || User::hasPermission('ase.swfs')): ?>
+				<li class="tag">Servidor</li>
+				<?php if(User::hasPermission('ase.server')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=server">Configuraci&oacute;n</a></li>
+				<?php endif; ?>
+				<?php if(User::hasPermission('ase.swfs')): ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=loader">SWFs</a></li>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=override_varstexts">Override Texts & Vars</a></li>
+				<?php endif; endif; ?>
+				
+				<!-- MANTENIMIENTO -->
+				<?php if(User::hasPermission('ase.logs')): ?>
+				<li class="tag">Mantenimiento</li>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=logs">Logs WEB</a></li>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=server_logs">Logs CLIENT</a></li>
+				<?php endif; ?>
+				<li class="hrb"><a href="<?php echo HHURL; ?>/manage?p=debug">Client DEBUG</a></li>
+			</ul>
+		</div>
+		<div class="wrapper">
+			<div id="titleT" class="pagename"><?php echo $PageName; ?></div>
+			<?php if(isset($msg_error)): ?>
+					<div class="warning">
+						<?php echo $msg_error; ?>
+					</div>
+			<?php elseif(isset($msg_correct)): ?>
+				<div id="ResponseAlert">
+					Guardado con éxito <u title="<?php echo $msg_correct; ?>"><i>¿+?</i></u>
+				</div>
+				<script type="text/javascript">
+					var _int = setInterval('RemoveResponse()', 10000);
+					function RemoveResponse(){
+						(elem=document.getElementById("ResponseAlert")).style.opacity = '0';
+						window.clearInterval(_int);
+					}
+				</script>
+			<?php endif; ?>
+			<?php if(Config::$Restrictions['security']['secretKeys']['enabled'] && !checkSecurityKey(User::$Data['id'], $_SESSION['Manage']['SecretKey']) && !isset($_SESSION['Manage']['AlertSecret'])): ?>
+			<div class="row1">
+				<div class="cell">
+					<div class="panel flat darken">
+						<div id="header">Seguridad</div>
+						<div id="content" style="font-size: 10pt;">
+							<?php echo Text::Get(Text::ACP_SECRET_KEY); ?>
+							<br />
+							<br />
+							<form style="float:none;" method="post" action="<?php echo HHURL; ?>/manage?c=login">
+							<div style="overflow:hidden">
+								<img src="<?php echo LOOK . User::$Data['figure']; ?>&size=s" style="float:left"></img>
+								<div style="margin: 0;font-size: 11pt;"><?php echo User::$Data['name']; ?></div>
+								<div style="margin-bottom: 5px;font-size: 10pt;font-weight: 600;"><?php echo User::$Data['mail']; ?></div>
+								<input type="password" name="secretKey" id="i0118" maxlength="5" style="width: 17.5em;background: white;padding: 4px;margin: 0;" placeholder="Secret Key"></input>
+							</div>
+							<br />
+							<button class="button alert save" type="submit">Conectar</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>

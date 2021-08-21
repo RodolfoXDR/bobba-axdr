@@ -1,0 +1,9 @@
+#bg__hotel{
+    background: url(Images/bg_hotel_bg.out.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 500px;
+    width: 530px;
+    bottom: 0;
+    z-index: 1;
+}

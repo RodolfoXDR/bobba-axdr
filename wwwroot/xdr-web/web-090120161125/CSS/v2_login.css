@@ -1,0 +1,143 @@
+.login__box{
+	display: -webkit-box;
+    font-family: Raleway;
+	margin: 30px;
+}
+
+.login__box > .branch{
+    width: 50%;
+    float: left;
+    position: relative;
+}
+
+.login__box > .branch.blue{
+	background: #007eff;
+}
+
+.login__box > .branch.darkblue{
+	background: #083058;
+}
+
+.login__box > .branch.info{
+    background-image: url(images/red-carpet@1x-29b6be3ba6d90d8c691486826146cad8.png);
+    background-position: 230px 600px;
+}
+
+.login__box > .branch.light{
+	background: #fff;
+}
+
+.login__box > .branch > .branch__heading{
+	padding: 15px 25px 5px;
+    font-size: 25pt;
+	font-weight: bold;
+	position: relative;
+	z-index: 11;
+}
+
+.login__box > .branch > .branch__heading.center{
+	text-align: center;
+}
+
+.login__box > .branch > .branch__heading.blue{
+    color: #3565bb;
+}
+
+.login__box > .branch > .branch__heading.light{
+    color: #fff;
+}
+
+.login__box > .branch > .branch__heading > .subtext{
+	font-size: 18pt;
+    display: inline;
+    margin: 0 15px;
+    font-style: italic;
+    font-family: Raleway Light;
+	font-weight: 100;
+	color: #757575;
+}
+
+.login__box > .branch > .branch__content{
+	padding: 10px 40px;
+    color: #fff;
+    font-size: 14pt;
+    margin: 0 0 20px;
+    line-height: 35px;
+    position: relative;
+    z-index: 11;
+    font-family: Roboto;
+    text-indent: 25px;
+}
+
+.overlay{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.35);
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+
+
+.tileb{
+    background: #f7f7f7;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 5px;
+	min-height: 120px;
+}
+
+.tileb.friends{
+	background: url(images/friends.png);
+    background-position: -8px -3px;
+}
+
+.tileb.rooms{
+	background: url(images/rooms.png);
+    background-position: -8px -3px;
+}
+
+.tileb.events{
+	background: url(images/events.png);
+    background-position: -8px -3px;
+}
+
+.tileb > #title{
+    padding: 10px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 25pt;
+    text-shadow: 2px 3px 7px #525252;
+    line-height: 85px;
+}
+
+p.div {
+    position: relative;
+    display: inline-block;
+    margin: 5px 0 20px;
+    text-align: center;
+    width: 100%;
+    color: #acacac;
+    font-size: 10pt;
+}
+
+p.div:before {
+	content: "";
+    border-top: 1px solid #d0d0d0;
+    position: absolute;
+    width: 20%;
+    top: 8px;
+    left: 140px;	
+}
+
+p.div:after {
+	content: "";
+    border-top: 1px solid #d0d0d0;
+    position: absolute;
+    width: 20%;
+    top: 8px;
+    right: 140px;
+}
+
+.icon{
+	font-style: inherit;
+}

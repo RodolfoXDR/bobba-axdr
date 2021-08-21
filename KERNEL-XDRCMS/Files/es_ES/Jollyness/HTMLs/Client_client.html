@@ -1,0 +1,470 @@
+<?php
+$cClient = Cache::GetAIOConfig('Client');
+$sSettings = Cache::GetAIOConfig('Server');
+
+if ($cClient['client.new.user.reception'] > 0 && !User::$Row['receptionPased'])
+	$showReception = $cClient['client.new.user.reception'] == 1 || $cClient['client.new.user.reception'] == 2 && User::$IsFB;
+
+if (!isset($_SESSION['adflyC']))
+	$_SESSION['adflyC'] = 0;
+if (!empty(Site::$Settings['adf.ly']) && $_SESSION['adflyC'] < 3 && (!isset($_SERVER['HTTP_REFERER']) || Site::$Settings['adf.ly'] !== $_SERVER['HTTP_REFERER'])):
+	header ('Location: ' . Site::$Settings['adf.ly']);	exit;
+endif;
+
+$_SESSION['adflyC']++;
+$sso = User::GenerateAuthToken(User::$Data['id']);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=<?php echo Site::Charset; ?>" />
+	<title><?php echo HotelName; ?>: Client</title>
+
+<script type="text/javascript">
+var andSoItBegins = (new Date()).getTime();
+</script>
+<link rel="shortcut icon" href="<?php echo RES; ?>v2/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="alternate" type="application/rss+xml" title="<?php echo HotelName; ?>: RSS" href="http://www.habbo.es/articles/rss.xml" />
+<meta name="csrf-token" content="0557681f1e"/>
+<link rel="stylesheet" href="<?php echo RES; ?>static/styles/common.css?<?php echo rand(1,50); ?>" type="text/css" />
+<script src="<?php echo RES; ?>static/js/libs2.js" type="text/javascript"></script>
+<script src="<?php echo RES; ?>static/js/visual.js" type="text/javascript"></script>
+<script src="<?php echo RES; ?>static/js/libs.js" type="text/javascript"></script>
+<script src="<?php echo RES; ?>static/js/common.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+document.habboLoggedIn = true;
+var habboName = "<?php echo User::$Data['name']; ?>";
+var habboId = <?php echo User::$Data['id'] ; ?>;
+var facebookUser = <?php echo User::$Logged ? 'true' : 'false'; ?>;
+var habboReqPath = "";
+var habboStaticFilePath = "<?php echo RES; ?>/";
+var habboImagerUrl = "<?php echo URL; ?>/habbo-imaging/";
+var habboPartner = "";
+var habboDefaultClientPopupUrl = "<?php echo URL; ?>/client";
+window.name = "<?php echo $_SESSION['user']['clientToken']; ?>";
+if (typeof HabboClient != "undefined") {
+    HabboClient.windowName = "<?php echo User::$Row['client_token']; ?>";
+    HabboClient.maximizeWindow = true;
+}
+function AdBlockDetected() {
+    window.location.href = '<?php echo URL; ?>/adblock';
+}
+</script>
+
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+
+<meta property="fb:app_id" content="<?php echo Config::$FaceBook['app']['id']; ?>" />
+
+<meta property="og:site_name" content="<?php echo HotelName; ?> Hotel" />
+<meta property="og:title" content="<?php echo HotelName; ?>: " />
+<meta property="og:url" content="<?php echo URL; ?>" />
+<meta property="og:image" content="<?php echo URL; ?>/images/facebook/app_habbo_hotel_image.gif" />
+<meta property="og:locale" content="es_ES" />
+
+<noscript>
+    <meta http-equiv="refresh" content="0;url=/client/nojs" />
+</noscript>
+<meta http-equiv="Pragma" content="no-cache, no-store" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store" />
+<meta name="google" content="notranslate" />
+
+
+<link rel="stylesheet" href="<?php echo RES; ?>static/styles/habboflashclient.css" type="text/css" />
+<script src="<?php echo RES; ?>static/js/habboflashclient.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    FlashExternalInterface.loginLogEnabled = true;
+    
+    FlashExternalInterface.logLoginStep("web.view.start");
+    
+    if (top == self) {
+        FlashHabboClient.cacheCheck();
+    }
+    var flashvars = {
+            "client.allow.cross.domain" : "0", 
+            "client.notify.cross.domain" : "1", 
+            "connection.info.host" : swf_urs, 
+            "connection.info.port" :_r5t4, 
+            "site.url" : "<?php echo URL; ?>", 
+            "url.prefix" : "<?php echo URL; ?>", 
+            "client.reload.url" : "<?php echo URL; ?>/client", 
+            "client.fatal.error.url" : "<?php echo URL; ?>/client", 
+            "client.connection.failed.url" : "<?php echo URL; ?>/client", 
+            "logout.url" : "<?php echo URL; ?>/client", 
+            "logout.disconnect.url" : "<?php echo URL; ?>/client", 
+            "external.variables.txt" : "<?php echo Tool::Tags($cClient['Txts']['external.variables.txt']); ?>?<?php echo rand(1,50); ?>", 
+            <?php if (!empty($cClient['Txts']['external.texts.txt'])): ?>"external.texts.txt" : "<?php echo Tool::Tags($cClient['Txts']['external.texts.txt']); ?>?<?php echo rand(1,50); ?>", 
+<?php endif; ?>
+            <?php if (!empty($cClient['Txts']['safechat.list.txt'])): ?>"safechat.list.txt" : "<?php echo Tool::Tags($cClient['Txts']['safechat.list.txt']); ?>",  
+<?php endif; ?>
+<?php if ($cClient['managed.override']): ?>
+			"external.override.texts.txt" : "<?php echo URL; ?>/managed-gamedata/override/external_flash_override_texts/<?php echo $cClient['managed.override.token']; ?>", 
+			"external.override.variables.txt" : "<?php echo URL; ?>/managed-gamedata/override/external_override_variables/<?php echo $cClient['managed.override.token']; ?>", 
+<?php else: if (!empty($cClient['Txts']['external.override.texts.txt'])): ?>"external.override.texts.txt" : "<?php echo Tool::Tags($cClient['Txts']['external.override.texts.txt']); ?>?<?php echo rand(1,50); ?>",  
+<?php endif; ?>
+            <?php if (!empty($cClient['Txts']['external.override.variables.txt'])): ?>"external.override.variables.txt" : "<?php echo Tool::Tags($cClient['Txts']['external.override.variables.txt']); ?>?<?php echo rand(1,50); ?>",  
+<?php endif; endif; ?>
+            <?php if (!empty($cClient['Txts']['productdata.load.url'])): ?>"productdata.load.url" : "<?php echo Tool::Tags($cClient['Txts']['productdata.load.url']); ?>?<?php echo rand(1,50); ?>",  
+<?php endif; ?>
+            <?php if (!empty($cClient['Txts']['furnidata.load.url'])): ?>"furnidata.load.url" : "<?php echo Tool::Tags($cClient['Txts']['furnidata.load.url']); ?>?<?php echo rand(1,50); ?>",  
+<?php endif; ?>
+            <?php if (!empty($cClient['Txts']['external.figurepartlist.txt'])): ?>"external.figurepartlist.txt" : "<?php echo Tool::Tags($cClient['Txts']['external.figurepartlist.txt']); ?>",  
+<?php endif; ?>
+			"use.sso.ticket" : "1", 
+			"client.starting.revolving":"Para ciencia, \u00A1T\u00FA, monstruito!\/Cargando mensajes divertidos... Por favor, espera.\/\u00BFTe apetecen salchipapas con qu\u00E9?\/Sigue al pato amarillo.\/El tiempo es s\u00F3lo una ilusi\u00F3n.\/\u00A1\u00BFTodav\u00EDa estamos aqu\u00ED?!\/Me gusta tu camiseta.\/Mira a la izquierda. Mira a la derecha. Parpadea dos veces. \u00A1Ta-ch\u00E1n!\/No eres t\u00FA, soy yo.\/Shhh! Estoy intentando pensar.\/Cargando el universo de p\u00EDxeles.",
+            "sso.ticket" : "<?php echo $sso ?>", 
+            <?php if (isset($_GET['forwardId'])): ?>"forward.type" : "<?php echo $_GET['forwardId'] ?>", 
+<?php endif; ?>
+            <?php if (isset($_GET['roomId'])): ?>"forward.id" : "<?php echo $_GET['roomId'] ?>", 
+<?php endif; ?>
+            "processlog.enabled" : "1", 
+            "account_id" : "<?php echo User::$Data['id']; ?>", 
+			"hotelview.banner.url" : "<?php echo Tool::Tags($cClient['Txts']['hotelview.banner.url']); ?>", 
+            "client.starting" : "<?php echo Tool::Tags($cClient['client.starting']); ?>",<?php if (isset($_NewUser)): ?>
+            "new.identity" : "1", 
+			"client.starting.revolving":"client.starting.revolving",
+<?php endif; ?>
+
+            "flash.client.url" : "<?php echo Tool::Tags($cClient['Folders']['flash.client.url']); ?>", 
+            "user.hash" : "<?php echo User::$Data['id'] . sha1(User::$Data['id']); ?>", 
+			<?php if (User::$IsFB): ?>"facebook.user" : "1", 
+<?php endif; ?>
+
+            "has.identity" : "1", 
+            "flash.client.origin" : "popup",
+            "nux.lobbies.enabled" : "false", 
+            "country_code" : "ES",<?php if (isset($showReception) && $showReception): ?> 
+            "new.user.flow.enabled" : "true", 
+            "new.user.onboarding.hc.flow.enabled" : "true", 
+            "new.user.flow.name" : "<?php echo User::$Data['name']; ?>", 
+            "new.user.reception.rename.title" : "Elige un nombre para tú avatar", 
+            "new.user.reception.rename.submit" : "Aceptar y continuar", 
+            "new.user.reception.tile.click.popup" : "Clica en el botón para ir al mostrador.", 
+            "new.user.reception.gender.female" : "Mujer", 
+            "new.user.reception.gender.male" : "Hombre", 
+            "new.user.reception.receptionist.welcome.submit" : "¡Hagamos esto!", 
+            "new.user.reception.rename.skip" : "Siguiente", 
+            "new.user.reception.receptionist.start.title" : "¡Bien!", 
+            "new.user.reception.rename.subtitle" : "Eres como un copo de nieve, único y bonito.", 
+            "new.user.reception.rename.error.taken" : "OOPS! ESE NOMBRE YA ESTÁ SIENDO USADO", 
+            "new.user.reception.rename.accepted" : "ACEPTAMOS LETRAS Y NÚMEROS. NO TARJETAS VISAS Y MASTERCARD", 
+            "new.user.reception.rename.error.chars" : "OOPS! SOLO LETRAS Y NÚMEROS, PORFA", 
+            "new.user.reception.receptionist.welcome.subtitle" : "Bienvenido a <?php echo HotelName; ?> Hotel.", 
+            "new.user.reception.rename.error.too_short" : "OOPS! TÚ NOMBRE ES DEMASIADO CORTO PARA PRONUNCIAR", 
+            "new.user.reception.rename.description" : "En <?php echo HotelName; ?> todos nos registramos usando un nombre único, así que, adelante y pon el tuyo. No tienes que poner tú nombre verdadero, un apodo vale.", 
+            "new.user.reception.receptionist.welcome.title" : "¡Buen Trabajo!", 
+            "new.user.reception.rename.warning" : "Una vez que has elegido un nombre para tú avatar no lo puedes cambiar, así que por favor presta un poco de atención al nombre elegido.", 
+            "new.user.reception.receptionist.welcome.text" : "Ahora que has llegado hagamos el check-in. Es muy fácil, divertido, y no te llevará más de un par de minutos.", 
+            "new.user.reception.receptionist.start.text" : "¡Pasa para hacer el check-in!", 
+            "new.user.reception.rename.error.too_long" : "OOPS! TÚ NOMBRE ES DEMASIADO LARGO DE RECORDAR", 
+            "new.user.reception.rename.error.words" : "OOPS! PIENSA UN POCO MÁS - ESE NOMBRE NO ES BONITO", 
+            "new.user.flow.bodyparts" : "Cuerpo del texto", 
+            "new.user.flow.save" : "¡Me pondré esto!", 
+            "new.user.flow.rename.skip" : "Dejarlo para otro momento", 
+            "new.user.flow.rename.subtitle" : "Se aceptan entre 4-15 caracteres, letras y números", 
+            "new.user.flow.gender.girl" : "Mientras preparamos tu acceso, puedes ir eligiendo tu primer look:", 
+            "new.user.flow.intro2" : "¡Nos gusta tu estilo! Ahora tienes que escoger un nombre para tu <?php echo HotelName; ?> (o puedes saltarte este paso y elegirlo más tarde)", 
+            "new.user.flow.room.name.11" : "Ático Penumbra", 
+            "new.user.flow.intro3" : "¡Sólo una cosa más! Dinos con que tipo de sala te gustaría empezar. ¡No es una decisión para toda la vida, así que no te lo pienses demasiado!", 
+            "new.user.flow.room.name.12" : "Sala Soleada", 
+            "new.user.flow.onboarding.get.hc.button" : "¡Hazte de <?php echo HotelName; ?> Club!", 
+            "new.user.flow.onboarding.button.select.room" : "Quiero esta sala", 
+            "new.user.flow.room.name.10" : "Hogar Reluciente Hogar", 
+            "new.user.flow.title" : "Vídeo anterior.", 
+            "new.user.flow.room.description.11" : "¡No hay nada como la Fiesta Penumbra!", 
+            "new.user.flow.rename.warning" : "Consejo:cada día se crean cientos de <?php echo HotelName; ?>s, y tu nombre tiene que ser único, ¡así que intenta ser creativo! Sólo se pueden usar los siguientes caracteres:  _-", 
+            "new.user.flow.room.description.10" : "Para aquellos <?php echo HotelName; ?>s a quienes les gustan las cosas brillantes", 
+            "new.user.flow.room.description.12" : "Incluye Lámpara Brillante Lava de ambiente retro. ", 
+            "new.user.flow.note.title" : "Gracias", 
+            "new.user.flow.gender" : "Chica", 
+            "new.user.flow.loader.waiting" : "¡Cargando!", 
+            "new.user.flow.figure.error" : "Género", 
+            "new.user.flow.rename.title" : "Pon un nombre a tu <?php echo HotelName; ?>", 
+            "new.user.flow.onboarding.button.ready" : "¡Estoy listo!", 
+            "new.user.flow.onboarding.hint.hc" : "NOTA: Alguna de las opciones seleccionadas solo están disponibles para <?php echo HotelName; ?> Club  -  Necesitas comprar <?php echo HotelName; ?> Club o cambiar tu look para continuar.", 
+            "new.user.flow.rename.submit" : "Hecho", 
+            "new.user.flow.room.select" : "Selecciona", 
+            "new.user.flow.clothes" : "¿Quieres tener más Créditos, Raros y <?php echo HotelName; ?> Club?", 
+            "new.user.flow.loader" : "Cargando...", 
+            "new.user.flow.colors" : "Podrás ganar un Punto de Fidelidad por cada crédito que compres.  Por cada 120 Créditos que compres durante el mismo mes, tendrás un bonus de 120 Puntos. Intercambia tus puntos por créditos extras, raros y <?php echo HotelName; ?> Club. Haz clik sobre el link Puntos de Fidelidad para obtener más información y comprobar tu balance.", 
+            "new.user.flow.onboarding.choose.your.style" : "Elige un estilo", 
+            "new.user.flow.onboarding.choose.your.name" : "Elige un nombre ", 
+            "new.user.flow.onboarding.characters.tip" : "CONSEJO:  De 4 a 15 caracteres, puedes utilizar letras, números y algunos signos de puntuación como los guiones.",   
+			"new.user.flow.header" : "¡Estás genial! Próximo paso, elegir un nombre para tu <?php echo HotelName; ?>. (Si no se te ocurre nada, no te agobies, deja esta opción para más tarde)", 
+            "new.user.flow.intro" : "Mientras preparamos tu registro, puedes ir eligiendo el primer look de tu avatar:", 
+            "new.user.flow.gender.boy" : "¡Elige tu <?php echo HotelName; ?>!", 
+            "new.user.flow.onboarding.choose.your.room" : "Elige la sala", 
+            "new.user.flow.onboarding.button.skip" : "Saltar", 
+            "new.user.flow.note.header" : "¡Por elegir <?php echo HotelName; ?>!", 
+            "new.user.flow.figure.ok" : "Chico", 
+            "new.user.reception.minLength" : "2", 
+            "new.user.reception.maxLength" : "15", 
+            "new.user.flow.roomTypes" : "10,11,12", 
+            "new.user.flow.galleryUrl" : "\//habboo-a.akamaihd.net/c_images/nux/"
+<?php endif; ?>
+    };
+    var params = {
+        "base" : "<?php echo Tool::Tags($cClient['Folders']['params..base']); ?>?<?php echo rand(1,50); ?>",
+        "allowScriptAccess" : "always",
+        "menu" : "false"                
+    };
+
+        if (!(HabbletLoader.needsFlashKbWorkaround())) {
+            params['wmode'] = "opaque";
+        }
+
+    FlashExternalInterface.signoutUrl = "<?php echo URL; ?>/account/logout?token=<?php echo User::$Row['token']; ?>";
+
+    var clientUrl = "<?php echo Tool::Tags($cClient['clientUrl']); ?>";
+    swfobject.embedSWF(clientUrl, "flash-container", "100%", "100%", "10.1.0", "<?php echo RES; ?>/web-gallery/flash/expressInstall.swf", flashvars, params, null, FlashExternalInterface.embedSwfCallback);
+
+    window.onbeforeunload = unloading;
+    function unloading() {
+        var clientObject;
+        if (navigator.appName.indexOf("Microsoft") != -1) {
+            clientObject = window["flash-container"];
+        } else {
+            clientObject = document["flash-container"];
+        }
+        try {
+            clientObject.unloading();
+        } catch (e) {}
+    }
+    window.onresize = function() {
+        HabboClient.storeWindowSize();
+    }.debounce(0.5);
+</script>
+
+<meta name="description" content="<?php echo HotelName; ?> Hotel: haz amig@s, ??e a la diversi?? date a conocer." />
+<meta name="keywords" content="<?php echo strtolower(HotelName); ?> hotel, mundo, virtual, red social, gratis, comunidad, personaje, chat, online, adolescente, roleplaying, unirse, social, grupos, forums, seguro, jugar, juegos, amigos, adolescentes, raros, furni raros, coleccionable, crear, coleccionar, conectar, furni, muebles, mascotas, dise??e salas, compartir, expresi??placas, pasar el rato, m??a, celebridad, visitas de famosos, celebridades, juegos en l?a, juegos multijugador, multijugador masivo" />
+
+<!--[if IE 8]>
+<link rel="stylesheet" href="<?php echo RES; ?>/static/styles/ie8.css" type="text/css" />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel="stylesheet" href="<?php echo RES; ?>/static/styles/ie.css" type="text/css" />
+<![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" href="<?php echo RES; ?>/static/styles/ie6.css" type="text/css" />
+<script src="<?php echo RES; ?>/static/js/pngfix.js" type="text/javascript"></script>
+<script type="text/javascript">
+try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {}
+</script>
+
+<style type="text/css">
+body { behavior: url(/js/csshover.htc); }
+</style>
+<![endif]-->
+<meta name="build" content="<?php echo Site::XDRBuild; ?>" />
+</head>
+
+<body id="client" class="flashclient">
+<div id="client-radio-box">
+    <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+<script type="text/javascript">
+MRP.insert({
+'url':'http://stream.zenolive.com/09fw59d09heuv',
+'lang':'es',
+'codec':'mp3',
+'volume':100,
+'autoplay':true,
+'forceHTML5':true,
+'jsevents':true,
+'buffering':0,
+'title':'Xukys Radio',
+'wmode':'transparent',
+'skin':'compact',
+'width':191,
+'height':46
+});
+</script>
+</div>
+<div id="overlay"></div>
+<img src="<?php echo RES; ?>v2/images/page_loader.gif" style="position:absolute; margin: -1500px;" />
+
+<div id="overlay"></div>
+<div id="client-ui" >
+    <div id="flash-wrapper">
+    <div id="flash-container">
+        <div id="content" style="width: 400px; margin: 20px auto 0 auto; display: none">
+<div class="cbb clearfix">
+    <h2 class="title">Please update your Flash Player to the latest version.</h2>
+    <div class="box-content">
+            <p>You can install and download Adobe Flash Player here: <a href="http://get.adobe.com/flashplayer/">Install flash player</a></p>
+    </div>
+</div>
+        </div>
+        <script type="text/javascript">
+            $('content').show();
+        </script>
+        <noscript>
+            <div style="width: 400px; margin: 20px auto 0 auto; text-align: center">
+                <p>If you are not automatically redirected, please <a href="/client/nojs">click here</a></p>
+            </div>
+        </noscript>
+    </div>
+    </div>
+	<div id="content" class="client-content"></div>
+	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<div class="ads2" style="top: -52px; background-image:url('http://i.imgur.com/SneKYBW.gif');padding-top:36px;padding-left:6px;margin-left:13%;height:100px;width:740px; background-repeat: 10; z-index: 7000; width: 734px; position: absolute; height:100px; left: 50%; margin-left:-370px; margin-right:auto; overflow: hidden;">
+<div onclick="$('.ads2').slideUp('slow2')" style="z-index: 9999; position: absolute; top: 80px; right: 30px; border-radius: 15px; padding: 2px 4px; font-size: 10pt; color: red; background: white; box-shadow: 0 0 10px white; cursor: pointer;" id="cerrar">X</div>
+<center>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" onerror="AdBlockDetected();"></script>
+<!-- client2-->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:970px;height:90px"
+     data-ad-client="ca-pub-1157334545507939"
+     data-ad-slot="8451479868"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>
+<script type="text/javascript">
+                  $(function(){
+                    setInterval(function(){
+                   $(".ads2").slideDown("slow2");
+                    },150000);
+                  });
+                   </script>
+</center>
+</div>
+		 </center>
+    <iframe id="game-content" class="hidden" allowtransparency="true" frameBorder="0" src="about:blank"></iframe>
+    <iframe id="page-content" class="hidden" allowtransparency="true" frameBorder="0" src="about:blank"></iframe>
+</div>
+    <script type="text/javascript">
+        RightClick.init("flash-wrapper", "flash-container");
+        if (window.opener && window.opener != window && window.opener.location.href == "/") {
+            window.opener.location.replace("/me");
+        }
+        $(document.body).addClassName("js");
+       	HabboClient.startPingListener();
+        Pinger.start(true);
+        HabboClient.resizeToFitScreenIfNeeded();
+    </script>
+<div id="fb-root"></div>
+<script type="text/javascript">
+    window.fbAsyncInit = function() {
+        Cookie.erase("fbsr_<?php echo Config::$FaceBook['app']['id']; ?>");
+        FB.init({
+            appId: '<?php echo Config::$FaceBook['app']['id']; ?>',
+            channelUrl : '/fbchannel',
+            status: true,
+            cookie: true,
+            xfbml: true
+        });
+
+        FB.getLoginStatus(function (oSession) {
+            if (typeof comufy_storeUser != 'undefined') {
+                if (oSession.status !== 'connected') {
+                    FB.Event.subscribe('auth.login', function (oSession) {
+                        if (oSession.status == "connected") {
+                            comufy_storeUser(oSession, {});
+                        }
+                    });
+                } else {
+                    comufy_storeUser(oSession, {});
+                }
+            }
+        });
+
+        if (window.habboPageInitQueue) {
+            // jquery might not be loaded yet
+            habboPageInitQueue.push(function() {
+                $(document).trigger("fbevents:scriptLoaded");
+            });
+        } else {
+            $(document).fire("fbevents:scriptLoaded");
+        }
+
+    };
+    window.assistedLogin = function(FBobject, optresponse) {
+        
+        Cookie.erase("fbsr_<?php echo Config::$FaceBook['app']['id']; ?>");
+        FBobject.init({
+            appId: '<?php echo Config::$FaceBook['app']['id']; ?>',
+            channelUrl : '/fbchannel',
+            status: true,
+            cookie: true,
+            xfbml: true
+        });
+
+        permissions = 'user_birthday,email,user_likes';
+        defaultAction = function(response) {
+            if (response.authResponse) {
+                fbConnectUrl = "/facebook?connect=true";
+                Cookie.erase("fbhb_val_<?php echo Config::$FaceBook['app']['id']; ?>");
+                Cookie.set("fbhb_val_<?php echo Config::$FaceBook['app']['id']; ?>", response.authResponse.accessToken);
+                Cookie.erase("fbhb_expr_<?php echo Config::$FaceBook['app']['id']; ?>");
+                Cookie.set("fbhb_expr_<?php echo Config::$FaceBook['app']['id']; ?>", response.authResponse.expiresIn);
+                window.location.replace(fbConnectUrl);
+            }
+        };
+
+        if (typeof optresponse == 'undefined')
+            FBobject.login(defaultAction, {scope:permissions});
+        else
+            FBobject.login(optresponse, {scope:permissions});
+
+    };
+
+    (function() {
+        var e = document.createElement('script');
+        e.async = true;
+        e.src = 'https://connect.facebook.net/es_ES/all.js';
+        document.getElementById('fb-root').appendChild(e);
+    }());
+</script>
+
+<iframe id="conversion-tracking" src="about:blank" width="0" height="0" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="position: absolute; top:0; left:0"></iframe>
+
+<script type="text/javascript">
+    /* stub firebug console methods in case Firebug is not present */
+    if (!("console" in window) || !("firebug" in console))
+    {
+        var names = ["log", "debug", "info", "warn", "error", "assert", "dir", "dirxml",
+            "group", "groupEnd", "time", "timeEnd", "count", "trace", "profile", "profileEnd"];
+
+        window.console = {};
+        for (var i = 0; i < names.length; ++i)
+            window.console[names[i]] = function() {}
+    }
+</script>
+
+<?php if (User::$IsFB): ?>
+    <div id="FB_HiddenIFrameContainer" style="display:none; position:absolute; left:-100px; top:-100px; width:0px; height: 0px;"></div>
+    <script type="text/javascript">
+        FacebookIntegration.apiKey = "<?php echo Config::$FaceBook['app']['id']; ?>";
+        FacebookIntegration.applicationId = "<?php echo Config::$FaceBook['app']['id']; ?>";
+        FacebookIntegration.applicationName = "<?php echo Config::$FaceBook['app']['name']; ?>";
+        FacebookIntegration.badgeImagePath = "http://www.habbo.es/habbo-imaging/decorate/001";
+        FacebookIntegration.viralPresentImagePath = "http://www.habbo.es/habbo-imaging/decorate/005";
+        FacebookIntegration.viralPartnerCode = "FBVIR";
+        FacebookIntegration.fbAppRequestUserFilter = "all";
+        L10N.put("facebook.story.actionlink.text", "Logra puntos extra");
+        L10N.put("facebook.story.name", "?oticias Frescas de <?php echo HotelName; ?> Hotel!");
+        L10N.put("facebook.story.registration.name", "Bienvenido a <?php echo HotelName; ?> Hotel");
+        L10N.put("facebook.story.registration.description", "Comienza una nueva vida como <?php echo HotelName; ?> en <?php echo HotelName; ?> Hotel.");
+        L10N.put("facebook.story.registration.prompt", "Ahora eres un <?php echo HotelName; ?>. ?u?pinas?");
+        L10N.put("facebook.story.achievement.prompt", "Deja un comentario a tus amig@s");
+        L10N.put("facebook.story.registration.caption", "?} acaba de entrar al Hotel!");
+        L10N.put("facebook.story.achievement.caption", "{0} ha logrado una Placa de Recompensa en <?php echo HotelName; ?>.");
+        L10N.put("facebook.story.xmasviral.actionlink.text", "Abrir el paquete");
+        L10N.put("facebook.story.xmasviral.prompt", "¡Diles a tus amigos que necesitas su ayuda!");
+        L10N.put("facebook.request.content.text", "He encontrado un paquete de regalo hecho a base de hojas y que contiene algo que croa. ?r favor, ay??e a abrirlo!");
+        L10N.put("title.fb_app_request", "Enviar reto croante");
+        FacebookIntegration.initUI();
+    </script>
+<?php endif; ?>
+
+<script type="text/javascript">
+    HabboView.run();
+</script>
+
+</body>
+</html>

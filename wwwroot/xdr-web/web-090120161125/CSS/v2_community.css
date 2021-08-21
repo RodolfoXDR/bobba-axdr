@@ -1,0 +1,321 @@
+
+.user-interface{
+    background-image: url(http://i70.servimg.com/u/f70/18/17/96/77/bg_hot10.png), linear-gradient(to bottom, #1e74ec , #0366ac);
+	background-repeat: no-repeat;
+    height: 170px;
+	border-radius: 4px;
+    overflow: hidden
+}
+
+.user-interface > .avatar{
+	margin: 3px 0;
+	float: left;
+}
+
+.user-interface > .information{
+    float: left;
+    background: rgba(0, 76, 110, 0.85);
+    height: 100%;
+    padding: 25px 15px;
+    width: 240px;
+}
+
+.user-interface > .information > #username{
+    font-size: 24pt;
+    font-family: Ubuntu;
+    color: white;
+    font-weight: 100;
+	margin-bottom: 5px;
+}
+
+.user-interface > .information > #motto{
+	font-size: 22pt;
+    color: #f1f1f1;
+    font-family: Segoe UI;
+    font-weight: 100;
+}
+
+.user-interface > .information > .currency{
+    font-size: 15pt;
+    font-family: Ubuntu;
+    color: white;
+    font-weight: 100;
+}
+
+.user-interface > .hotel__btt__area{
+	float:left;
+	margin: 50px;
+}
+
+.user-interface > .hotel__btt__area > a.enter__button{
+	box-shadow: 0 3px 0 1px rgba(0,0,0,.3);
+    display: inline-block;
+    line-height: 1.2;
+    text-align: center;
+    border-width: 2px;
+    background-color: #00813e;
+    border-color: #8eda55;
+    color: #fff;
+    padding: 12px 24px;
+    border-style: solid;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 19pt;
+	text-decoration: none;
+}
+
+.user-interface > .hotel__btt__area > a.enter__button.disabled{
+    background-color: #464646;
+    border-color: #7f7f7f;
+    color: #848484;
+}
+
+.articles-interface{
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 3px 3px 13px -4px #949494;
+    border-radius: 4px;
+}
+
+.articles-interface > .article{
+    overflow: hidden;
+}
+
+.articles-interface > .article > #image{
+	overflow: hidden;
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin: 25px 10px;
+	border-radius: 4px;
+}
+
+.articles-interface > .article > #image img{
+	height:inherit; 
+	width:inherit;
+}
+
+.articles-interface > .article > #material{
+	float: left;
+    width: 65%;
+    margin: 15px;
+}
+
+.articles-interface > .article > #material > #title{
+	font-size: 30pt;
+    font-family: Ubuntu Condensed;
+    text-transform: uppercase;
+}
+
+.articles-interface > .article > #material > #datencat{
+    font-size: 10pt;
+    font-family: Ubuntu;
+    color: #969696;
+}
+
+.articles-interface > .article > #material > #content{
+    font-size: 12pt;
+    font-family: Ubuntu;
+    padding: 15px 15px;
+}
+
+.articles-interface > .article > #material > a#link{
+    display: block;
+    text-align: right;
+    color: #206271;
+    font-size: 14pt;
+    font-weight: 700;
+    font-family: Segoe UI Light;
+}
+
+.articles-interface > .divider{
+	border-top: 1px solid #e7e7e7;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.mini__articles-interface{
+    background: white;
+    padding: 10px;
+    margin: 20px;
+    box-shadow: 3px 3px 13px -4px #949494;
+    border-radius: 4px;
+}
+
+.mini__articles-interface > #header{
+	background: #1a9aff;
+    padding: 10px;
+    color: white;
+    font-size: 15pt;
+    border-radius: 5px;
+    margin: 0 0 10px;
+}
+
+.mini__articles-interface > .article{
+	padding: 15px;
+    border-left: 4px solid #1a9aff;
+    margin: 0 0 20px;
+}
+
+.mini__articles-interface > .article > #content > a#title{
+	
+}
+
+/**********NEWS PAGE*********/
+.article-interface{
+    background: #fff;
+    padding: 20px;
+    margin: 11px 0;
+    border-radius: 2px;
+}
+
+.article-interface > #article_header{
+	margin: 0 0 15px;
+}
+
+.article-interface > #article_header > #article_title{
+	font-size: 28pt;
+    font-family: Ubuntu;
+    color: #343434;
+}
+
+.article-interface > #article_header > #article_image{
+	width: 50%;
+    margin: 0 auto;
+}
+
+.article-interface > #article_header > #article_information{
+	font-size: 11pt;
+    text-align: right;
+    color: #6e6e6e;
+}
+
+.article-interface > #article_header > #article_description{
+    padding: 10px;
+    font-size: 10pt;
+    color: #14679f;
+    font-weight: bold;
+    font-family: Segoe UI Light;
+    text-transform: uppercase;
+}
+
+ul.flags{
+	padding: 0;
+	margin: 0;
+}
+
+ul.flags > li{
+    list-style: none;
+    padding: 5px;
+    display: -webkit-box;
+    border-radius: 3px;
+}
+
+ul.flags > li > #flag-space{
+
+}
+
+ul.flags > li > #country-name{
+    line-height: 47px;
+    margin: 0 15px;
+    font-size: 20pt;	
+}
+
+ul.flags > li > #country-users{
+    line-height: 47px;
+    font-size: 14pt;
+    font-style: italic;
+    font-weight: bolder;
+    color: #2196F3;	
+}
+
+.flag{
+    background: url(Images/flags.png);
+    height: 47px;
+    width: 70px;
+    background-position: -10px -10px;
+    border-radius: 8px;
+}
+
+.flag.MX{
+	background-position: -730px -238px;
+}
+
+.flag.CZ{
+	background-position: -250px 228px;
+}
+
+.flag.VE{
+	background-position: 160px 114px;
+}
+
+.flag.CL{
+	background-position: -170px 171px;
+}
+
+.flag.PE{
+	background-position: -890px -238px;
+}
+
+.flag.AR{
+	background-position: -10px -295px;
+}
+
+.flag.CO{
+	background-position: -170px 57px;
+}
+
+.flag.DO{
+	background-position: -330px -10px;
+}
+
+.flag.ES{
+	background-position: 320px -352px;
+}
+
+.flag.SV{
+	background-position: 560px -352px;
+}
+
+.flag.EC{
+	background-position: -330px -124px;
+}
+
+.flag.PA{
+	background-position: 480px -67px;
+}
+
+.flag.PY{
+	background-position: 480px -181px;
+}
+
+.flag.UY{
+	background-position: 160px 342px;
+}
+
+.flag.BO{
+	background-position: -90px -409px;
+}
+
+.flag.PR{
+	background-position: 160px 399px;
+}
+
+.flag.US{
+	background-position: 160px 399px;
+}
+
+.flag.HN{
+	background-position: -490px -10px;
+}
+
+.flag.GT{
+	background-position: -410px -409px;
+}
+
+.flag.CU{
+	background-position: -250px -352px
+}

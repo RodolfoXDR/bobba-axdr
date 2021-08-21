@@ -1,0 +1,52 @@
+<div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
+	<div class="wrapper" style="width: 1120px;margin-top: 20px;">
+		<div class="plugin" >
+			<div class="title-blue">Mensajes</div>
+			<div class="content">
+			<?php
+				$send = SQL::query('SELECT DISTINCT from_id FROM messenger_offline_messages');
+				if ($send && $send->num_rows > 0):
+					while ($sendRow = $send->fetch_assoc()):
+						User::Get('users', 'look', $r, 'id = ' . $sendRow['from_id']);
+						$timestamp = SQL::query('SELECT timestamp FROM messenger_offline_messages WHERE from_id = \'' . $sendRow['from_id'] . '\' ORDER BY timestamp DESC LIMIT 1');
+						if ($timestamp && $timestamp->num_rows > 0):
+							while($timestampRow = $timestamp->fetch_assoc()):
+			?>
+				<div id="messages" style="float: left;width: 100%">
+					<div class="column" style="width: 30%">
+						<div class="avatar__msg">
+							<div class="base__msg"><img src="<?php echo LOOK . $r['look']; ?>&head_direction2&headonly=1&gesture=spk&size=l" alt="Mustache"></div>
+							<div class="name__msg"><?php echo User::GetNameById($sendRow['from_id']) ?></div>
+						</div>
+					</div>
+					<div class="column" style="width:50%">
+						<div class="since"><?php echo Tool::ParseUnixTime($timestampRow['timestamp']); ?></div>
+					<?php 
+						$messages = SQL::query('SELECT * FROM messenger_offline_messages WHERE to_id = \'' . User::$Data['id'] . '\' AND from_id = \'' . $sendRow['from_id'] . '\' ORDER BY timestamp');
+						if($messages && $messages->num_rows > 0):
+							while($messagesRow = $messages->fetch_assoc()):
+					?>
+						<div class="message">
+							<div class="text">
+							<?php echo $messagesRow['message']; ?>
+							</div>
+							<div class="time"><?php echo date("d M Y h:i:s", $messagesRow['timestamp']); ?></div>
+						</div>
+					<?php endwhile; endif; ?>
+						<a href="#" class="button" style="float: right;text-decoration: none;padding: 0 10px">Responder en el Hotel</a>
+					</div>
+				</div>
+			<?php
+				endwhile;
+				endif;
+				endwhile;
+				else:		
+			?>
+				<div id="empty__messages" style="float: left;width: 100%">
+					No tienes mensajes nuevos <span class="frank__unsure"></span>
+				</div>
+			<?php endif; ?>
+			</div>
+		</div>
+	</div>
+</div>

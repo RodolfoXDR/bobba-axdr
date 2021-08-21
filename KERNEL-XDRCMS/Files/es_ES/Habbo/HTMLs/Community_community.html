@@ -1,0 +1,128 @@
+<div id="container">
+    <div id="content" style="position: relative" class="clearfix">
+	<?php Cache::AppendPlugin(1); ?>
+    <?php
+    $Row = Cache::GetArticles(true, 5, 0);
+    $Count = 0;
+    if(count($Row) > 0):
+    ?>
+     <div id="promo-box">
+        <div id="promo-bullets"></div>
+    <?php
+        foreach($Row as $DataRow):
+            if($Count === 0):
+                $Count++;
+                echo ' <div class="promo-container" style="background-image: url(' . $DataRow['BackGroundImage'] . ')">';
+            else:
+                echo ' <div class="promo-container" style="display: none; background-image: url(' . $DataRow['BackGroundImage'] . ')">';
+            endif;
+            $DataURL =  URL . '/articles/' . $DataRow['Id'] . '-' . str_replace(' ', '-', strtolower($DataRow['Title']));
+    ?>
+                <div class="promo-content-container">
+                    <div class="promo-content">
+                        <div class="title"><?php echo $DataRow['Title']; ?></div>
+                        <div class="body"><?php echo $DataRow['Summary']; ?></div>
+                    </div>
+                </div>
+
+                <div class="promo-link-container">
+                    <div class="enter-hotel-btn">
+                        <div class="open enter-btn">
+                            <a href="<?php echo $DataURL; ?>" target="_blank">Leer Más...<i></i></a>
+                            <b></b>
+                            </div>
+                    </div>
+                </div>
+            </div>
+    <?php endforeach; ?>
+    
+    
+    </div>
+    
+    <script type="text/javascript">
+        document.observe("dom:loaded", function() { PromoSlideShow.init(); });
+    </script>
+    <?php endif; ?>
+
+<div id="column1" class="column">
+        <div class="habblet-container ">		
+            <div class="cbb clearfix activehomes ">
+                <h2 class="title">Usuarios al azar</h2>
+                <div id="homes-habblet-list-container" class="habblet-list-container">
+                    <img class="active-habbo-imagemap" src="<?php echo RES; ?>v2/images/activehomes/transparent_area.gif" width="435px" height="230px" usemap="#habbomap" />
+                    <?php
+                        $i = 0;
+                        $getem = SQL::query('SELECT username, motto, account_created, look, online FROM users ORDER BY RAND() LIMIT 18');
+
+                        while ($row = $getem->fetch_assoc()):
+                            $i++;
+                            $list_id = $i - 1;
+                            $status = $row['online'] == 1 ? 'on' : 'off';
+                    ?>
+                    <div id="active-habbo-data-<?php echo $list_id; ?>" class="active-habbo-data">
+                        <div class="active-habbo-data-container">
+                            <div class="active-name <?php echo $status; ?>"><?php echo $row['username']; ?></div>
+                            Creado el <?php echo strtolower(date('d \d\e M \e\n Y', $row['account_created'])); ?>
+                            <p class="moto"><?php echo $row['motto']; ?></p>
+                        </div>
+                    </div>                
+                    <input type="hidden" id="active-habbo-url-<?php echo $list_id; ?>" value="<?php echo URL; ?>/home/<?php echo $row['username']; ?>"/>
+                    <input type="hidden" id="active-habbo-image-<?php echo $list_id; ?>" class="active-habbo-image" value="<?php echo LOOK . $row['look']; ?>&size=b&direction=4&head_direction=4&gesture=sml" />
+                    <?php endwhile; ?>
+                    <div id="placeholder-container">
+                        <div id="active-habbo-image-placeholder-0" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-1" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-2" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-3" class="active-habbo-image-placeholder"></div>
+
+                        <div id="active-habbo-image-placeholder-4" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-5" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-6" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-7" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-8" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-9" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-10" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-11" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-12" class="active-habbo-image-placeholder"></div>
+
+                        <div id="active-habbo-image-placeholder-13" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-14" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-15" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-16" class="active-habbo-image-placeholder"></div>
+                        <div id="active-habbo-image-placeholder-17" class="active-habbo-image-placeholder"></div>
+                    </div>
+                </div>
+            <map id="habbomap" name="habbomap">
+                <area id="imagemap-area-0" shape="rect" coords="55,53,95,103" href="#" alt=""/>
+                <area id="imagemap-area-1" shape="rect" coords="120,53,160,103" href="#" alt=""/>
+                <area id="imagemap-area-2" shape="rect" coords="185,53,225,103" href="#" alt=""/>
+                <area id="imagemap-area-3" shape="rect" coords="250,53,290,103" href="#" alt=""/>
+                <area id="imagemap-area-4" shape="rect" coords="315,53,355,103" href="#" alt=""/>
+                <area id="imagemap-area-5" shape="rect" coords="380,53,420,103" href="#" alt=""/>
+                <area id="imagemap-area-6" shape="rect" coords="28,103,68,153" href="#" alt=""/>
+                <area id="imagemap-area-7" shape="rect" coords="93,103,133,153" href="#" alt=""/>
+                <area id="imagemap-area-8" shape="rect" coords="158,103,198,153" href="#" alt=""/>
+                <area id="imagemap-area-9" shape="rect" coords="223,103,263,153" href="#" alt=""/>
+                <area id="imagemap-area-10" shape="rect" coords="288,103,328,153" href="#" alt=""/>
+                <area id="imagemap-area-11" shape="rect" coords="353,103,393,153" href="#" alt=""/>
+                <area id="imagemap-area-12" shape="rect" coords="55,153,95,203" href="#" alt=""/>
+                <area id="imagemap-area-13" shape="rect" coords="120,153,160,203" href="#" alt=""/>
+                <area id="imagemap-area-14" shape="rect" coords="185,153,225,203" href="#" alt=""/>
+                <area id="imagemap-area-15" shape="rect" coords="250,153,290,203" href="#" alt=""/>
+                <area id="imagemap-area-16" shape="rect" coords="315,153,355,203" href="#" alt=""/>
+                <area id="imagemap-area-17" shape="rect" coords="380,153,420,203" href="#" alt=""/>
+            </map>
+            <script type="text/javascript">
+            var activeHabbosHabblet = new ActiveHabbosHabblet();
+            document.observe("dom:loaded", function() { activeHabbosHabblet.generateRandomImages(); });
+            </script>
+        </div>
+    </div>
+    <script type="text/javascript">if (!$(document.body).hasClassName('process-template')) { Rounder.init(); }</script>
+
+    <?php Cache::AppendPlugin(7); ?>
+</div>
+
+<div id="column2" class="column">
+    <?php Cache::AppendPlugin(8); ?>
+</div>

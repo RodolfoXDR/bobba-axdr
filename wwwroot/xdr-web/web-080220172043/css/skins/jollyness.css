@@ -1,0 +1,420 @@
+.box{
+    background: white;
+    box-shadow: -5px 5px 20px 0px #dedede;
+    margin: 0 0 15px 0;
+}
+
+.box > .title{
+	background: #0075dc;
+    color: white;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 6px 12px;
+    font-size: 13pt;
+	font-family: Roboto Condensed;
+}
+
+.box > .title.purple{
+	background: #7e3878;
+}
+
+.box > .title.lightpurple{
+	background: #9f00a7
+}
+
+.box > .title.darkpurple{
+	background: #603cba
+}
+
+.box > .title.magenta{
+	background: #ff0097
+}
+
+.box > .title.teal{
+	background:  #00aba9
+}
+
+.box > .title.darkteal{
+	background: #018280
+}
+
+.box > .title.yellow{
+	background: #ffc40d
+}
+
+.box > .title.gold{
+	background: #E0BD00
+}
+
+.box > .title.brown{
+	background: #5d3a26
+}
+
+.box > .title.landing{
+	background: #1f619e
+}
+
+.box > .title.blue{
+    background: #457DFF
+}
+
+.box > .title.darkblue{
+	background: #004d9e
+}
+
+.box > .title.red{
+    background: #e21c49
+}
+
+.box > .title.darkred{
+	background: #960000
+}
+
+.box > .title.redpink{
+	background: #de0e57;
+}
+
+.box > .title.green{
+	background: #61ad00
+}
+
+.box > .title.lightgreen{
+	background: #99b433
+}
+
+.box > .title.darkgreen{
+	background: #006f00
+}
+
+.box > .title.emerald{
+	background: #018491
+}
+
+.box > .title.lightbrown{
+	background: #FF9445
+}
+
+.box > .title.orange{
+	background: #e3a21a
+}
+
+.box > .title.darkorange{
+	background: #da532c
+}
+
+.box > .title.darken{
+    background: #1d1d1d
+}
+
+.box > .title.light{
+    background: #dedede;
+    color: #2d2d2d;
+}
+
+.box > .title.facebook{
+	background: #3a5897
+}
+
+.box > .title.twitter{
+	background: #1da1f2
+}
+
+.box > .title.wine{
+    background: #480000;
+}
+
+.box > .title.maintenance{
+	background: none;
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+.box > .content{
+    padding: 8px;
+}
+
+.box.badges > .content > .hbadge {
+    text-align: center;
+    width: 70px;
+    display: inline-block;
+}
+
+.box.badges > .content > .hbadge > .image {
+    align-items: center;
+    border: 3px solid #383838;
+    border-radius: 50%;
+    display: flex;
+    height: 50px;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 50px;
+    margin: 0 auto;
+}
+
+.box.groups > .content > .hgroup {
+	
+}
+
+.box.groups > .content > .hgroup > .image {
+	
+}
+
+.box.groups > .content > .hgroup > .information {
+	
+}
+
+.box.groups > .content > .hgroup > .information > .group-name {
+	
+}
+
+.box.groups > .content > .hgroup > .information > .group-members {
+	
+}
+
+.box.rooms > .content > .hroom {
+	padding: 1px 1px;
+    height: 110px;
+    margin: 20px 10px;
+}
+
+.box.rooms > .content > .hroom > .image{
+	background: url(../../img/rooms.png) no-repeat;
+    float: left;
+    height: 110px;
+    width: 110px;
+    border-radius: 55px;
+}
+
+.box.rooms > .content > .hroom > .information {
+	float: left;
+    height: 110px;
+    padding: 30px 10px;
+}
+
+.box.rooms > .content > .hroom > .information > .room-name {
+	font-size: 14pt;
+    font-family: Roboto Condensed;
+    font-weight: 600;
+    color: #f96b43;
+}
+
+.box.rooms > .content > .hroom > .information > .room-owner {
+	padding: 0 10px;
+    font-family: Roboto Condensed;
+    color: #b92e07;
+}
+
+.box.list > .content li {
+	color: #000;
+	list-style: none;
+}
+
+.box.list > .content li > a {
+	color: #000;
+}
+
+.user-interface{
+	background: url('https://images.habbo.com/c_images/web_promo/lpromo_Blue_BB.png') -53px 0px;
+	border-radius: 4px;
+	margin: 0 0 20px 0;
+}
+
+.user-interface > #overlay{
+	background: rgba(10, 44, 76, 0.3);
+}
+
+.user-interface > #overlay > .avatar{
+    height: 130px;
+    overflow: hidden;
+    display: inline-block;
+    background: url(http://img.ibxk.com.br/2015/3/programas/878446701161327480-o.jpg) -370px -425px;
+    border-radius: 50%;
+    margin: 20px;
+}
+
+.user-interface > #overlay > .data{
+	display: inline-block;
+    color: white;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 32px 15px;
+
+}
+
+.user-interface > #overlay > .data > #credits{
+	margin: 5px 0;
+	color: #e0b200;
+}
+
+.user-interface > #overlay > .data > #duckets{
+	margin: 5px 0;
+	color: #eb37ff;
+}
+
+.user-interface > #overlay > .data > #diamonds{
+	margin: 5px 0;
+	color: #00bfaf;
+}
+
+.user-interface > #overlay > .data > #gotw{
+	margin: 5px 0;
+	color: #ff6c00;
+}
+
+.user-interface > #overlay > .buttons{
+    float: right;
+    margin: 60px 50px;
+}
+
+.user-interface > #overlay > .avatar > span.thumbnail-data{
+	-webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    background: rgba(16, 16, 16, 0.9);
+    top: 100px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    left: 40px;
+    letter-spacing: -1px;
+    padding: 9px 11px 9px;
+    position: absolute;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+.user-interface > #overlay > .avatar > span.thumbnail-data > span.thumb-info-name{
+	-webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    display: block;
+    white-space: nowrap;
+    font-size: 12pt;
+	
+}
+
+.user-interface > #overlay > .avatar > span.thumbnail-data > span.thumb-info-rank{
+    border-radius: 2px;
+    display: inline-block;
+    float: left;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin: 2px -2px -15px -2px;
+    padding: 2px 9px;
+    text-transform: none;
+    background-color: #0088cc;
+}
+
+.articles-interface{
+    background: url(https://images.habbo.com/web_images/habbo-web-articles/lpromo_gen15_10.png) no-repeat #c7c7c7;
+    color: white;
+    padding: 20px 25px;
+    border-radius: 2px;
+    min-height: 250px;
+	margin: 25px 0;
+}
+
+.articles-interface > #overlay{
+	
+}
+
+.articles-interface > #overlay > .article-title{
+	text-transform: uppercase;
+	margin: 0 0 10px;
+	font-size: 20pt;
+}
+
+.articles-interface > #overlay > .article-title a{
+	text-transform: uppercase;
+	margin: 0 0 10px;
+	font-size: 20pt;
+}
+
+.articles-interface > #overlay > .article-data{
+	font-size: 10pt;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.articles-interface > #overlay > .article-content{
+	text-indent: 30px;
+    margin: 15px 5px;
+}
+
+.articles-interface > #overlay > .article-buttons{
+	float: right;
+}
+
+button.habbo.big{
+	background-color: #569400;
+    color: #fff;
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(175, 6, 6, 0) 50%, rgba(255, 255, 255, 0.15) 51%);
+    border: 2px solid rgb(59, 101, 2);
+    border-radius: 3px;
+	font-size: 18pt;
+    padding: 15px 30px;
+	font-family: Ubuntu Condensed;
+}
+
+button.habbo.green{
+	background-color: #569400;
+    color: #fff;
+    background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(175, 6, 6, 0) 50%, rgba(255, 255, 255, 0.15) 51%);
+    border: 2px solid rgb(59, 101, 2);
+    border-radius: 3px;
+    padding: 3px 10px;
+    font-size: 10pt;
+	font-family: Ubuntu Condensed;
+}
+
+/*--------------------------------------*/
+.nav-pills > li.teamli, .nav-pills > li + li.teamli{
+    margin-left: 5px;
+    background: #252525;
+    border-radius: 4px;
+}
+
+.nav-pills > li + li.teamli > a:hover{	
+	color: white;
+}
+
+/* ARTICLES PAGE */
+
+#article-interface { 
+	background-color: #fff;
+	box-shadow: 1px 1px 7px -1px rgba(0, 0, 0, 0.4);
+	border-radius: 3px;
+}
+
+#article-interface > #article-header {
+	color: #fff;
+    padding: 25px 20px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 200px;
+}
+
+#article-interface > #article-header > #article-title {
+    font-size: 20pt;
+    font-family: Roboto Condensed;
+    margin: 5px 0 5px 0;	
+}
+
+#article-interface > #article-header > #article-information {
+	padding: 0 15px;
+    font-size: 10pt;
+    font-weight: 300;
+}
+
+#article-interface > #article-header > #article-description {
+	
+}
+
+#article-interface > #article-content {
+	padding: 5px 10px;
+}
+
+#article-interface > #article-content p{
+	color: #000;
+}

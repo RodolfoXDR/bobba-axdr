@@ -1,0 +1,177 @@
+<?php
+$getMyStickers = SQL::query('SELECT id, skin, type FROM xdrcms_site_inventory_items WHERE userId = ' . User::$Data['id'] . ' AND type = \'sticker\' AND isWaiting = \'0\'');
+$c = 0;
+$i = [];
+if($getMyStickers && $getMyStickers->num_rows > 0):
+	while($Row = $getMyStickers->fetch_assoc()):
+		if(!isset($i[$Row['skin']]))
+			$i[$Row['skin']] = ['id' => $Row['id'], 'type' => $Row['type'], 'count' => 1];
+		else	
+			$i[$Row['skin']]['count']++;
+	endwhile;
+	foreach($i as $Key => $Row):
+			if($c === 0):
+				header('X-JSON: ' . json_encode([['Inventario', 'Tienda'], [$Key, $Key, '', $Row['type'], null, $Row['count']]]));
+			endif;
+	endforeach;
+endif;
+?>
+<div style="position: relative;">
+<div id="webstore-categories-container">
+	<h4>Categorias:</h4>
+	<div id="webstore-categories">
+<ul class="purchase-main-category">
+		<li id="maincategory-1-stickers" class="selected-main-category webstore-selected-main">
+			<div>Stickers</div>
+			<ul class="purchase-subcategory-list" id="main-category-items-1">
+<?php $c = 0; foreach(Categories::$Row as $Key => $Value): $c++; ?>
+				<li id="subcategory-1-<?php echo $Key; ?>-stickers" class="subcategory<?php if($c === 1) echo '-selected'; ?>">
+					<div><?php echo $Value['Name']; ?></div>
+				</li>
+<?php endforeach; ?>
+			</ul>
+		</li>
+		<li id="maincategory-2-backgrounds" class="main-category-no-subcategories">
+			<div>Fondos</div>
+			<ul class="purchase-subcategory-list" id="main-category-items-2">
+				<li id="subcategory-2-52-backgrounds" class="subcategory">
+					<div>Fondos</div>
+				</li>
+			</ul>
+		</li>
+		<li id="maincategory-6-stickie_notes" class="main-category-no-subcategories">
+			<div>Notas</div>
+			<ul class="purchase-subcategory-list" id="main-category-items-6">
+				<li id="subcategory-6-54-stickie_notes" class="subcategory">
+					<div>Notas</div>
+				</li>
+			</ul>
+		</li>
+</ul>
+
+	</div>
+</div>
+
+<div id="webstore-content-container">
+	<div id="webstore-items-container">
+		<h4>Select an item by clicking it</h4>
+		<div id="webstore-items"><ul id="webstore-item-list">
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+	<li class="webstore-item-empty"></li>
+</ul></div>
+	</div>
+	<div id="webstore-preview-container">
+		<div id="webstore-preview-default"></div>
+		<div id="webstore-preview"></div>
+	</div>
+</div>
+
+<div id="inventory-categories-container">
+	<h4>Categorias:</h4>
+	<div id="inventory-categories">
+<ul class="purchase-main-category">
+	<li id="inv-cat-stickers" class="selected-main-category-no-subcategories">
+		<div>Stickers</div>
+	</li>
+	<li id="inv-cat-backgrounds" class="main-category-no-subcategories">
+		<div>Fondos</div>
+	</li>
+	<li id="inv-cat-widgets" class="main-category-no-subcategories">
+		<div>Elementos</div>
+	</li>
+	<li id="inv-cat-notes" class="main-category-no-subcategories">
+		<div>Notas</div>
+	</li>
+</ul>
+
+	</div>
+</div>
+
+<div id="inventory-content-container">
+	<div id="inventory-items-container">
+		<h4>Selecciona un producto haciendo clic sobre �l.</h4>
+		<div id="inventory-items"><ul id="inventory-item-list">
+<?php
+$c = 0;
+$i = [];
+$b = false;
+
+if($getMyStickers && $getMyStickers->num_rows > 0):
+	while($Row = $getMyStickers->fetch_assoc()):
+		if(!isset($i[$Row['skin']]))	$i[$Row['skin']] = ['id' => $Row['id'], 'type' => $Row['type'], 'count' => 1];
+		else	$i[$Row['skin']]['count']++;
+	endwhile;
+	foreach($i as $Key => $Row):
+
+			if($c === 0)
+				$b = ($Row['count'] > 1);
+
+			if($c !== 20)	$c++;
+?>
+	<li id="inventory-item-<?php echo $Row['id']; ?>" title="">
+		<div class="webstore-item-preview <?php echo $Key; ?> <?php echo $Row['type']; ?>">
+			<div class="webstore-item-mask">
+				<?php if($Row['count'] > 1): ?><div class="webstore-item-count"><div>x<?php echo $Row['count']; ?></div></div><?php endif; ?>
+			</div>
+		</div>
+	</li>
+<?php
+	endforeach;
+else:
+	header('X-JSON: [["Inventario","Tienda"],[]]');
+endif;
+if($c < 20):
+	while($c < 20):
+		$c++;
+		echo '<li class="webstore-item-empty"></li>';
+	endwhile;
+endif;
+?>
+</ul></div>
+	</div>
+	<div id="inventory-preview-container">
+		<div id="inventory-preview-default"></div>
+		<div id="inventory-preview"><h4>&nbsp;</h4>
+
+<div id="inventory-preview-box"></div>
+
+<div id="inventory-preview-place" class="clearfix">
+	<div class="clearfix">
+		<a href="#" class="new-button" id="inventory-place"><b>Colocar</b><i></i></a>
+	</div>
+<?php if($b): ?>
+	<div class="clearfix">
+		<a href="#" class="new-button" id="inventory-place-all">
+			<b>Colocar todos</b>
+			<i></i>
+		</a>
+	</div>
+<?php endif; ?>
+</div>
+
+</div>
+	</div>
+</div>
+
+<div id="webstore-close-container">
+	<div class="clearfix"><a href="#" id="webstore-close" class="new-button"><b>Cerrar</b><i></i></a></div>
+</div>
+</div>

@@ -1,0 +1,109 @@
+<div id="container">
+	<div id="content" style="position: relative" class="clearfix">
+        <div class="habblet-container" style="float:left; width:210px;">
+                <div class="cbb settings">
+                    <h2 class="title">Cambiar tu perfil</h2>
+                    <div class="box-content">
+                        <div id="settingsNavigation">
+                            <ul>
+                            <?php
+                            $NavigationPages = [
+                            'PREFERENCIAS' => '/profile?tab=1',
+                            'EMAIL Y VERIFICACIÓN' => '/profile?tab=2',
+                            'MI CONTRASEÑA' => '/profile?tab=3'
+                            ];
+    
+                            $NavigationUrls = [
+                            'PREFERENCIAS' => ['/profile', '/profile?tab=1'],
+                            'EMAIL Y VERIFICACIÓN' => ['/profile?tab=2'],
+                            'MI CONTRASEÑA' => ['/profile?tab=3']
+                            ];
+    
+                            foreach ($NavigationPages as $PageName => $PageUrl):
+                            ?>
+                                <li <?php echo (in_array($_SERVER['REQUEST_URI'], $NavigationUrls[$PageName])) ? 'class="selected"' : ''; ?>><?php if(!in_array($_SERVER['REQUEST_URI'], $NavigationUrls[$PageName])): ?><a href="<?php echo URL . $PageUrl; ?>"><?php endif; ?><?php echo $PageName; ?></a></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="habblet-container " style="float:left; width: 560px;">
+            <div class="cbb clearfix settings">
+                <h2 class="title">Mi Estado</h2>
+                <div class="box-content">
+                    <?php if(!empty($result)): ?>
+                        <div class="rounded rounded-<?php echo isset($error) ? 'red' : 'green'; ?>"><?php echo $result; ?><br /></div><div>&nbsp;</div>
+                    <?php endif; ?>
+    
+                    <form action="<?php echo URL; ?>/profile?tab=1" method="post" id="profileForm">
+                        <input type="hidden" name="tab" value="2" />
+    
+                        <h3>Tu estado</h3>
+    
+                        <p>Tu estado podrá ser visto por todos, ¡piénsalo bien!</p>
+                        <p>
+                            <label>Estado:
+                            <input type="text" name="motto" size="32" maxlength="32" value="<?php echo User::$Data['motto']; ?>" id="avatarmotto" /></label>
+                        </p>
+    
+                        <h3>Tu Página</h3>
+    
+                        <p>Permitir a otros usuarios ver tu Página personal:<br />
+                            <?php
+                                $Home1 = '';
+                                $Home0 = '';
+    
+                                if(USER::$Row['visibility'] === 'EVERYONE')
+                                    $Home1 = ' checked="checked"';
+                                else
+                                    $Home0 = ' checked="checked"';
+                        ?>
+                            <label><input type="radio" name="visibility" value="EVERYONE"<?php echo $Home1; ?> />Todos</label>
+                            <label><input type="radio" name="visibility" value="NOBODY"<?php echo $Home0; ?> />No</label>
+                        </p>
+    
+                        <input type="hidden" name="emailFriendRequestAlertEnabled" value="true" />
+    
+                        <h3>Peticiones de amigos</h3>
+                        
+                        <p>
+                            <label>
+                                <input type="checkbox" name="block_newfriends" <?php if(User::$Row['block_newfriends'] == 0) echo 'checked="checked"'; ?> value="true"/>Peticiones de Amigos activadas 
+                            </label>
+                        </p>
+    
+                        <?php
+                        if(USER::$Row['hide_online'] == '0')
+                            $Home1 = ' checked="checked"';
+                        else
+                            $Home0 = ' checked="checked"';
+                        ?>
+                        <h3>Estado de la conexión</h3>
+                    
+                        <p>
+                            Elige quién puede ver si estás conectado:
+                            <label><input name="showOnlineStatus" value="false"<?php echo $Home1; ?> type="radio">Nadie</label>
+                            <label><input name="showOnlineStatus" value="true"<?php echo $Home0; ?> type="radio">Todos</label>
+                        </p>
+    
+                        <div class="settings-buttons">
+                            <a href="#" class="new-button" style="display: none" id="profileForm-submit"><b>Salvar cambios</b><i></i></a>
+                            <noscript><input type="submit" value="Salvar cambios" name="save" class="submit" /></noscript>
+                        </div>
+                    </form>
+    
+                    <script type="text/javascript">
+                        $("profileForm-submit").observe("click", function(e) { e.stop(); $("profileForm").submit(); });
+                        $("profileForm-submit").show();
+                    </script>
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+    if (typeof HabboView != "undefined") {
+        HabboView.run();
+    }
+    document.getElementById("style_<?php echo (isset($_COOKIE['customStyle']) && is_numeric($_COOKIE['customStyle'])) ? $_COOKIE['customStyle'] : '-1'; ?>").setAttribute("selected", true);
+</script>

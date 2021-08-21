@@ -1,0 +1,84 @@
+<?php
+$uQ = SQL::query('SELECT users.id, users.username, users.look FROM users, messenger_friendships WHERE (messenger_friendships.user_one_id = ' . $user_row['id'] . ' AND users.id = messenger_friendships.user_two_id) OR (messenger_friendships.user_two_id = ' . $user_row['id'] . ' AND users.id = messenger_friendships.user_one_id) ORDER BY users.id DESC LIMIT 20');
+$uC = SQL::query('SELECT Count(*) FROM users, messenger_friendships WHERE (messenger_friendships.user_one_id = ' . $user_row['id'] . ' AND users.id = messenger_friendships.user_two_id) OR (messenger_friendships.user_two_id = ' . $user_row['id'] . ' AND users.id = messenger_friendships.user_one_id)');
+
+if(!$uC || !$uQ)
+	goto saltf;
+	
+$uC = $uC->fetch_assoc()['Count(*)'];
+?>
+<div class="movable widget FriendsWidget" id="widget-<?php echo $WidgetId; ?>" style=" left: <?php echo $row['position_left']; ?>px; top: <?php echo $row['position_top']; ?>px; z-index: <?php echo $row['position_z']; ?>;">
+	<div class="<?php echo $row['skin']; ?>">
+		<div class="widget-corner" id="widget-<?php echo $WidgetId; ?>-handle">
+			<div class="widget-headline">
+				<h3>
+<?php if($edit_mode): ?>
+					<img src="<?php echo RES; ?>images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button" id="widget-<?php echo $WidgetId; ?>-edit" />
+					<script language="JavaScript" type="text/javascript">
+						var editButtonCallback = function(e) { openEditMenu(e, <?php echo $WidgetId; ?>, "widget", "widget-<?php echo $WidgetId; ?>-edit"); };
+						Event.observe("widget-<?php echo $WidgetId; ?>-edit", "click", editButtonCallback);
+						Event.observe("widget-<?php echo $WidgetId; ?>-edit", "editButton:click", editButtonCallback); 
+					</script>
+<?php endif; ?>
+					<span class="header-left">&nbsp;</span><span class="header-middle">Mis Amigos (<span id="avatar-list-size"><?php echo $uC; ?></span>)</span><span class="header-right">&nbsp;</span>
+				</h3>
+			</div>	
+		</div>
+		<div class="widget-body">
+			<div class="widget-content">
+				<div id="avatar-list-search">
+					<input type="text" style="float:left;" id="avatarlist-search-string"/>
+					<a class="new-button" style="float:left;" id="avatarlist-search-button"><b>Buscar</b><i></i></a>
+				</div>
+				<br clear="all"/>
+
+				<div id="avatarlist-content">
+					<div class="avatar-widget-list-container">
+<?php if($uC == 0): ?>
+						No tienes amigos :(
+<?php else: echo '<ul id="avatar-list-list" class="avatar-widget-list">';
+	while($uR = $uQ->fetch_assoc()): ?>
+						<li id="avatar-list-<?php echo $WidgetId; ?>-<?php echo $uR['id']; ?>" title="<?php echo $uR['username']; ?>"><div class="avatar-list-open"><a href="#" id="avatar-list-open-link-<?php echo $WidgetId; ?>-<?php echo $uR['id']; ?>" class="avatar-list-open-link"></a></div>
+							<div class="avatar-list-avatar"><img src="<?php echo LOOK . $uR['look']; ?>&size=s&direction=4&head_direction=4&gesture=sml" alt="" /></div>
+							<h4><a href="<?php echo URL; ?>/home/<?php echo $uR['id']; ?>/id"><?php echo $uR['username']; ?></a></h4>
+							<!--<p class="avatar-list-birthday"><?php //echo User::GetData($uR['id'], 'birth', 'id', '', 'xdrcms_users_data')['birth']; ?></p>-->
+							<p>
+
+							</p>
+						</li>
+<?php endwhile; echo '</ul>'; endif; ?>
+
+						<div id="avatar-list-info" class="avatar-list-info">
+							<div class="avatar-list-info-close-container"><a href="#" class="avatar-list-info-close"></a></div>
+							<div class="avatar-list-info-container"></div>
+						</div>
+					</div>
+					<div id="avatar-list-paging">
+						0 - <?php echo $uQ->num_rows; ?> / <?php echo $uC; ?>
+						<br />
+						Primero |
+						&lt;&lt; |
+<?php if($uC > 20): ?>
+						<a href="#" class="avatar-list-paging-link" id="avatarlist-search-next" >&gt;&gt;</a> |
+						<a href="#" class="avatar-list-paging-link" id="avatarlist-search-last" >Último</a>
+<?php else: ?>
+						&gt;&gt; |
+						Último
+<?php endif; ?>
+						<input type="hidden" id="pageNumber" value="1"/>
+						<input type="hidden" id="totalPages" value="<?php echo ceil($uC / $uQ->num_rows); ?>"/>
+					</div>
+					<script type="text/javascript">
+					document.observe("dom:loaded", function() {
+						window.widget<?php echo $WidgetId; ?> = new FriendsWidget('<?php echo $user_row['id']; ?>', '<?php echo $WidgetId; ?>');
+					});
+					</script>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+saltf:
+?>
