@@ -1,0 +1,1395 @@
+/*
+SLEEK DESIGN - RECREATED BY: Mr.Mustache
+*/
+
+@ttf: format('truetype');
+
+@font-face{
+	font-family: 'Billabong';
+	src: url("@Fonts/Billabong/billabong.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu';
+	src: url("@Fonts/Ubuntu/Ubuntu-R.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu Light';
+	src: url("@Fonts/Ubuntu Light/Ubuntu-L.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu Condensed';
+	src: url("@Fonts/Ubuntu Condensed/Ubuntu-C.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'KeepCalm';
+	src: url("@Fonts/KeepCalm/KeepCalm-Medium.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'KeepCalm Light';
+	src: url("@Fonts/KeepCalm/KeepCalm-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("@Fonts/Roboto/Roboto-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Light';
+  src: url("@Fonts/Roboto/Roboto-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("@Fonts/MaterializeIcons/MaterialIcons-Regular.ttf") format('truetype');
+}
+
+html, body{
+    background: #ececec;
+	font-family: 'Roboto';
+	color: #454545;
+	margin: 0;
+}
+
+#logo{
+    font-family: 'Billabong';
+    text-align: center;
+    font-size: 100pt;
+}
+
+.button{
+	background: rgba(255, 255, 255, 0);
+    border: 1px solid #eaeaea;
+	border-top: none;
+    border-left: none;
+    border-right: none;
+    color: #eaeaea;
+    padding: 10px 20px;
+    font-family: 'Roboto';
+    font-size: 14pt;
+	text-decoration: none;
+}
+
+.button:hover{
+	background: rgba(255, 255, 255, 1);
+	color: #000;
+	border: none;
+}
+
+.button.green{
+    background: #00a554;
+	border-bottom: 3px solid #006f39;
+}
+
+.button.green:hover{
+    background: #00904a;
+    color: #fff;
+}
+
+.button.blue{
+	background: #0072bf;
+	border-bottom: 3px solid #004574;
+}
+
+.button.blue:hover{
+	background: #0389e4;
+    color: #fff;
+}
+
+.button.red{
+	background: #bf001d;
+	border-bottom: 3px solid #930016;
+}
+
+.button.red:hover{
+	background: #d60323;
+    color: #fff;
+}
+
+.button.big{
+	padding: 30px 60px;
+	font-size: 30pt;
+}
+
+.button.small{
+    padding: 2px 15px;
+    font-size: 11pt;
+}
+
+.button.register{
+    /*border: 2px solid #00aa00;*/
+	box-shadow: 1px 1px 5px -1px #003660;
+    border-radius: 3px;
+    padding: 20px 20px;
+    width: 200px;
+    height: 25px;
+    font-size: 18pt;
+    line-height: 25px;
+    margin: 110px 50px;
+    float: left;
+	-webkit-animation: bounce .3s infinite alternate;
+	-moz-animation: bounce .3s infinite alternate;
+	animation: bounce .3s infinite alternate;
+}
+
+@-webkit-keyframes bounce {
+  to { -webkit-transform: scale(1.2); }
+}
+@-moz-keyframes bounce {
+  to { -moz-transform: scale(1.2); }
+}
+@keyframes bounce {
+  to { transform: scale(1.2); }
+}
+
+.tileb{
+    background: #f7f7f7;
+    box-shadow: 2px 2px 10px -2px #020305;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 5px;
+	min-height: 120px;
+}
+
+.tileb.friends{
+	background: url(images/friends.png);
+    background-position: -8px -3px;
+}
+
+.tileb.rooms{
+	background: url(images/rooms.png);
+    background-position: -8px -3px;
+}
+
+.tileb.events{
+	background: url(images/events.png);
+    background-position: -8px -3px;
+}
+
+.tileb > #title{
+    padding: 10px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 25pt;
+    text-shadow: 2px 3px 7px #525252;
+    line-height: 85px;
+}
+
+.box{
+    background: #f7f7f7;
+    box-shadow: 2px 2px 10px -2px #020305;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.box.darken{
+	background: #333333;
+}
+
+.box.mini__articles{
+	padding: 0;
+    background: white;
+}
+
+.box > #title{
+	padding: 10px;
+    border-radius: 3px;
+    color: #f5f4f4;
+}
+
+.box > #title.principal{
+	font-size: 26pt;
+    font-family: 'Ubuntu Condensed';
+    font-weight: 100;
+}
+
+.box > #title.register{
+	font-family: Ubuntu;
+    color: #faac32;
+    font-size: 34pt;
+    text-transform: uppercase;
+}
+
+.box > #title.blue{
+	background: #0093f7;	
+}
+
+.box > #title.red{
+	background: #f70052;
+}
+
+.box > #title.green{
+	background: #629d1e;
+}
+
+.box > #title.tile{
+	background: #00806c;
+}
+
+.box > #title.orange{
+	background: #f77b00;
+}
+
+.box > #title.facebook{
+	background: #3b5998;
+}
+
+button.fb{
+	background: #3041a2;
+    width: 35px;
+    height: 35px;
+    color: #fff;
+    line-height: 35px;
+    font-family: Tahoma;
+    text-align: center;
+    font-size: 18pt;
+    border: none;
+    border-radius: 2px;
+}
+
+.box > #title.twitter{
+	background: #55acee;
+}
+
+.box.mini__articles > #title{
+	background: none;
+    font-size: 19pt;
+    font-family: Roboto;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    color: #151515;
+}
+
+.box > #content{
+    padding: 10px;
+    font-size: 11pt;
+    line-height: 25px;
+}
+
+.box.mini__articles > #content{
+    padding: 5px;
+}
+
+.box > #content > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.box > #content > ul > li{
+    list-style: none;
+    margin: 5px 0 5px;
+    background: #ffffff;
+    box-shadow: 2px 2px 9px -4px;
+    padding: 15px;
+}
+
+.box > #content > ul > li > #li-title{
+	font-size: 13pt;
+    font-weight: 700;
+}
+
+.box > #content > ul > li > #li-content{}
+
+.box > #content > ul > li > #li-date{
+    font-size: 9pt;
+    background: #009fa4;
+    display: inline;
+    border-radius: 15px;
+    padding: 5px 12px;
+    color: white;
+}
+
+.box > #content > ul > li > #lr-avatar{
+    overflow: hidden;
+    float: left;
+    width: 75px;
+    height: 60px;
+}
+
+.box > #content > ul > li > #lr-information{
+	
+}
+
+.box > #content > ul > li > #lr-information > #lr-name{
+	color: #ff9934;
+    font-size: 16pt;
+    font-weight: 700;
+}
+
+.box > #content > ul.article{}
+
+.box > #content > ul.article > li{
+    list-style: none;
+    margin: 5px 0 5px;
+    background: none;
+    box-shadow: none;
+    padding: 0;	
+}
+
+.box > #content > ul.article > li > a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #004f8a;
+}
+
+.box > #content > ul.mini__articles{
+    border-left: 3px solid #212121;
+}
+
+.box > #content > ul.mini__articles > li.mini__li{
+    padding: 5px 8px;
+    background: none;
+    box-shadow: none;
+}
+
+.box > #content > ul.mini__articles > li.mini__li:hover{
+    background: #3a3a3a;
+    color: white;
+}
+
+.box > #content > ul.mini__articles > li.mini__li > a{
+	text-decoration: none;
+	color: inherit; 
+}
+
+.box > #content > ul.mini__articles > li.mini__li > a >  #title{
+	font-size: 15pt;
+    line-height: 40px;
+    font-family: Segoe UI Light;
+}
+
+ul.flags{
+	padding: 0;
+	margin: 0;
+}
+
+ul.flags > li{
+	list-style: none;
+    padding: 10px;
+    display: -webkit-box;
+    background: #ffffff;
+    border-radius: 3px;
+    box-shadow: 2px 2px 9px -4px;
+	margin: 10px 0;
+}
+
+ul.flags > li > #flag-space{
+
+}
+
+ul.flags > li > #country-name{
+    line-height: 47px;
+    margin: 0 15px;
+    font-size: 20pt;	
+}
+
+ul.flags > li > #country-users{
+    line-height: 47px;
+    font-size: 14pt;
+    font-style: italic;
+    font-weight: bolder;
+    color: #2196F3;	
+}
+
+.flag{
+    background: url(Images/flags.png);
+    height: 47px;
+    width: 70px;
+    background-position: -10px -10px;
+    border-radius: 8px;
+}
+
+.flag.MX{
+	background-position: -730px -238px;
+}
+
+.flag.CZ{
+	background-position: -250px 228px;
+}
+
+.flag.VE{
+	background-position: 160px 114px;
+}
+
+.flag.CL{
+	background-position: -170px 171px;
+}
+
+.flag.PE{
+	background-position: -890px -238px;
+}
+
+.flag.AR{
+	background-position: -10px -295px;
+}
+
+.flag.CO{
+	background-position: -170px 57px;
+}
+
+.flag.DO{
+	background-position: -330px -10px;
+}
+
+.flag.ES{
+	background-position: 320px -352px;
+}
+
+.flag.SV{
+	background-position: 560px -352px;
+}
+
+.flag.EC{
+	background-position: -330px -124px;
+}
+
+.flag.PA{
+	background-position: 480px -67px;
+}
+
+.flag.PY{
+	background-position: 480px -181px;
+}
+
+.flag.UY{
+	background-position: 160px 342px;
+}
+
+.flag.BO{
+	background-position: -90px -409px;
+}
+
+.flag.PR{
+	background-position: 160px 399px;
+}
+
+.flag.US{
+	background-position: 160px 399px;
+}
+
+.flag.HN{
+	background-position: -490px -10px;
+}
+
+.flag.GT{
+	background-position: -410px -409px;
+}
+
+.flag.CU{
+	background-position: -250px -352px
+}
+
+ul.rooms{}
+
+ul.rooms > li {
+	display: -webkit-box;
+	height: inherit;
+}
+
+ul.rooms > li > #room-space{
+	background: white;
+    width: 90px;
+    border-radius: 45px;
+}
+
+ul.rooms > li > #room-info{
+    margin: 0 20px;
+    width: 50%;
+}
+
+ul.rooms > li > #room-info > #room-name{
+    font-size: 14pt;
+    font-weight: 800;
+    color: #E91E63;	
+}
+
+ul.rooms > li > #room-info > #room-users{
+    font-size: 11pt;
+    font-weight: 700;
+    color: #3ac732;
+}
+
+.room{
+    background: url(Images/habbo_icons.png);
+    height: 90px;
+    width: 90px;
+    background-position: 289px 0px;
+}
+
+
+ul.tops{
+	margin: 0;
+    padding: 0;
+}
+
+ul.tops > li{}
+
+ul.tops > li > #t-avatar{
+	height: 110px;
+    width: 110px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+ul.tops > li > #t-information{}
+
+ul.tops > li > #t-information > #t-name{}
+
+ul.tops > li > #t-information > #t-currency{}
+
+
+.hotel__name{
+	display: inline-block;
+	font-size: 11pt;
+	font-family: 'KeepCalm';
+}
+
+.alert{
+    margin: 90px auto;
+    width: 800px;
+    overflow: auto;
+	display: none;
+	border-radius: 4px;
+}
+
+.alert > #wrapper{
+    float: left;
+    width: 70%;
+    background: #d7d7d7;
+    border-bottom: 4px solid #959595;
+    color: #313131;
+}
+
+.alert > #design{
+    float: left;
+    width: 30%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.alert > #design.blue{
+	background: #2b77ff;
+    border-bottom: 4px solid #0047c6;	
+}
+
+.alert > #design.red{
+    background: #ff2121;
+    border-bottom: 4px solid #de0000;
+}
+
+.alert > #design.green{
+    background: #78a700;
+    border-bottom: 4px solid #577900;	
+}
+
+.alert > #design.darken{
+    background: #3c3c3c;
+    border-bottom: 4px solid #292929;
+}
+
+
+.alert > #wrapper > #title{
+    font-size: 20pt;
+    padding: 8px;
+}
+
+.alert > #wrapper > #content{
+    padding: 15px 25px;
+    color: #5c5c5c;
+}
+
+#bg__hotel{
+    background: url('Images/habbo15_background_right.png');
+    position: fixed;
+    height: 460px;
+    width: 615px;
+    right: 0;
+    bottom: 0;
+}
+
+h2.staff__title{
+	background: white;
+    margin: 10px;
+    padding: 12px;
+    color: #01779a;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 2px 10px -3px black;
+    text-align: center;
+    border-top: 3px solid #01779a;
+    border-bottom: 3px solid rgb(1, 119, 154);
+}
+
+.staff__box{
+	background: #111b2b;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.staff__box.blue{
+	background: #2196F3;
+}
+
+.staff__box.red{
+	background:#d60049;
+}
+
+.staff__box.green{
+	background:#047d72;
+}
+
+.staff__box.orange{
+	background:#ff9800;
+}
+
+.staff__box > #title{
+	color: #f6f6f6;
+    font-size: 40pt;
+    margin: 0 10px 10px;
+}
+
+.staff__box > #content{
+}
+
+.staff__box > #content > p{
+text-align: center;
+    color: white;
+}
+
+
+.staff__box > #content > #attendant{
+	background: #1c293e;
+    color: #fcfcfc;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.staff__box.blue > #content > #attendant{
+	background: #58adf2;
+}
+
+.staff__box.red > #content > #attendant{
+	background: #f24680;
+}
+
+.staff__box.green > #content > #attendant{
+	background: #05998c;
+}
+
+.staff__box.orange > #content > #attendant{
+	background: #fcb54c;
+}
+
+.staff__box > #content > #attendant > #av-head{
+	height: 40px;
+    width: 40px;
+    margin: -10px -5px;
+    display: inline-block;
+    background-position: -10px -10px;
+}
+
+.staff__box > #content > #staff{
+	padding:5px;
+	display: -webkit-box;
+	border-radius: 4px;
+}
+
+.staff__box > #content > #staff.even{
+	background: #09101b;
+}
+
+.staff__box.blue > #content > #staff.even{
+	background: #1a76be;
+}
+
+.staff__box.red > #content > #staff.even{
+	background:#b6144b;
+}
+
+.staff__box.green > #content > #staff.even{
+	background:#00665c;
+}
+
+.staff__box.orange > #content > #staff.even{
+	background:#e58902;
+}
+
+.staff__box > #content > #staff > .avatar{
+	overflow: hidden;
+    height: 75px;
+    width: 75px;
+}
+
+.staff__box > #content > #staff > .information{
+	padding:15px;
+}
+
+.staff__box > #content > #staff > .information > #name{
+    font-size: 14pt;
+    color: #fafafa;
+}
+
+.staff__box > #content > #staff > .information > #name > #status{
+	display: inline-block;
+    margin: 0 15px;
+    padding: 5px;
+    color: white;
+    border-radius: 20px;
+    width: 50px;
+    height: 10px;
+    text-align: center;
+    font-size: 10pt;
+    line-height: 10px;
+    text-transform: capitalize;
+}
+
+.staff__box > #content > #staff > .information > #name > #status.online{
+	border: 2px solid #007469;
+	background: #009688;	
+}
+
+.staff__box > #content > #staff > .information > #name > #status.offline{
+	border: 2px solid #ae0c43;
+    background: #E91E63;
+}
+
+.staff__box > #content > #staff > .information > #assignment{
+	padding: 10px 10px 0;
+    font-size: 11pt;
+	color: #f9f9f9;
+}
+
+.staff__box > #content > #staff > .information > #assignment > #assignment-sp{
+    display: inline-block;
+    color: #ffffff;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 9pt;
+}
+
+.staff__box > #content > #staff > .information > #last__connection{
+	padding: 10px 10px 0;
+    font-size: 11pt;
+    color: white;
+}
+
+.staff__box > #content > #staff > .country{
+	padding: 10px;
+}
+
+header{
+    height: 70px;
+    background: rgba(0, 95, 160, 0.87);
+    line-height: 75px;
+    padding: 0 60px;
+    position: absolute;
+    z-index: 99;
+    right: 0;
+    left: 0;
+}
+
+header .hotel__name{
+	font-family: 'KeepCalm';
+    font-size: 24pt;
+    display: inline;
+    color: #f4f4f4;	
+}
+
+header .hotel__count{
+    margin: -70px auto;
+    width: 130px;
+    position: relative;
+    height: 130px;
+    background-color: #0273c3;
+    background-image: url(Images/count_bg.png);
+    text-align: center;
+    line-height: 30px;
+    text-shadow: 1px 1px 4px rgba(58, 58, 58, 0.71);
+    border: 2px solid #005fa2;
+    border-radius: 80px;
+    color: #f3f3f3;
+    padding: 0px 0 0 0;
+    font-family: 'Ubuntu';
+    font-weight: 100;
+    font-size: 13pt;
+}
+
+header .hotel__count b{
+    display: block;
+    margin: 0;
+    padding: 30px 0 0 0;
+    font-size: 30pt;
+}
+
+
+.menu{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: -50px;
+	width: 60%;
+}
+
+.menu > .p-menu{
+    background: #f5b537;
+	box-shadow: 0px -3px 11px -4px #004982;
+}
+
+.menu > .p-menu > ul{
+    text-align: center;
+	padding: 0;
+}
+
+.menu > .p-menu > ul > li{
+    margin: 0px 15px;
+    padding: 8px;
+	min-width: 50px;
+    color: white;
+    display: inline-block;
+    list-style-type: none;	
+}
+
+.menu > .p-menu > ul > li > a{
+	color: #fbfdff;
+    font-size: 14pt;
+    font-weight: 700;
+	text-decoration: none;
+}
+
+.menu > .p-menu > ul > li > a:hover{
+	text-decoration: underline;
+}
+
+.menu > .p-menu > ul > li > a > span{
+    height: 45px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    background-position: center;
+    text-align: center;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+
+.menu > .p-menu > ul > li > a > span.home{
+	height: 45px;
+    background-position: 50% -10px;
+}
+	
+.menu > .p-menu > ul > li > a > span.community{
+	background-image: url(images/hotel.gif);
+}
+
+.menu > .p-menu > ul > li > a > span.login{
+	background-image: url(images/login.gif);
+}
+
+.menu > .p-menu > ul > li > a > span.news{
+	background-image: url(images/new.gif);
+}
+
+.menu > .p-menu > ul > li > a > span.staffs{
+	background-image: url(images/staffs.gif);
+}
+
+.menu > .p-menu > ul > li > a > span.shop{
+	background-image: url(images/shop.gif);
+}
+
+.menu > .p-menu > ul > li > a > span.acp{
+	background-image: url(images/groupboard.gif);
+}
+
+.s-menu{
+    background: #fff;
+	margin-bottom: 20px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0px 1px 8px -2px #bdbdbd;
+}
+
+.s-menu > ul{
+    display: -webkit-inline-box;
+}
+
+.s-menu > ul > li{
+	margin: 0 30px;
+    color: white;
+    list-style-type: none;
+}
+
+.s-menu > ul > li.selected{
+	color: #2196f3;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.s-menu > ul > li > a{
+    text-decoration: none;
+    color: #585858;
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.s-menu > ul > li > a:hover{
+    text-decoration: underline;
+    color: #585858;
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.user-interface{
+    background-image: url(http://i70.servimg.com/u/f70/18/17/96/77/bg_hot10.png), linear-gradient(to bottom, #1e74ec , #0366ac);
+	background-repeat: no-repeat;
+    height: 170px;
+	border-radius: 4px;
+    overflow: hidden
+}
+
+.user-interface > .avatar{
+	margin: 3px 0;
+	float: left;
+}
+
+.user-interface > .information{
+    float: left;
+    background: rgba(0, 76, 110, 0.85);
+    height: 100%;
+    padding: 25px 15px;
+    width: 240px;
+}
+
+.user-interface > .information > #username{
+    font-size: 24pt;
+    font-family: Ubuntu;
+    color: white;
+    font-weight: 100;
+	margin-bottom: 5px;
+}
+
+.user-interface > .information > #motto{
+	font-size: 22pt;
+    color: #f1f1f1;
+    font-family: Segoe UI;
+    font-weight: 100;
+}
+
+.user-interface > .information > .currency{
+    font-size: 15pt;
+    font-family: Ubuntu;
+    color: white;
+    font-weight: 100;
+}
+
+.user-interface > .hotel__btt__area{
+	float:left;
+	margin: 50px;
+}
+
+.user-interface > .hotel__btt__area > a.enter__button{
+	box-shadow: 0 3px 0 1px rgba(0,0,0,.3);
+    display: inline-block;
+    line-height: 1.2;
+    text-align: center;
+    border-width: 2px;
+    background-color: #00813e;
+    border-color: #8eda55;
+    color: #fff;
+    padding: 12px 24px;
+    border-style: solid;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 19pt;
+	text-decoration: none;
+}
+
+.user-interface > .hotel__btt__area > a.enter__button.disabled{
+    background-color: #464646;
+    border-color: #7f7f7f;
+    color: #848484;
+}
+
+.articles-interface{
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 3px 3px 13px -4px #949494;
+    border-radius: 4px;
+}
+
+.articles-interface > .article{
+    overflow: hidden;
+}
+
+.articles-interface > .article > #image{
+	overflow: hidden;
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin: 25px 10px;
+	border-radius: 4px;
+}
+
+.articles-interface > .article > #image img{
+	height:inherit; 
+	width:inherit;
+}
+
+.articles-interface > .article > #material{
+	float: left;
+    width: 65%;
+    margin: 15px;
+}
+
+.articles-interface > .article > #material > #title{
+	font-size: 30pt;
+    font-family: Ubuntu Condensed;
+    text-transform: uppercase;
+}
+
+.articles-interface > .article > #material > #datencat{
+    font-size: 10pt;
+    font-family: Ubuntu;
+    color: #969696;
+}
+
+.articles-interface > .article > #material > #content{
+    font-size: 12pt;
+    font-family: Ubuntu;
+    padding: 15px 15px;
+}
+
+.articles-interface > .article > #material > a#link{
+    display: block;
+    text-align: right;
+    color: #206271;
+    font-size: 14pt;
+    font-weight: 700;
+    font-family: Segoe UI Light;
+}
+
+.articles-interface > .divider{
+	border-top: 1px solid #e7e7e7;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.mini__articles-interface{
+    background: white;
+    padding: 10px;
+    margin: 20px;
+    box-shadow: 3px 3px 13px -4px #949494;
+    border-radius: 4px;
+}
+
+.mini__articles-interface > #header{
+	background: #1a9aff;
+    padding: 10px;
+    color: white;
+    font-size: 15pt;
+    border-radius: 5px;
+    margin: 0 0 10px;
+}
+
+.mini__articles-interface > .article{
+	padding: 15px;
+    border-left: 4px solid #1a9aff;
+    margin: 0 0 20px;
+}
+
+.mini__articles-interface > .article > #content > a#title{
+	
+}
+
+/**********NEWS PAGE*********/
+.article-interface{
+    background: #f7f7f7;
+    box-shadow: 2px 1px 6px -1px #818283;
+    padding: 20px;
+    margin: 11px 0;
+    border-radius: 2px;
+}
+
+.article-interface > #article_header{
+	margin: 0 0 15px;
+}
+
+.article-interface > #article_header > #article_title{
+	font-size: 28pt;
+    font-family: Ubuntu;
+    color: #343434;
+}
+
+.article-interface > #article_header > #article_image{
+	width: 50%;
+    margin: 0 auto;
+}
+
+.article-interface > #article_header > #article_information{
+	font-size: 11pt;
+    text-align: right;
+    color: #6e6e6e;
+}
+
+.article-interface > #article_header > #article_description{
+    padding: 10px;
+    font-size: 10pt;
+    color: #14679f;
+    font-weight: bold;
+    font-family: Segoe UI Light;
+    text-transform: uppercase;
+}
+
+.login__view{
+	display: -webkit-box;
+    background: url('images/covers/palooza14_background_left_1.png') left no-repeat,
+				url('images/covers/palooza14_background_right.png') right no-repeat, #1a9aff;
+    height: 250px;
+    position: relative;
+    border-bottom: 1px solid #dddddd;
+}
+
+.login__view > #steps{
+	margin: 70px auto
+}
+
+.login__view > #steps > .step{
+	float: left;
+	margin:25px 0;
+	width: 170px;
+}
+
+.login__view > #steps > .arrow{
+    float: left;
+    height: 130px;
+    width: 125px;
+    margin: 25px -30px;
+    position: relative;
+}
+
+.login__view > #steps > .arrow > #material{
+    margin: 50px auto;
+    height: 8px;
+    width: 100%;
+    background: #045798;
+}
+
+.login__view > #steps > .step > #number{
+    border: 5px solid #003d6d;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    font-size: 40pt;
+    border-radius: 60px;
+    color: white;
+    background: #014880;
+	margin: 0 auto;
+}
+
+.login__view > #steps > .step > #number.locked{
+	background: #325169;
+    border: 5px solid #3a5d78;
+    color: #4b6172;
+}
+
+.login__view > #steps > .step > #title{
+    font-size: 10pt;
+    font-family: Ubuntu;
+    color: white;
+    text-shadow: 1px 1px 3px #2e2e2e;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.login__view > #steps > .step > #title.locked{
+    color: rgba(122, 122, 122, 0.49);
+    text-transform: uppercase;
+    font-weight: bolder;
+    width: 170px;
+    text-align: center;	
+	text-shadow: none;
+}
+
+.login__view > #slogan{
+    font-size: 24pt;
+    font-weight: bolder;
+    font-family: 'KeepCalm Light';
+    width: 520px;
+    color: #f9f9f9;
+    line-height: 58px;
+    text-align: left;
+    margin: 100px 0 0px 20%;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.13);
+}
+
+.login__error{
+    background: #ff2443;
+    color: #f5f4f4;
+    margin: -10px -10px 0;
+    padding: 0 15px;
+    font-size: 10pt;
+}
+
+.login__view > #slogan > #hotel__name{
+	font-family: 'KeepCalm';
+    display: inline-block;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.page{
+    height: auto;
+    width: 60%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto 50px;
+}
+
+.page > .container__1{
+	float: left;
+	width: 100%;
+}
+
+.page > .container__1 > .column{
+	width: 100%;
+	float: left;
+}
+
+.page > .container__2{
+	float: left;
+	width: 100%;
+}
+
+.page > .container__2 > .column{
+	width: 50%;
+	float: left;
+}
+
+.page > .container__3{
+	width: 100%;
+}
+
+.page > .container__3 > .column{
+	width: 33.333%;
+	float: left;
+}
+
+.page > .container__4{
+	width: 100%;
+}
+
+.page > .container__4 > .column{
+	width: 25%;
+	float: left;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 35px;
+    line-height: 35px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0 30px;
+    font-size: 10pt;
+    color: #565656;
+}
+
+footer .hotel__name{
+    font-family: 'KeepCalm';
+    font-size: 11pt;
+    display: inline;
+    color: #005996;	
+}
+
+/** FORM STYLING **/
+input {
+	font-size:18px;
+	padding:10px 10px 10px 5px;
+	display:block;
+	width:300px;
+	color: #dedede;
+	border:none;
+	border-bottom: 1px solid #868686;
+	background: transparent;
+}
+
+input:focus {
+	outline:none;
+	color: #f3f3f3;
+}
+
+::-webkit-input-placeholder { 
+    font-size: 14pt;
+    padding: 3px;
+    font-family: Segoe UI;
+    color: #8e8e8e;
+}
+
+::-moz-placeholder { 
+    font-size: 14pt;
+    padding: 3px;
+    font-family: Segoe UI;
+    color: #8e8e8e;
+} /* firefox 19+ */
+
+:-ms-input-placeholder { 
+    font-size: 14pt;
+    padding: 3px;
+    font-family: Segoe UI;
+    color: #8e8e8e;
+} /* ie */
+
+input:-moz-placeholder {     
+	font-size: 14pt;
+    font-family: Segoe UI;
+    color: #8e8e8e;
+}
+
+.sg-multicolor {
+list-style:none;
+width:100%;
+font-size:0;
+}
+
+.sg-multicolor li {
+display:inline-block;
+width:25%;
+height:8px;
+}
+
+.sg-multicolor li:nth-child(1) {
+background:#005fec;
+}
+
+.sg-multicolor li:nth-child(2) {
+background:#00c70f;
+}
+
+.sg-multicolor li:nth-child(3) {
+background:#e4d300;
+}
+
+.sg-multicolor li:nth-child(4) {
+background:#ff2443;
+}

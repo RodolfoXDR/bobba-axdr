@@ -1,0 +1,294 @@
+<div id="container">
+    <div id="content" style="position: relative" class="clearfix">
+        <div id="mypage-wrapper" class="cbb blue">
+            <div class="box-tabs-container box-tabs-left clearfix">
+                <?php if($canEdit && !$edit_mode): ?>
+                <a href="<?php echo URL; ?>/myhabbo/startSession/<?php echo $user_row['id']; ?>" id="edit-button" class="new-button dark-button edit-icon" style="float:left"><b><span></span>Editar</b><i></i></a>
+                <div class="myhabbo-view-tools"></div>
+                <?php endif; ?>
+                <h2 class="page-owner"><?php echo $user_row['name']; ?></h2>
+                <ul class="box-tabs"></ul>
+            </div>
+            <div id="mypage-content">
+                <?php if($edit_mode): ?>
+                <div id="top-toolbar" class="clearfix">
+                    <ul>
+                        <li><a href="#" id="inventory-button">Inventario</a></li>
+                
+                        <li><a href="#" id="webstore-button">Tienda</a></li>
+                    </ul>
+                    
+                    <form action="#" method="get" style="width: 50%">
+                        <a id="cancel-button" class="new-button red-button cancel-icon" href="#"><b><span></span>Cancelar edición</b><i></i></a>
+                        <a id="save-button" class="new-button green-button save-icon" href="#"><b><span></span>Guardar cambios</b><i></i></a>
+                    </form>
+                </div>
+                <?php endif; ?>
+
+                <div id="mypage-bg" class="<?php echo $user_row['homeBg']; ?>">
+                    <div id="playground-outer">
+                        <div id="playground">
+                        <?php
+                            $getStickies = SQL::query("SELECT * FROM xdrcms_site_items WHERE userId = '" . $user_row['id'] . "' AND type = 'stickie'");
+                            while($row = $getStickies->fetch_assoc()):
+                        ?>
+                        <div class="movable stickie <?php echo (isset(Categories::$Skins[$row['skin']])) ? Categories::$Skins[$row['skin']]['Skin'] : $row['skin']; ?>-c" style=" left: <?php echo $row['position_left']; ?>px; top: <?php echo $row['position_top']; ?>px; z-index: <?php echo $row['position_z']; ?>;" id="stickie-<?php echo $row['id']; ?>">
+
+                            <div class="<?php echo (isset(Categories::$Skins[$row['skin']])) ? Categories::$Skins[$row['skin']]['Skin'] : $row['skin']; ?>" >
+                                <div class="stickie-header">
+                                    <h3>
+                                        <?php if($edit_mode): ?>
+                                        <img src="<?php echo RES; ?>images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button" id="stickie-<?php echo $row['id']; ?>-edit" />
+                                        <script type="text/javascript">
+                                            var editButtonCallback = function(e) {
+                                                openEditMenu(e, <?php echo $row['id']; ?>, "stickie", "stickie-<?php echo $row['id']; ?>-edit"); 
+                                            };
+                                            Event.observe("stickie-<?php echo $row['id']; ?>-edit", "click", editButtonCallback);
+                                            Event.observe("stickie-<?php echo $row['id']; ?>-edit", "editButton:click", editButtonCallback); 
+                                        </script>
+                                        <?php else: ?>
+                                        <img id="stickie-<?php echo $row['id']; ?>-report" class="report-button report-s" alt="report" src="<?php echo RES; ?>images/myhabbo/buttons/report_button.gif" style="display: none" />
+                                        <?php endif; ?>
+                                    </h3>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="stickie-body">
+                                    <div class="stickie-content">
+
+                                        <div class="stickie-markup">
+                                        <?php echo Tool::DecodeBBText(str_replace(array_keys($textNotes), array_values($textNotes), Tool::ChangeCMSCharset($row['content']))); ?> 
+                                        </div>
+                                        <div class="stickie-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endwhile; ?>
+
+                        <?php
+                        // Stickers
+                        $getStickers = SQL::query("SELECT id, skin, position_left, position_top, position_z FROM xdrcms_site_items WHERE userId = '" . $user_row['id'] . "' AND type = 'sticker'");
+                        while($row = $getStickers->fetch_assoc()):
+                        ?>
+                            <div class="movable sticker <?php echo $row['skin']; ?>" style="left: <?php echo $row['position_left']; ?>px; top: <?php echo $row['position_top']; ?>px; z-index: <?php echo $row['position_z']; ?>" id="sticker-<?php echo $row['id']; ?>">
+                            <?php if($edit_mode): ?>
+                                <img src="<?php echo RES; ?>images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button" id="sticker-<?php echo $row['id']; ?>-edit" />
+                                <script type="text/javascript">
+                                    var editButtonCallback = function(e) {
+                                        openEditMenu(e, <?php echo $row['id']; ?>, "sticker", "sticker-<?php echo $row['id']; ?>-edit"); 
+                                    };
+                                    Event.observe("sticker-<?php echo $row['id']; ?>-edit", "click", editButtonCallback);
+                                    Event.observe("sticker-<?php echo $row['id']; ?>-edit", "editButton:click", editButtonCallback); 
+                                </script>
+                            <?php endif; ?>
+                            </div>
+                        <?php endwhile; ?>
+
+                        <?php	
+                        // Widgets
+                        $lo = [];
+
+                        $getWidgets = SQL::query('SELECT * FROM xdrcms_site_items WHERE userId = ' . $user_row['id'] . ' AND type = \'widget\' ');
+                        while($row = $getWidgets->fetch_assoc()):
+                            if(isset($lo[$row['var']]))
+                                continue;
+                            $lo[$row['var']] = true;
+
+                            $WidgetId = $row['id'];
+                            require HTML . 'Widget_' . $row['var'] . '.html';
+                        endwhile;
+
+                        if(!isset($lo['ProfileWidget']))
+                            SQL::query('INSERT INTO xdrcms_site_items (userId, groupId, position_left, position_top, position_z, var, skin, content, type) VALUES (' . $user_row['id'] . ', 0, 457, 26, 4, \'ProfileWidget\', \'w_skin_defaultskin\', \'\', \'widget\')');
+                        ?>
+                        </div>
+                    </div>
+                    <div id="mypage-ad"></div>
+                </div>
+            </div>
+        </div>
+        <?php if($edit_mode): ?>
+        <script language="JavaScript" type="text/javascript">
+            initEditToolbar();
+            initMovableItems();
+            document.observe("dom:loaded", initDraggableDialogs);
+            Utils.setAllEmbededObjectsVisibility('hidden');
+            Pinger.start();
+        </script>
+
+        <div id="edit-save" style="display:none;"></div>
+    </div>
+    <div id="footer"></div>
+</div>
+
+<div id="edit-menu" class="menu">
+	<div class="menu-header">
+        <div class="menu-exit" id="edit-menu-exit">
+            <img src="<?php echo RES; ?>images/dialogs/menu-exit.gif" alt="" width="11" height="11" />
+        </div>
+        <h3>Editar</h3>
+	</div>
+
+    <div class="menu-body">
+            <div class="menu-content">
+                <form action="#" onsubmit="return false;">
+                    <div id="edit-menu-skins">
+                        <select id="edit-menu-skins-select">
+                                <option value="5" id="edit-menu-skins-select-notepadskin">Bloc de notas</option>
+                                <option value="2" id="edit-menu-skins-select-speechbubbleskin">Bocadillo de diálogo</option>
+                                <option value="6" id="edit-menu-skins-select-goldenskin">Dorado</option>
+                                <?php if(User::$Data['rank'] > 2): ?>
+                                <option value="7" id="edit-menu-skins-select-hc_machineskin">HC</option>
+                                <option value="8" id="edit-menu-skins-select-hc_pillowskin">HC Rosa</option>
+                                <?php endif; if(User::$Data['rank'] > MinRank): ?>
+                                <option value="9" id="edit-menu-skins-select-nakedskin">Vacio (Staff only)</option>
+                                <?php endif; ?>
+
+                                <option value="3" id="edit-menu-skins-select-metalskin">Metal</option>
+                                <option value="4" id="edit-menu-skins-select-noteitskin">Nota-etiqueta</option>
+                                <option value="1" id="edit-menu-skins-select-defaultskin">Por defecto</option>
+                        </select>
+                    </div>
+                    <div id="edit-menu-stickie">
+                        <p>¡Atención! Si pinchas en 'Quitar', tu nota será eliminada para siempre.</p>
+                    </div>
+                    <div id="rating-edit-menu">
+                        <input type="button" id="ratings-reset-link" value="Reiniciar los votos" />
+                    </div>
+                    <div id="highscorelist-edit-menu" style="display:none">
+                        <select id="highscorelist-game">
+                            <option value="">Elige juego</option>
+                            <option value="1">Battle Ball: Rebound!</option>
+                            <option value="2">SnowStorm</option>
+                            <option value="0">Wobble Squabble</option>
+                        </select>
+                    </div>
+                    <div id="edit-menu-remove-group-warning">
+                        <p>Esta Etiqueta pertenece a otro usuario. Si la quitas, regresar� a su Inventario</p>
+                    </div>
+                    <div id="edit-menu-gb-availability">
+                        <select id="guestbook-privacy-options">
+                            <option value="private">Sólo amigos</option>
+                            <option value="public">Público</option>
+                        </select>
+                    </div>
+                    <div id="edit-menu-trax-select">
+                        <select id="trax-select-options"></select>
+                    </div>
+                    <div id="edit-menu-remove">
+                        <input type="button" id="edit-menu-remove-button" value="Quitar" />
+                    </div>
+                </form>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="menu-bottom"></div>
+</div>
+<script language="JavaScript" type="text/javascript">
+    Event.observe(window, "resize", function() { if (editMenuOpen) closeEditMenu(); }, false);
+    Event.observe(document, "click", function() { if (editMenuOpen) closeEditMenu(); }, false);
+    Event.observe("edit-menu", "click", Event.stop, false);
+    Event.observe("edit-menu-exit", "click", function() { closeEditMenu(); }, false);
+    Event.observe("edit-menu-remove-button", "click", handleEditRemove, false);
+    Event.observe("edit-menu-skins-select", "click", Event.stop, false);
+    Event.observe("edit-menu-skins-select", "change", handleEditSkinChange, false);
+    Event.observe("guestbook-privacy-options", "click", Event.stop, false);
+    Event.observe("guestbook-privacy-options", "change", handleGuestbookPrivacySettings, false);
+    Event.observe("trax-select-options", "click", Event.stop, false);
+    Event.observe("trax-select-options", "change", handleTraxplayerTrackChange, false);
+</script>
+        <?php else: ?>
+        <script type="text/javascript">
+            Event.observe(window, "load", observeAnim);
+            document.observe("dom:loaded", function() {
+                initDraggableDialogs();
+                repositionInvalidItems();
+            });
+        </script>
+    </div>
+    <div id="footer">
+        <p class="footer-links"><a href="<?php echo URL; ?>/papers/termsAndConditions" target="_new">Términos y Condiciones</a>  |  <a href="<?php echo URL; ?>/papers/privacy" target="_new">Política de Privacidad</a>  |  <a href="<?php echo URL; ?>/papers/cookies" target="_new">Política de Cookies</a></p>
+        <p class="copyright">2018 aXDR 4.0. <?php echo HotelName; ?> is not affiliated with, endorsed, sponsored, or specifically approved by Sulake Corporation Oy or its Affiliates. <br/>
+            All the content belongs to Sulake Corporation Oy. All rights reserved.</p>
+    </div>
+</div>
+
+    <?php if(User::$Logged): ?>
+    <div class="cbb topdialog" id="guestbook-form-dialog">
+        <h2 class="title dialog-handle">Editar un mensaje en el Libro</h2>
+        <a class="topdialog-exit" href="#" id="guestbook-form-dialog-exit">X</a>
+        <div class="topdialog-body" id="guestbook-form-dialog-body">
+            <div id="guestbook-form-tab">
+                <form method="post" id="guestbook-form">
+                    <p>
+                        Nota: el mensaje no puede superar los 500 caracteres
+                        <input type="hidden" name="ownerId" value="<?php echo User::$Data['id']; ?>" />
+                    </p>
+                    <div>
+                        <textarea cols="15" rows="5" name="message" id="guestbook-message"></textarea>
+                        <script type="text/javascript">
+                            bbcodeToolbar = new Control.TextArea.ToolBar.BBCode("guestbook-message");
+                            bbcodeToolbar.toolbar.toolbar.id = "bbcode_toolbar";
+                            var colors = { 
+                                "red" : ["#d80000", "Rojo"],
+                                "orange" : ["#fe6301", "Naranja"],
+                                "yellow" : ["#ffce00", "Amarillo"],
+                                "green" : ["#6cc800", "Verde"],
+                                "cyan" : ["#00c6c4", "Cyan"],
+                                "blue" : ["#0070d7", "Azul"],
+                                "gray" : ["#828282", "Gris"],
+                                "black" : ["#000000", "Negro"]
+                            };
+                            bbcodeToolbar.addColorSelect("Color", colors, true);
+                        </script>
+
+                        <div id="linktool">
+                            <div id="linktool-scope">
+                                <label for="linktool-query-input">Crear link:</label>
+                                <input type="radio" name="scope" class="linktool-scope" value="1" checked="checked"/>Habbos
+                                <input type="radio" name="scope" class="linktool-scope" value="2"/>Salas
+                                <input type="radio" name="scope" class="linktool-scope" value="3"/>Grupos
+                            </div>
+                            <input id="linktool-query" type="text" name="query" value=""/>
+                            <a href="#" class="new-button" id="linktool-find"><b>Buscar</b><i></i></a>
+                            <div class="clear" style="height: 0;"><!-- --></div>
+
+                            <div id="linktool-results" style="display: none"></div>
+                            <script type="text/javascript">
+                                linkTool = new LinkTool(bbcodeToolbar.textarea);
+                            </script>
+                        </div>
+                    </div>
+                    <div class="guestbook-toolbar clearfix">
+                        <a href="#" class="new-button" id="guestbook-form-cancel"><b>Cancelar</b><i></i></a>
+                        <a href="#" class="new-button" id="guestbook-form-preview"><b>Previa</b><i></i></a>	
+                    </div>
+                </form>
+            </div>
+            <div id="guestbook-preview-tab">&nbsp;</div>
+        </div>
+    </div>	
+    <div class="cbb topdialog" id="guestbook-delete-dialog">
+        <h2 class="title dialog-handle">Eliminar mensaje</h2>
+        <a class="topdialog-exit" href="#" id="guestbook-delete-dialog-exit">X</a>
+        <div class="topdialog-body" id="guestbook-delete-dialog-body">
+            <form method="post" id="guestbook-delete-form">
+                <input type="hidden" name="entryId" id="guestbook-delete-id" value="" />
+                    <p>¿Seguro que lo quieres eliminar?</p>
+                    <p>
+                        <a href="#" id="guestbook-delete-cancel" class="new-button"><b>Cancel</b><i></i></a>
+                        <a href="#" id="guestbook-delete" class="new-button"><b>Remove</b><i></i></a>
+                    </p>
+            </form>
+        </div>
+    </div>	
+<?php endif; ?>
+        <?php endif; ?>
+<script type="text/javascript">
+    if (typeof HabboView != "undefined") {
+        HabboView.run();
+    }
+</script>
+</body>
+</html>

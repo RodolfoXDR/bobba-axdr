@@ -1,0 +1,51 @@
+<div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
+	<div class="wrapper" style="width: 1120px">
+		<div class="column" style="width: 500px;">
+			<div class="plugin top respects">
+				<div class="title-brown">Top <b>10</b> en Respetos</div>
+				<div class="content tops">				
+				<?php
+					$query2 = SQL::query('SELECT ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_ID_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_NAME_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.figure, player_stats.total_respect_points FROM player_stats, ' . Server::Get(Server::USER_TABLE) . ' WHERE ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_ID_COLUMN) . ' = ' . Server::Get(Server::USER_STATS_TABLE) . '.' . Server::Get(Server::USER_STATS_USER_ID_COLUMN) . ' AND ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_RANK_COLUMN) . ' = 1 ORDER BY ' . Server::Get(Server::USER_STATS_TABLE) . '.' . Server::Get(Server::USER_STATS_RESPECTS_COLUMN) . ' DESC LIMIT 10');
+						while($topuser = $query2->fetch_assoc()):
+					?>
+					<div id="character">
+						<div id="base" class="brown">
+							<img class="shadow" src="<?php echo LOOK . $topuser[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&direction=2&head_direction=2&gesture=sml&size=n&action=none" alt="">
+						</div>
+						<div id="data">
+							<h2><?php echo $topuser[Server::Get(Server::USER_NAME_COLUMN)]?></h2>
+							<div id="count">
+								<b><?php echo $topuser[Server::Get(Server::USER_STATS_RESPECTS_COLUMN)]?></b> Respetos
+							</div>
+						</div>
+					</div>
+				<?php endwhile;?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="column" style="width: 500px;">
+			<div class="plugin top diamonds">
+				<div class="title-emerald">Top <b>10</b> en Diamantes</div>
+				<div class="content tops">
+				<?php
+					$query2 = SQL::query('SELECT ' . Server::Get(Server::USER_ID_COLUMN) . ', ' . Server::Get(Server::USER_NAME_COLUMN) . ', ' . Server::Get(Server::USER_LOOK_COLUMN) . ', online, ' . Server::Get(Server::USER_DIAMONDS_COLUMN) . ' FROM ' . Server::Get(Server::USER_TABLE) . ' WHERE ' . Server::Get(Server::USER_RANK_COLUMN) . ' = 1 ORDER BY ' . Server::Get(Server::USER_DIAMONDS_COLUMN) . ' DESC LIMIT 10');
+						while($topuser = $query2->fetch_assoc()):
+				?>
+					<div id="character">
+						<div id="base" class="emerald">
+							<img class="shadow" src="<?php echo LOOK . $topuser[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&direction=2&head_direction=2&gesture=sml&size=n&action=none" alt="">
+						</div>
+						<div id="data">
+							<h2><?php echo $topuser[Server::Get(Server::USER_NAME_COLUMN)]?></h2>
+							<div id="count">
+								<b><?php echo $topuser[Server::Get(Server::USER_DIAMONDS_COLUMN)]?></b> Diamantes
+							</div>
+						</div>
+					</div>
+				<?php endwhile; ?>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>

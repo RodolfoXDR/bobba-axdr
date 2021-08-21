@@ -1,0 +1,58 @@
+<div role="main" class="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="box list">
+					<div class="title red"><b>Últimas</b> Noticias</div>
+					<div class="content">
+					<?php 
+						$LastNews = Cache::GetArticles(true, 5);
+						foreach($LastNews as $Row):
+					?>
+						<li>
+							<a href="<?php echo URL; ?>/articles/<?php echo $Row['Id']; ?>-<?php echo str_replace(' ', '-', strtolower($Row['Title'])); ?>"><?php echo $Row['Title']; ?></a> <b>(<?php echo (is_numeric($Row['TimeCreated'])) ? date('M d, Y', $Row['TimeCreated']) : '--';?>)</b>
+						</li>
+					<?php endforeach; ?>
+					</div>
+				</div>
+				<div class="box list">
+					<div class="title red">Noticias <b>Relacionadas</b></div>
+					<div class="content">
+					<?php 
+						$query = SQL::query('SELECT Id, Title, TimeCreated FROM xdrcms_news WHERE Category = \'' . $queryRow['Category'] . '\' AND ID != \'' . $articleId . '\' ORDER BY ID DESC LIMIT 5');
+						if($query && $query->num_rows > 0):
+							while($Row = $query->fetch_assoc()):
+					?>
+						<li><a href="<?php echo URL; ?>/articles/<?php echo $Row['Id']; ?>-<?php echo str_replace(' ', '-', strtolower($Row['Title'])); ?>"><?php echo $Row['Title']; ?></a> <b>(<?php echo (is_numeric($Row['TimeCreated'])) ? date('M d, Y', $Row['TimeCreated']) : '--';?>)</b></li>
+					<?php 	
+							endwhile;
+						else:
+					?>
+						No hay noticias relacionadas con esta categoria.
+					<?php
+						endif;
+					?>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div id="article-interface">
+					<div id="article-header" style="background: url('<?php echo $queryRow['BackGroundImage']; ?>') no-repeat #c7c7c7;">
+						<div id="article-title">
+							<?php echo $queryRow['Title']; ?>
+						</div>
+						<div id="article-information">
+							<i><?php echo (is_numeric($queryRow['TimeCreated'])) ? date('M d, Y', $queryRow['TimeCreated']) : '--';?></i> | <i><b><?php echo $Category; ?></b></i>
+						</div>
+						<div id="article-description">
+							<?php echo $queryRow['Summary']; ?>
+						</div>
+					</div>
+					<div id="article-content">
+						<?php echo $queryRow['Body']; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

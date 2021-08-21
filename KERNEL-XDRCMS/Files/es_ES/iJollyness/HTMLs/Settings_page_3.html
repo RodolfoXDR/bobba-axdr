@@ -1,0 +1,61 @@
+<?php
+$success = false;
+
+if (isset($_POST['password'], $_POST['password_new'], $_POST['password_ver'])):
+	$cPwD = $_POST['password'];
+	$pWd = $_POST['password_new'];
+	$pWdRepit = $_POST['password_ver'];
+
+	if(empty($pWd)):
+		$error = Text::REGISTER_PWD_EMPTY;
+	elseif(strlen($pWd) < 6):
+		$error = Text::REGISTER_PWD_TOO_SHORT;
+	elseif(strlen($pWd) > 32):
+		$error = Text::REGISTER_PWD_TOO_LONG;
+	elseif(!preg_match('`[0-9]`', $pWd)):
+		$error = Text::REGISTER_PWD_NOT_NUM;
+	elseif($pWd !== $pWdRepit):
+		$error = Text::REGISTER_PWD_NOT_MATCH;
+	elseif(Tool::Hash($cPwD) != User::$Row['password']):
+		$error = Text::ERROR_DIFF_PWD;
+	else:
+		SQL::query('UPDATE xdr_users SET password = \'' . Tool::Hash($pWd) . '\' WHERE id = ' . User::$Data['id']);
+		$success = true;
+	endif;
+endif;
+?>
+<div role="main" class="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="box list">
+					<div class="content">
+							<li><a href="/profile?tab=1">General</a></li>
+							<!--<li><a href="/profile?tab=2">Email y verificación</a></li>-->
+							<li><b>Mi Contraseña</b></li>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="box">
+					<div class="title green">General</b></div>
+					<div class="content">
+						<?php if(isset($error) && !$success): ?>
+							<div id="error">ERROR: <?php echo Text::Get($error); ?></div>
+						<?php elseif($success): ?>
+							<div id="success">Guardado con éxito</div>
+						<?php endif; ?>
+						<form action="<?php echo URL; ?>/profile?tab=3" id="profileForm" method="post" name="profileForm">
+							<div id="label">Contraseña Actual</div>
+							<input maxlength="32" name="password" size="32" type="password" placeholder="Introduzca su contraseña actual" value="">
+							<div id="label">Nueva Contraseña</div>
+							<input maxlength="32" name="password.new" size="32" type="password" placeholder="Introduzca su nueva contraseña" value="">
+							<input maxlength="32" name="password.ver" size="32" type="password" placeholder="Repita su nueva contraseña" value="">
+							<input class="button" type="submit" value="Guardar" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

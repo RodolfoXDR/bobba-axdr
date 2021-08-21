@@ -1,0 +1,137 @@
+<div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
+	<div class="wrapper" style="width: 1120px;">
+		<div class="column" style="width: 500px;">
+			<?php foreach (Site::GetRanks(1, 4, 0) as $rankId => $value): ?>
+			<div class="plugin">
+				<div class="title-blue">
+					<?php echo $value['Name']; ?>
+				</div>
+				<div class="content staffs">
+				<?php 
+					$query = SQL::query('SELECT ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_ID_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_LOOK_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_NAME_COLUMN) . ', xdr_users.task, ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_MOTTO_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.online, xdr_users.web_online FROM ' . Server::Get(Server::USER_TABLE) . ', xdr_users WHERE ' . Server::Get(Server::USER_TABLE) . '.id = xdr_users.id AND ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_RANK_COLUMN) . ' = '. $rankId);
+					if($query != null && $query->num_rows != 0):
+						while($uRow = $query->fetch_assoc()):	
+							$Status = ($uRow['online'] == 1) ? 'Online' : 'Offline';
+				?>
+					<div id="character">
+						<div id="base">
+							<img src="<?php echo LOOK . $uRow[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&direction=3&gesture=sml&size=m&headonly=0" alt="">
+						</div>
+						<div id="data">
+							<h2><?php echo $uRow[Server::Get(Server::USER_NAME_COLUMN)]; ?></h2>
+							
+							<?php if($uRow['task'] != '' && $uRow['task'] != null):?>
+								<div id="task" class="blue"><?php echo $uRow['task']; ?></div>
+							<?php endif; ?>
+							
+							<div id="status" class="<?php echo $Status; ?>"></div>
+							
+							<div id="motto"><?php echo $uRow[Server::Get(Server::USER_MOTTO_COLUMN)]; ?></div>
+							<div id="last_visit">Última Visita: <b><?php echo Tool::ParseUnixTime($uRow['web_online']); ?></b></div>
+						</div>
+						<div id="status"></div>
+					</div>
+				<?php endwhile; 
+					else: ?>
+						<p>No hay usuarios con este rango.</p>
+				<?php endif; ?>
+				</div>
+			</div>
+			<?php endforeach; ?>
+		</div>
+		
+		<div class="column" style="width: 500px;">
+				<?php
+				foreach (Site::GetRanks(2, 0, 0) as $rankId => $value):
+			?>
+			<div class="plugin">
+				<div class="title-blue">
+					<?php echo $value['Name']; ?>
+				</div>
+				<div class="content staffs">
+				<?php 
+					$query = SQL::query('SELECT ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_ID_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_LOOK_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_NAME_COLUMN) . ', xdr_users.task, ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_MOTTO_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.online, xdr_users.web_online FROM ' . Server::Get(Server::USER_TABLE) . ', xdr_users WHERE ' . Server::Get(Server::USER_TABLE) . '.id = xdr_users.id AND ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_RANK_COLUMN) . ' = '. $rankId);
+					if($query != null && $query->num_rows != 0):
+						while($uRow = $query->fetch_assoc()):	
+							$Status = ($uRow['online'] == 1) ? 'Online' : 'Offline';
+				?>
+					<div id="character">
+						<div id="base">
+							<img src="<?php echo LOOK . $uRow[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&direction=3&gesture=sml&size=m&headonly=0" alt="">
+						</div>
+						<div id="data">
+							<h2><?php echo $uRow[Server::Get(Server::USER_NAME_COLUMN)]; ?></h2>
+							
+							<?php if($uRow['task'] != '' && $uRow['task'] != null):?>
+								<div id="task" class="blue"><?php echo $uRow['task']; ?></div>
+							<?php endif; ?>
+							
+							<div id="status" class="<?php echo $Status; ?>"></div>
+							
+							<div id="motto"><?php echo $uRow[Server::Get(Server::USER_MOTTO_COLUMN)]; ?></div>
+							<div id="last_visit">Última Visita: <b><?php echo Tool::ParseUnixTime($uRow['web_online']); ?></b></div>
+						</div>
+						<div id="status"></div>
+					</div>
+				<?php endwhile; 
+					else: ?>
+						<p>No hay usuarios con este rango.</p>
+				<?php endif; ?>
+				</div>
+			</div>
+			<?php endforeach; ?>			
+			<div class="plugin">
+				<div class="title-darken">¿Qué son los staffs?</div>
+				<div class="content">
+					<p>
+						Son los que están detrás de <?php echo HotelName; ?>, todos aquellos que pasan el día estrujándose la cabeza en busca de nuevas ideas y para sacar adelante todas esas locuras. Siempre atentos para que todo funcione sin problemas y, por encima de todo, que <?php echo HotelName; ?> sea el lugar seguro del que sentirse orgullosos.  Criticados, admirados,..... siempre tratan de hacerlo lo mejor posible.
+						<br><br>
+						Los puedes distinguir al pinchar sobre ellos, siempre llevan su respectiva placa bien visible.
+						<br><br>
+						¡Conócelos!
+					</p>
+					<div id="staffway"></div>
+				</div>
+			</div>
+			<?php
+				foreach (Site::GetRanks(2, 2, 4) as $rankId => $value):
+			?>
+			<div class="plugin">
+				<div class="title-blue">
+					<?php echo $value['Name']; ?>
+				</div>
+				<div class="content staffs">
+				<?php 
+					$query = SQL::query('SELECT ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_ID_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_LOOK_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_NAME_COLUMN) . ', xdr_users.task, ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_MOTTO_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.online, xdr_users.web_online FROM ' . Server::Get(Server::USER_TABLE) . ', xdr_users WHERE ' . Server::Get(Server::USER_TABLE) . '.id = xdr_users.id AND ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_RANK_COLUMN) . ' = '. $rankId);
+					if($query != null && $query->num_rows != 0):
+						while($uRow = $query->fetch_assoc()):	
+							$Status = ($uRow['online'] == 1) ? 'Online' : 'Offline';
+				?>
+					<div id="character">
+						<div id="base">
+							<img src="<?php echo LOOK . $uRow[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&direction=3&gesture=sml&size=m&headonly=0" alt="">
+						</div>
+						<div id="data">
+							<h2><?php echo $uRow[Server::Get(Server::USER_NAME_COLUMN)]; ?></h2>
+							
+							<?php if($uRow['task'] != '' && $uRow['task'] != null):?>
+								<div id="task" class="blue"><?php echo $uRow['task']; ?></div>
+							<?php endif; ?>
+							
+							<div id="status" class="<?php echo $Status; ?>"></div>
+							
+							<div id="motto"><?php echo $uRow[Server::Get(Server::USER_MOTTO_COLUMN)]; ?></div>
+							<div id="last_visit">Última Visita: <b><?php echo Tool::ParseUnixTime($uRow['web_online']); ?></b></div>
+						</div>
+						<div id="status"></div>
+					</div>
+				<?php endwhile; 
+					else: ?>
+						<p>No hay usuarios con este rango.</p>
+				<?php endif; ?>
+				</div>
+			</div>
+			<?php endforeach; ?>
+		</div>
+	</div>	
+</div>

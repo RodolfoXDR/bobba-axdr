@@ -1,0 +1,92 @@
+<div class="movable widget ProfileWidget" id="widget-<?php echo $WidgetId; ?>" style=" left: <?php echo $row['position_left']; ?>px; top: <?php echo $row['position_top']; ?>px; z-index: <?php echo $row['position_z']; ?>;">
+<div class="<?php echo $row['skin']; ?>">
+	<div class="widget-corner" id="widget-<?php echo $WidgetId; ?>-handle">
+		<div class="widget-headline"><h3>
+<?php if($edit_mode): ?>
+		<img src="<?php echo RES; ?>images/myhabbo/icon_edit.gif" width="19" height="18" class="edit-button" id="widget-<?php echo $WidgetId; ?>-edit" />
+		<script type="text/javascript">
+			var editButtonCallback = function(e) { openEditMenu(e, <?php echo $WidgetId; ?>, "widget", "widget-<?php echo $WidgetId; ?>-edit"); };
+			Event.observe("widget-<?php echo $WidgetId; ?>-edit", "click", editButtonCallback);
+			Event.observe("widget-<?php echo $WidgetId; ?>-edit", "editButton:click", editButtonCallback); 
+		</script>
+<?php endif; ?>
+		<span class="header-left">&nbsp;</span><span class="header-middle">MI PERFIL </span><span class="header-right">&nbsp;</span></h3>
+		</div>	
+	</div>
+
+	<div class="widget-body">
+		<div class="widget-content">
+	<div class="profile-info">
+		<div class="name" style="float: left">
+		<span class="name-text"><?php echo $user_row['name']; ?></span>
+			<img id="name-<?php echo $user_row['id']; ?>-report" class="report-button report-n"
+				alt="report"
+				src="<?php echo RES; ?>images/myhabbo/buttons/report_button.gif"
+				style="display: none;" />
+		</div>
+
+		<br class="clear" />
+
+			<img alt="offline" src="<?php echo RES; ?>images/myhabbo/profile/habbo_<?php echo ($user_row['online'] == '0') ? 'off' : 'on'; ?>line.gif" />
+		<div class="birthday text">
+			Me registre el: 
+		</div>
+		<div class="birthday date">
+			<?php echo date('M j, Y', $user_row['account_created']); ?>
+		</div>
+		<div>
+<?php
+//$GroupF = $MySQLi->query("SELECT groupid FROM groups_memberships WHERE userid = '" . $user_row['id'] . "' AND is_pending = '0' AND is_current = '1' LIMIT 1");
+//$GroupExists = $GroupF->num_rows;
+$GroupExists = 0;
+
+if($GroupExists > 0)
+{
+	$RowGroup = $GroupF->fetch_assoc();
+
+	$GroupData = $MySQLi->query("SELECT id, name, badge FROM groups_details WHERE id = '" . $RowGroup["groupid"] . "' LIMIT 1");
+	$RowData = $GroupData->fetch_assoc();
+?>
+        	<a href="<?php echo URL; ?>/groups/<?php echo $RowData["id"]; ?>/id" title="<?php echo $RowData["name"]; ?>"><img src="<?php echo URL; ?>/habbo-imaging/badge/<?php echo $RowData["badge"]; ?>.gif" /></a>
+<?php } ?>
+
+            
+        </div>
+	</div>
+	<div class="profile-figure">
+			<img alt="<?php echo $user_row['name']; ?>" src="<?php echo LOOK . $user_row['figure']; ?>&size=b&direction=4&head_direction=4&gesture=sml" />
+	</div>
+<?php if(!empty($user_row['motto'])): ?>
+	<div class="profile-motto">
+		<?php echo $user_row['motto']; ?>
+			<img id="motto-<?php echo $user_row['id']; ?>-report" class="report-button report-m"
+				alt="report"
+				src="<?php echo RES; ?>images/myhabbo/buttons/report_button.gif"
+				style="display: none;" />
+		<div class="clear"></div>
+
+	</div>
+<?php endif; ?>
+
+<?php if($user_row['id'] != User::$Data['id']): ?>
+		<div class="profile-friend-request clearfix">
+			<a class="new-button" id="add-friend" style="float: left"><b>Añadir de amig@</b><i></i></a>
+		</div>
+<?php endif; ?>
+
+    <script type="text/javascript">
+		document.observe("dom:loaded", function() {
+			new ProfileWidget('<?php echo $user_row['id']; ?>', <?php echo (User::$Data['id'] > 0) ? "'" . $user_row['id'] . "'" : "null"; ?>, {
+				headerText: "¿Estás seguro?",
+				messageText: "¿Estás seguro de que quieres que <strong><?php echo $user_row['name']; ?><\/strong> sea tu amigo? ¡Piénsatelo dos veces antes de darle al OK!",
+				loginText: "¡Debes registrarte antes de enviar peticiones!",
+				buttonText: "OK",
+				cancelButtonText: "Cancelar"
+			});
+		});
+	</script>
+		<div class="clear"></div>
+		</div>
+	</div>
+	</div>
+</div>

@@ -1,0 +1,67 @@
+<div id="container">
+    <div id="content" style="position: relative" class="clearfix">
+		<?php Cache::AppendPlugin(1); ?>
+        <div id="column1" class="column">
+        <?php foreach (Site::GetRanks(3, 8, 0) as $rankId => $value): ?>
+            <div class="habblet-container ">		
+                <div class="cbb clearfix blue ">
+                    <h2 class="title"><?php echo $value['Name']; ?></h2>
+                    <div class="staff-box">
+                        <table width="100%" style=" background-color: #fff">
+                            <tbody>
+                            <?php 
+                                $query = SQL::query('SELECT ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_ID_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_LOOK_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_NAME_COLUMN) . ', xdr_users.task, xdr_users.country_cf, ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_MOTTO_COLUMN) . ', ' . Server::Get(Server::USER_TABLE) . '.online, xdr_users.web_online FROM ' . Server::Get(Server::USER_TABLE) . ', xdr_users WHERE ' . Server::Get(Server::USER_TABLE) . '.id = xdr_users.id AND ' . Server::Get(Server::USER_TABLE) . '.' . Server::Get(Server::USER_RANK_COLUMN) . ' = '. $rankId);
+                                if($query != null && $query->num_rows != 0):
+                                    while($uRow = $query->fetch_assoc()):	
+                                        $Status = ($uRow['online'] == 1) ? 'Online' : 'Offline';
+                            ?>
+                                <tr>
+                                    <td valign="middle" width="25">
+                                        <div style="position: relative; overflow:hidden; height:65px;">
+                                            <img style="margin-top: -10px;" src="<?php echo LOOK . $uRow[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&gesture=sml&size=m">
+                                        </div>
+                                    </td>
+                                    <td valign="top"></td>
+                                    <td style="color:black;font-size: 11px; margin: 10px 0px 0px 0px;">
+                                        <p>
+                                            <a style="color:orange;text-decoration:none" href="#"></a>
+                                            <strong><?php echo $uRow[Server::Get(Server::USER_NAME_COLUMN)]; ?></strong>
+                                        </p>
+                                        <p style="padding: 0px;">
+                                            <img src="<?php echo RES; ?>/v2/images/motto.gif"> <?php echo $uRow[Server::Get(Server::USER_MOTTO_COLUMN)]; ?>
+                                        </p>
+                                        <p>
+                                            <img src="<?php echo RES; ?>/v2/images/login.gif?"> <?php echo Tool::ParseUnixTime($uRow['web_online']); ?>
+                                        </p>
+                                    </td>
+                                    <td valign="top" style="float: right;">
+                                        <img src="<?php echo RES; ?>/images/myhabbo/profile/habbo_<?php echo $Status; ?>.gif"><br>
+                                        <img src="<?php echo RES; ?>images/flags/<?php echo $uRow['country_cf']; ?>.png" style="margin-left: 13px;margin-top: 4px;">
+                                    </td>
+                                </tr>
+                                <?php endwhile; 
+                                else: ?>
+                                    <p style="text-align: center;margin: 5px;">No hay usuarios con este rango.</p>
+                            <?php endif; ?>
+                            </tbody>
+                        </table>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        </div>
+        <div id="column2" class="column">
+            <div class="habblet-container ">		
+                <div class="cbb clearfix settings ">
+                    <h2 class="title">¿Qué son los staffs?</h2>
+                    <p style="padding: 10px;">
+                        Son los que están detrás de <?php echo HotelName; ?>, todos aquellos que pasan el día estrujándose la cabeza en busca de nuevas ideas y para sacar adelante todas esas locuras. Siempre atentos para que todo funcione sin problemas y, por encima de todo, que <?php echo HotelName; ?> sea el lugar seguro del que sentirse orgullosos.  Criticados, admirados,..... siempre tratan de hacerlo lo mejor posible.
+                        <br><br>
+                        Los puedes distinguir al pinchar sobre ellos, siempre llevan su respectiva placa bien visible.
+                        <br><br>
+                        ¡Conócelos!
+                    </p>
+                </div>
+            </div>
+        </div>

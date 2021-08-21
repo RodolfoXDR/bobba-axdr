@@ -1,0 +1,125 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=656533071187201";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div role="main" class="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="box">
+					<div class="title teal">Amig@s Conectados</div>
+					<div class="content">
+					<?php 
+						$MyFriends = User::GetFriendsOnline(User::$Data['id']);
+						
+						$Count = count($MyFriends) == 0;
+						if(!$Count):
+							foreach($MyFriends as $key => $id):
+								User::Get('users', 'look', $l, 'id = ' . $id);
+					?>		
+								<ul class="simple-post-list">
+									<li>
+										<div class="post-image">
+											<div class="img-thumbnail">
+												<a href="shop-product-sidebar.html">
+													<img alt="" class="img-responsive" src="<?php echo LOOK .  $l['look']; ?>&head_direction=3&action=wlk,wav,crr=667&gesture=spk&size=m">
+												</a>
+											</div>
+										</div>
+										<div class="post-info">
+											<a class="blue" href="shop-product-sidebar.html"><?php echo User::GetNameById($id); ?></a>
+											<div class="post-meta">
+												Online
+											</div>
+										</div>
+									</li>
+								</ul>
+					<?php
+							endforeach;
+						else:
+							echo 'No hay amig@s conectados';
+						endif;
+					?>
+					</div>
+				</div>
+				<div class="box">
+					<div class="title facebook">Facebook</b></div>
+					<div class="content">
+					<div class="fb-page" data-href="https://www.facebook.com/ComunidadiFoster/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/ComunidadiFoster/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ComunidadiFoster/">iFoster</a></blockquote></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="user-interface">
+					<div id="overlay">
+						<div class="avatar">
+							<img style="margin: -40px 0px;" src="<?php echo LOOK . User::$Data['figure']; ?>&head_direction=1&action=wlk&gesture=sml&size=l" alt="<?php echo User::$Data['name']; ?>" >
+							<span class="thumbnail-data">
+								<span class="thumb-info-name"><?php echo User::$Data['name']; ?></span>
+								<span class="thumb-info-rank">CEO</span>
+							</span>
+						</div>
+						<div class="data">
+							<div id="credits"><span></span> <?php echo User::$Data['credits']; ?> Creditos</div>
+							<div id="duckets"><span></span> <?php //echo User::$Data['activity_points']; ?> Duckets</div>
+							<div id="diamonds"><span></span> <?php //echo User::$Data['vip_points']; ?> Diamantes</div>
+							<div id="gotw"><span></span> <?php //echo User::$Data['gotw_points_honor']; ?> Puntos GOTW</div>
+						</div>
+						<div class="buttons">
+							<button class="habbo big" onclick="window.open('/client')">Jugar Ahora</button>
+						</div>
+					</div>
+				</div>
+				
+				<?php
+					$ArticlesData = Cache::GetArticles(true, 3, 0);
+					foreach($ArticlesData as $Data):
+					$DataURL =  URL . '/articles/' . $Data['Id'] . '-' . str_replace(' ', '-', strtolower($Data['Title']));
+				?>
+				<div class="articles-interface" style="background: url('<?php echo $Data['BackGroundImage']; ?>') no-repeat #c7c7c7;">
+					<div id="overlay">
+						<div class="article-title">
+							<a href="<?php echo $DataURL; ?>" target="_new"><?php echo $Data['Title']; ?></a>
+						</div>
+						<div class="article-data">
+							<i><?php echo (is_numeric($Data['TimeCreated'])) ? date('M d, Y', $Data['TimeCreated']) : '--';?></i> | <b>Undefined</b>
+						</div>
+						<div class="article-content">
+							<?php echo $Data['Summary']; ?>
+						</div>
+						<div class="article-buttons">
+							<button class="habbo green">Leer Mas...</button>
+						</div>
+					</div>
+				</div>
+				<?php endforeach; ?>
+			</div>
+			<div class="col-md-3">
+				<div class="box">
+					<div class="title orange">iRadio</b></div>
+					<div class="content">
+					Aqui va la radio
+					</div>
+				</div>
+				<div class="box">
+					<div class="title twitter">Twitter</b></div>
+					<div class="content">
+						<center style="margin-top: 10px;">
+							<a class="twitter-timeline" data-tweet-limit="3" data-chrome="nofooter" href="https://twitter.com/<?php echo (Config::$Restrictions['maintenance']['twitter']);?>">Tweets by <?php echo (Config::$Restrictions['maintenance']['twitter']);?></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+						</center>
+					</div>
+				</div>
+				<div class="box">
+					<div class="title darkblue">Box Dark Blue</b></div>
+					<div class="content">Probando todo esto</div>
+				</div>
+			</div>
+		</div>						
+	</div>
+
+</div>

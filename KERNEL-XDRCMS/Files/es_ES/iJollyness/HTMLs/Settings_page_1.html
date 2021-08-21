@@ -1,0 +1,56 @@
+<?php
+$success = false;
+
+if (isset($_POST['motto'], $_POST['showOnlineStatus'], $_POST['followFriendMode']))
+{
+	$blockNewFriends = isset($_POST['friendRequestsAllowed']) && $_POST['friendRequestsAllowed'] == 'true' ? '1' : '0';
+	$hideOnline = $_POST['showOnlineStatus'] == '1' ? '1' : '0';
+	$hideInRoom = $_POST['followFriendMode'] == '0' ? '1' : '0';
+	
+	SQL::query('UPDATE player_settings, players SET players.motto = \'' . $_POST['motto'] . '\', player_settings.allow_friend_requests = \'' . $blockNewFriends . '\', player_settings.hide_online = \'' . $hideOnline . '\', player_settings.hide_inroom = \'' . $hideInRoom . '\' WHERE players.id = player_settings.player_id AND players.id = ' . User::$Data['id']);
+	$success = true;
+}
+?>
+<div role="main" class="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="box list">
+					<div class="content">
+							<li><b>General</b></li>
+							<!--<li><a href="/profile?tab=2">Email y verificación</a></li>-->
+							<li><a href="/profile?tab=3">Mi Contraseña</a></li>
+					</div>
+				</div>
+			</div>
+		<div class="col-md-6">
+				<div class="box">
+					<div class="title green">General</b></div>
+					<div class="content">
+						<?php if($success): ?>
+							<div id="success">Guardado con éxito</div>
+						<?php endif; ?>
+						<form action="<?php echo URL; ?>/profile" action="window.location.reload()" id="profileForm" method="post" name="profileForm" >
+							<div id="label">Mi Estado</div>
+							<div id="detail">Tu estado podrá ser visto por todos, ¡piénsalo bien!</div>
+							<input type="text" maxlength="60" name="motto" size="32" value="<?php echo User::$Data['motto']; ?>"/>
+							<br />
+							<div id="label">Peticiones de Amigos</div>
+							<div id="detail">¿Deseas que puedan enviarte peticiones?</div>
+							<input <?php echo User::$Row['allow_friend_requests'] == '1' ? ' checked="checked"' : '' ; ?> type="checkbox" value="true" id="peticiones" name="friendRequestsAllowed" /> <label for="peticiones">Desactivar</label>
+							<br /><br />
+							<div id="label">Elige quien puede verte conectado</div>
+							<input <?php echo User::$Row['hide_online'] == '1' ? ' checked="checked"' : '' ; ?> name="showOnlineStatus" type="radio" value="1" id="nadie" /><label for="nadie">Nadie</label><input<?php echo User::$Row['hide_online'] == '0' ? ' checked="checked"' : '' ; ?> name="showOnlineStatus" type="radio" value="0" id="todos" /><label for="todos">Todos</label>
+							<br /><br />
+							<div id="label">Ajustes 'Sigueme'</div>
+							<div id="detail">¿Quién puede seguirme dentro del hotel?</div>
+							<input <?php echo User::$Row['hide_inroom'] == '1' ? ' checked="checked"' : '' ; ?> name="followFriendMode" type="radio" value="0" id="nadie2" /><label for="nadie2">Nadie </label> <input<?php echo User::$Row['hide_inroom'] == '0' ? ' checked="checked"' : '' ; ?> name="followFriendMode" type="radio" value="1" id="misamigos" /><label for="misamigos">Mis Amigos</label>
+							<br /><br />
+							<input class="button" type="submit" value="Guardar"/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

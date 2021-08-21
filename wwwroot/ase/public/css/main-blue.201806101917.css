@@ -1,0 +1,32 @@
+.wrapper {
+    background: #0c2642;
+}
+
+.pagename {
+    color: #ffffff;
+}
+
+#jolly__upper_bar {
+    background: #11385f;
+}
+
+#jolly__side_bar {
+    background: #003a73;
+}
+
+#jolly__side_bar li.tag {
+    color: #ffffff;
+    background: #00509c;
+}
+
+#jolly__side_bar li.hrb a {
+    color: #ffffff;
+}
+
+#jolly__side_bar li.hrb:hover {
+    background: #03488a;
+}
+
+.widget {
+    background: #ffffff;
+}

@@ -1,0 +1,161 @@
+<?php
+$Row = Cache::GetShopItems(true, 'badge');
+
+if(isset($_GET['action'], $_GET['key']) && !User::IsOnline()):
+    $BadgeInfo = null;
+
+    if($_GET['action'] == 'buy'):
+        if(count($Row) > 0):
+            foreach($Row as $DataRow):
+                if($DataRow['active'] == '0')
+                    continue; 
+
+                if($DataRow['id'] == $_GET['key']):
+                    $BadgeInfo = $DataRow;
+                    break;
+                endif;
+            endforeach;
+        endif;
+
+        if($BadgeInfo != null || $BadgeInfo['active'] == '1'):
+            if($BadgeInfo['limited'] == '0' || $BadgeInfo['limited'] == '1' && $BadgeInfo['limited_sells'] < $BadgeInfo['limited_stack']):
+                if(!User::hasBadge(User::$Data['id'], $BadgeInfo['code'])):
+                    if(User::$Data['credits'] >= ((int) $BadgeInfo['price_credits']) && User::$Data['diamonds'] >= ((int) $BadgeInfo['price_diamonds'])):			
+						$newCredits = User::$Data['credits'] - $BadgeInfo['price_credits'];
+						$newDiamonds = User::$Data['diamonds']- $BadgeInfo['price_diamonds'];
+					
+						SQL::query('UPDATE ' . Server::Get(Server::USER_TABLE) . ' SET credits = ' . $newCredits . ' WHERE id = ' . User::$Data['id']);
+						SQL::query('UPDATE ' . Server::Get(Server::USER_TABLE) . ' SET vip_points = ' . $newDiamonds . ' WHERE id = ' . User::$Data['id']);
+						
+						User::$Data['credits'] = $newCredits;
+						User::$Data['diamonds'] = $newDiamonds;
+					
+						SQL::query('INSERT INTO `users_badges` (`user_id`, `badge_id`) VALUES (\'' . User::$Data['id'] . '\', \'' . $BadgeInfo['code'] . '\')');
+
+						if($BadgeInfo['limited']):
+							SQL::query('UPDATE `xdrcms_shop` SET `limited_sells`= `limited_sells` + 1 WHERE (`id`=' . $BadgeInfo['id'] . ') LIMIT 1');			
+                            Cache::GetShopItems(false);
+                        endif;
+						
+                        $success = '¡Enhorabuena, has conseguido una nueva placa para mostrarla con tus amigos!';
+                    else:
+                        $error = '¡Hey! ¿Que intentas hacer? No tienes suficientes fondos.';
+                    endif;
+                else:
+                    $error = '¡Oops! Un error ha ocurrido, al parecer ya cuentas con esta placa.';
+                endif;
+            else:
+                $error = '¡Uy! Muy tarde, esta placa ya esta agotada, suerte para la proxima vez...';
+            endif;
+        else:
+            $error = '¡Oops! Ha ocurrido un error, al parecer la placa que intentas comprar no esta disponible, o no existe...';
+        endif;
+    endif;
+endif;
+
+?>
+<div id="container">
+    <div id="content" style="position: relative" class="clearfix">
+        <div id="column1" class="column">
+            <?php if(isset($error)): ?>
+            <div class="balert error">
+                <?php echo $error; ?>
+            </div>
+            <?php endif; ?>
+
+            <?php if(isset($success)): ?>
+            <div class="balert success">
+                <?php echo $success; ?>
+            </div>
+            <?php endif; ?>
+
+            <div class="habblet-container ">		
+                <div class="cbb clearfix blue">
+                    <h2 class="title">Tienda de Placas</h2>
+                    <form method="post">
+                    <ul class="shop-items">
+                        <?php
+						$Row2 = Cache::GetShopItems(true, 'badge');
+                        $Odd = 'odd';
+                        if(count($Row2) > 0):
+                            foreach($Row2 as $DataRow):
+                            $Odd = ($Odd === 'odd') ? 'even' : 'odd';
+                            if($DataRow['active'] == '0')
+                                continue; 
+
+                            $hasBadge = User::hasBadge(User::$Data['id'], $DataRow['code']);
+                            $isSold = ($DataRow['limited'] == '1' && $DataRow['limited_sells'] >= $DataRow['limited_stack']);
+
+                            switch($DataRow['category']):
+                                case 3:
+                                    $category = 'Legendario';
+                                    break;
+                                case 2:
+                                    $category = 'Épico';
+                                    break;
+                                case 1:
+                                    $category = 'Raro';
+                                    break;
+                                case 0:
+                                default:
+                                    $category = 'Común';
+                                    break;
+                            endswitch;
+                        ?>
+                        <li class="item <?php echo $Odd . ' ' . (($hasBadge || $isSold) ? 'unavailable' : ''); ?>">
+                            <div class="bimg">
+                                <img src="<?php echo Site::$Settings['badgesPath'] . $DataRow['code']; ?>.gif" />
+                            </div>
+                            <div class="info">
+                                <div class="btitle">
+                                    <?php echo $DataRow['title']; ?>
+                                </div>
+                                <?php if($DataRow['limited'] == '1'): ?>
+                                <div class="bltd">
+                                    <b>LTD:</b> ¡Quedan <b><?php echo $DataRow['limited_stack'] - $DataRow['limited_sells']; ?></b> de <b><?php echo $DataRow['limited_stack']; ?></b>!
+                                </div>
+                                <?php endif; ?>
+                                <div class="bprice">
+                                    <?php if($DataRow['price_credits'] > 0): ?>
+                                    <?php echo $DataRow['price_credits']; ?> Créditos
+                                    <?php endif; ?>
+                                    <?php if($DataRow['price_credits'] > 0 && $DataRow['price_diamonds'] > 0): ?>
+                                    +
+                                    <?php endif; ?>
+                                    <?php if($DataRow['price_diamonds'] > 0): ?>
+                                    <?php echo $DataRow['price_diamonds']; ?> Diamantes
+                                    <?php endif; ?>
+
+                                </div>
+                                <div class="bcategory">
+                                    <?php echo $category; ?>
+                                </div>
+                            </div>
+                            <button type="submit" formaction="<?php echo URL; ?>/shop/badges?action=buy&key=<?php echo $DataRow['id']; ?>" class="<?php echo ($hasBadge ? 'bought' : ($isSold  ? 'sold' : '')); ?>" <?php echo ($hasBadge || $isSold) ? 'disabled' : '' ?>><?php echo ($hasBadge ? 'Comprado' : ($isSold  ? 'Agotado' : 'Comprar')); ?></button>
+                        </li>
+                        <?php
+                            endforeach;
+                        endif;
+                        ?>
+                    </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="column2" class="column">
+            <div class="balert <?php echo (User::IsOnline()) ? 'error' : 'success'; ?>">
+                    <?php echo (User::IsOnline()) ? 'Debes desconectarte para comprar...' : '¡Muy bien! Continua con tu compra...'; ?>
+                </div>
+            <div class="habblet-container ">		
+                <div class="cbb clearfix red">
+                    <h2 class="title">Monedero</h2>
+                    <p style="padding: 10px; font-size:10pt;">
+                        Actualmente cuentas con:
+                        <br />
+                        <b style="font-size:8pt;"><?php echo User::$Data['credits']; ?> Créditos</b>  
+                        <br />       
+                        <b style="font-size:8pt;"><?php echo User::$Data['diamonds']; ?> Diamantes </b>  
+                    </p>
+                </div>
+            </div>
+        </div>

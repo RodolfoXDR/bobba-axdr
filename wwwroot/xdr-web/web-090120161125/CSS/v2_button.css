@@ -1,0 +1,36 @@
+button{
+    border: none;
+    color: white;
+    padding: 8px 58px;
+    border-radius: 3px;
+	cursor: pointer;
+	cursor: hand;
+}
+
+button:focus{
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+
+button:active{
+	opacity: .5;
+}
+
+button.blue{
+	background: #009cec;
+}
+
+button.green{
+	background: #56c400;
+}
+
+button.facebook{
+	font-size: 12pt;
+    font-family: Roboto;
+    background: #185ea4;
+}
+
+.icon{
+	font-family: 'Awesome';
+}

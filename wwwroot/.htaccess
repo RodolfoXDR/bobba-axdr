@@ -1,0 +1,77 @@
+ErrorDocument 400 /error.php
+ErrorDocument 401 /error.php
+ErrorDocument 403 /error.php
+ErrorDocument 404 /error.php
+ErrorDocument 500 /error.php
+
+Options +FollowSymlinks
+Options -Indexes
+
+<Files .htaccess>
+deny from all
+</Files>
+
+php_flag display_errors On
+
+order allow,deny
+deny from 65.18.169.227
+allow from all
+
+<ifModule mod_php5.c>
+	php_value zlib.output_compression 16386
+	php_value register_globals off
+	php_value session.use_trans_sid 0
+	php_value default_charset iso-8859-1
+</ifModule>
+
+<ifModule mod_rewrite.c>
+RewriteEngine on
+# Toda esta seccion es necesaria para XdrCMS, pero tienes que tener el modulo mod_rewrite activado.
+# RewriteBase /
+RewriteRule ^quickregister/(.*)/e/(.*) quickregister/$1.php
+RewriteRule ^identity/useOrCreateAvatar/(.*)?(.*) identity/useOrCreateAvatar/index.php?id=$1
+RewriteRule ^community/(.*) community_$1.php
+RewriteRule ^account/password/resetIdentity/(.*) account/password/resetIdentity.php?Code=$1
+RewriteRule ^creditflow/confirm/(.*)/(.*) creditflow/confirm.php?ID=$1&SubID=$2
+RewriteRule ^creditflow/validate/(.*)/(.*)/(.*) creditflow/validate.php?ID=$3
+RewriteRule ^creditflow/proceedWithPayment/(.*)/(.*)/(.*) creditflow/proceedWithPayment.php?ID=$3
+RewriteRule ^credits/(.*) credits_$1.php
+RewriteRule ^groups/(.*)/id/discussions/(.*)/id/page/(.*) viewthread.php?groupid=$1&thread=$2&page=$3
+RewriteRule ^groups/(.*)/id/discussions/(.*)/id viewthread.php?groupid=$1&thread=$2
+RewriteRule ^groups/(.*)/id/discussions groups/Forum.php?id=$1
+RewriteRule ^groups/(.*)/id/canceledit myhabbo/canceledit.php
+RewriteRule ^groups/(.*)/id groups/Profile.php?id=$1
+RewriteRule ^articles/(.*) articles.php?URI=$1
+
+RewriteRule ^home/(.*)/id home.php?id=$1
+RewriteRule ^home/(.*)/(.*) home.php?name=$1&do=$2
+RewriteRule ^home/(.*) home.php?name=$1
+
+RewriteRule ^identity/useOrCreateAvatar/(.*) identity/useOrCreateAvatar/index.php
+RewriteRule ^habbo-imaging/badge/(.*) habbo-imaging/badge.php?badge=$1
+RewriteRule ^myhabbo/startSession/(.*) myhabbo/startSession/index.php?Id=$1
+
+RewriteRule ^profile/(.*) profile_$1.php
+RewriteRule ^myhabbo/cancel/(.*) myhabbo/cancel.php?Id=$1
+RewriteRule ^safety/(.*) safety_$1.php
+RewriteRule ^room/(.*) room.php?roomId=$1
+RewriteRule ^managed-gamedata/override/external_override_variables/(.*) managed-gamedata/override/eov.php?token=$1
+RewriteRule ^managed-gamedata/override/external_flash_override_texts/(.*) managed-gamedata/override/efot.php?token=$1
+
+RewriteRule ^(xdr-web) - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+</ifModule>
+
+<ifModule mod_ssl.c>
+#SSLVerifyClient	optional_no_ca
+#SSLVerifyDepth	5
+#php_value SSLCACertificateFile /N`-0PYM7U.cer
+#php_value SSLCACertificatePath /
+#SSLOptions	+FakeBasicAuth
+#SSLRequireSSL
+
+</ifModule>

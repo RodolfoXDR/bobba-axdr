@@ -1,0 +1,6 @@
+@ttf: format('truetype');
+
+@font-face{
+	font-family: 'Roboto';
+	src: url("fonts/Roboto/OpenSans-Regular.ttf") format('truetype');
+}

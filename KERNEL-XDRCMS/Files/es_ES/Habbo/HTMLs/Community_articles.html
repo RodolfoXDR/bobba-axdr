@@ -1,0 +1,67 @@
+<div id="container">
+    <div id="content" style="position: relative" class="clearfix">
+		<?php Cache::AppendPlugin(1); ?>
+        <div id="column1" class="column" style="width: 210px;">
+            <div class="habblet-container ">		
+                <div class="cbb clearfix default ">
+                    <h2 class="title">Noticias</h2>
+                    <div id="article-archive">
+					<h2>Últimas Noticias</h2>
+                        <ul>
+					<?php foreach(Cache::GetArticles() as $article): ?>
+					<?php if($articleId != 0 && $articleId == $article['Id']) 
+                     { 
+					 ?>
+					 <li><?php echo $article['Title']; ?> <b>(<?php echo (is_numeric($article['TimeCreated'])) ? date('M d, Y', $article['TimeCreated']) : '--';?>)</b></li>
+					 <?php } else { ?>
+					<li><a href="<?php echo URL; ?>/articles/<?php echo $article['Id']; ?>-<?php echo str_replace(' ', '-', strtolower($article['Title'])); ?>"><?php echo $article['Title']; ?></a> <b>(<?php echo (is_numeric($article['TimeCreated'])) ? date('M d, Y', $article['TimeCreated']) : '--';?>)</b></li>
+				    <?php } endforeach; ?>
+					</ul>
+                        
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">if (!$(document.body).hasClassName('process-template')) { Rounder.init(); }</script>
+        </div>
+        <div id="column2" class="column" style="width: 550px;">	
+            <div class="habblet-container ">		
+                <div class="cbb clearfix notitle ">
+                    <div id="article-wrapper">
+                        <h2><?php echo $queryRow['Title']; ?></h2>
+
+                        <?php if($articleId !== 0): ?><div class="article-meta">Publicado el <?php echo (is_numeric($queryRow['TimeCreated'])) ? date('M d, Y', $queryRow['TimeCreated']) : '--';?>
+                        </div><?php else: ?>
+                        <div class="article-meta" style="height: 1px">&nbsp;</div>
+                        <?php endif; ?>
+
+                        <?php if(!empty($queryRow['Summary'])): ?><p class="summary"><?php echo $queryRow['Summary']; ?></p><?php endif; ?>
+
+                        <div class="article-body">
+                            <p>
+                                <?php echo html_entity_decode($queryRow['Body'], ENT_HTML401, Tool::GetCharset($queryRow['Body'])); ?>
+                                <div class="article-images clearfix">
+                                        <a href="https://i.imgur.com/nvWkQ9n.jpg" style="background-image: url('https://i.imgur.com/nvWkQ9n.jpg'); background-position: -481px -175px"></a>
+                                </div>
+                            </p>
+                            <br><br>
+                            <p><font face="Verdana" size="1"><b>- Staff <?php echo HotelName; ?></b></p><br><br>
+                            <script type="text/javascript" language="Javascript">
+                                document.observe("dom:loaded", function() {
+                                    $$('.article-images a').each(function(a) {
+                                        Event.observe(a, 'click', function(e) {
+                                            Event.stop(e);
+                                            Overlay.lightbox(a.href, "Image is loading");
+                                        });
+                                    });
+                                    
+                                    $$('a.article-<?php echo $articleId; ?>').each(function(a) {
+                                        a.replace(a.innerHTML);
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">if (!$(document.body).hasClassName('process-template')) { Rounder.init(); }</script>
+        </div>

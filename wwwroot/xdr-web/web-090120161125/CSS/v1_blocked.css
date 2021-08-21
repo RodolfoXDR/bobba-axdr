@@ -1,0 +1,118 @@
+/*
+SLEEK DESIGN - RECREATED BY: Mr.Mustache
+*/
+
+
+@ttf: format('truetype');
+
+@font-face{
+	font-family: 'Billabong';
+	src: url("@Fonts/Billabong/billabong.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu';
+	src: url("@Fonts/Ubuntu/Ubuntu-R.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu Light';
+	src: url("@Fonts/Ubuntu Light/Ubuntu-L.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'Ubuntu Condensed';
+	src: url("@Fonts/Ubuntu Condensed/Ubuntu-C.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'KeepCalm';
+	src: url("@Fonts/KeepCalm/KeepCalm-Medium.ttf") format('truetype');
+}
+
+@font-face{
+	font-family: 'KeepCalm Light';
+	src: url("@Fonts/KeepCalm/KeepCalm-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("@Fonts/Roboto/Roboto-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Light';
+  src: url("@Fonts/Roboto/Roboto-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("@Fonts/MaterializeIcons/MaterialIcons-Regular.ttf") format('truetype');
+}
+
+html, body{
+	margin: 0;
+	background:#eeeeee;
+}
+
+.pin__box{
+	background: rgb(224, 224, 224);
+    top: 30%;
+    position: relative;
+    text-align: center;
+    padding: 30px;
+}
+
+.pin__box h2{
+	font-family: KeepCalm;
+    font-size: 36pt;
+    color: #2196F3;
+    margin: 0;
+}
+
+.pin__box h2 .bill{
+    font-size: 32pt;
+    font-family: 'Billabong';
+    margin: 0;
+    font-style: italic;
+    display: inline-block;
+    color: #E91E63;
+}
+
+.pin__box p{
+    font-family: Roboto;
+    font-size: 12pt;
+    margin: 0 auto 15px
+}
+
+.error{
+	color: #ff4444;
+    font-family: Segoe UI;
+    margin: 0 auto;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 16pt;
+    border-radius: 3px;
+}
+
+input{
+	height: 25px;
+    width: 130px;
+    padding: 0;
+}
+
+button{
+	background: #8bc34a;
+    border: none;
+    color: #ffffff;
+    font-family: Segoe UI;
+    font-size: 14pt;
+    padding: 7px;
+}
+
+button:hover{
+	color: #8bc34a;
+	background:#fff;
+}

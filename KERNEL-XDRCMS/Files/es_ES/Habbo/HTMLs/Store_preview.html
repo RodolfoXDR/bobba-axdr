@@ -1,0 +1,39 @@
+<h4 title="<?php echo $Row['skin']; ?>"><?php echo Tool::ChangeCMSCharset($Row['ItemName']); ?></h4>
+<div id="webstore-preview-box">
+<?php if($Row['skin'] !== 'package_product_pre'): ?>
+	<div title="mypage.sticker.paper_clip_1.title" class="<?php echo $Row['skin']; ?> <?php echo $Row['type']; ?>" id="webstore-preview-pre">
+<?php if($Row['type'] === 'Background'): ?>
+		<div id="webstore-preview-bgpreview"><a href="#" class="toolbutton" id="webstore-preview-bg"><span id="webstore-preview-bg-<?php echo $Row['skin']; ?>">Previa</span></a></div>
+<?php endif; if($Row['amount'] > 1): ?>
+		<div id="webstore-preview-count" class="webstore-item-count">
+			<div>x<?php echo $Row['amount']; ?><div></div><?php endif; ?></div>
+<?php if($Row['ItemPack'] > 0): ?>
+			<div id="webstore-preview-page">1/<?php echo $row['amount']; ?></div>
+			<div id="webstore-preview-next"></div>
+			<div id="webstore-preview-prev"></div>
+<?php endif; ?>
+		</div>
+<?php endif; ?>
+	</div>
+
+<div id="webstore-preview-price">
+Precio:<br /><b>
+	<?php echo $Row['price']; ?> Crédito<?php if($Row['price'] > 1) echo 's'; ?>
+	
+</b>
+</div>
+
+<div id="webstore-preview-purse">
+Tienes:<br /><b><?php if(User::$Data['credits'] > 0): echo User::$Data['credits']; ?> Crédito<?php else: echo 'No tienes créditos'; endif; if(User::$Data['credits'] > 1) echo 's'; ?></b><br />
+<?php if($Row['price'] > User::$Data['credits']): ?>
+<a class="clearfix" webstore-preview-purchase="" href="<?php echo URL; ?>/credits">Conseguir créditos</a>
+<?php endif; ?>
+</div>
+
+<div id="webstore-preview-purchase" class="clearfix">
+	<div class="clearfix">
+		<a href="#" class="new-button <?php if($Row['price'] > User::$Data['credits']) echo 'disabled-button" disabled="disabled'; ?>" id="webstore-purchase"><b>Comprar</b><i></i></a>
+	</div>
+</div>
+
+<span id="webstore-preview-bg-text" style="display: none">Previa</span>

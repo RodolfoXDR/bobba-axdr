@@ -1,0 +1,208 @@
+<div id="container">
+    <div id="content" style="position: relative" class="clearfix">
+		<?php Cache::AppendPlugin(1); ?>
+        <div id="column1" class="column" style="width: 380px;">
+                <div class="top-users-box">
+                        <div id="header">
+                            <div id="label">TOP 10 Diamantes</div>
+                        </div>
+                        <ul class="other-top">
+                        <?php
+                        $i = 0;
+                        $Odd = 'even';
+                        $icon = '';
+                        $query2 = SQL::query("SELECT username, look, vip_points FROM users WHERE rank = 1 ORDER BY vip_points DESC LIMIT 10");
+                        while($topuser = $query2->fetch_assoc()):
+                            $Odd = $Odd === 'even' ? 'odd' : 'even';
+                            $first = '';
+                            $headonly = 'true';
+                            $i++;
+                            switch($i):
+                            case 1:
+                                $icon = 'trophy_g';
+                                $first = 'first';
+                                $headonly = 'false';
+                                break;
+                            case 2:
+                                $icon = 'trophy_s';
+                                break;
+                            case 3:
+                                $icon = 'trophy_b';
+                                break;
+                            default:
+                                $icon = '';
+                                break;
+                            endswitch;
+                        ?>
+
+                            <li class="<?php echo $Odd . ' ' . $first; ?>">
+                                <div class="user-look">
+                                    <img src="<?php echo LOOK . $topuser[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&size=b&direction=2&head_direction=2&gesture=sml&headonly=<?php echo $headonly; ?>" />
+                                </div>
+                                <div class="user-info">
+                                <div id="name"><?php echo $i . '. ' . $topuser['username']; ?></div>
+                                <div id="score"><?php echo $topuser['vip_points']; ?> diamantes</div>
+                                </div>
+                                <div class="top-icon">            
+                                    <?php if(!empty($icon)): ?>           
+                                    <img src="<?php echo RES; ?>v2/images/<?php echo $icon; ?>.png" />
+                                    <?php endif; ?>  
+                                </div>
+                            </li>
+                        <?php endwhile; ?>
+                        </ul>
+                    </div>
+
+                    <div class="top-users-box">
+                        <div id="header">
+                            <div id="label">TOP 10 VIPs</div>
+                        </div>
+                        <ul class="other-top">
+                        <?php
+                        $i = 0;
+                        $Odd = 'even';
+                        $icon = '';
+                        $query2 = SQL::query('SELECT us.username, us.look, count(ir.id) count FROM users us INNER JOIN items ir ON ir.user_id = us.id WHERE us.rank < 5 AND ir.base_item = 209 GROUP BY us.id ORDER BY count DESC LIMIT 10');
+                        while($topuser = $query2->fetch_assoc()):
+                            $Odd = $Odd === 'even' ? 'odd' : 'even';
+                            $first = '';
+                            $headonly = 'true';
+                            $i++;
+                            switch($i):
+                            case 1:
+                                $icon = 'trophy_g';
+                                $first = 'first';
+                                $headonly = 'false';
+                                break;
+                            case 2:
+                                $icon = 'trophy_s';
+                                break;
+                            case 3:
+                                $icon = 'trophy_b';
+                                break;
+                            default:
+                                $icon = '';
+                                break;
+                            endswitch;
+                        ?>
+                            <li class="<?php echo $Odd . ' ' . $first; ?>">
+                                <div class="user-look">
+                                    <img src="<?php echo LOOK . $topuser[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&size=b&direction=2&head_direction=2&gesture=sml&headonly=<?php echo $headonly; ?>" />
+                                </div>
+                                <div class="user-info">
+                                <div id="name"><?php echo $i . '. ' . $topuser['username']; ?></div>
+                                <div id="score"><?php echo $topuser['count'] ?> VIPs</div>
+                                </div>
+                                <div class="top-icon"> 
+                                    <?php if(!empty($icon)): ?>           
+                                        <img src="<?php echo RES; ?>v2/images/<?php echo $icon; ?>.png" />
+                                    <?php endif; ?>    
+                                </div>
+                            </li>
+                        <?php endwhile; ?>
+                        </ul>
+                    </div>
+        </div>
+
+        <div id="column2" class="column" style="width: 380px;">
+                <div class="top-users-box">
+                        <div id="header">
+                            <div id="label">TOP 10 Creditos</div>
+                        </div>
+                        <ul class="other-top">
+                        <?php
+                        $i = 0;
+                        $Odd = 'even';
+                        $icon = '';
+                        $query2 = SQL::query('SELECT username, look, credits FROM users WHERE rank = 1 ORDER BY credits DESC LIMIT 10');
+                        while($topuser = $query2->fetch_assoc()):
+                            $Odd = $Odd === 'even' ? 'odd' : 'even';
+                            $first = '';
+                            $headonly = 'true';
+                            $i++;
+                            switch($i):
+                            case 1:
+                                $icon = 'trophy_g';
+                                $first = 'first';
+                                $headonly = 'false';
+                                break;
+                            case 2:
+                                $icon = 'trophy_s';
+                                break;
+                            case 3:
+                                $icon = 'trophy_b';
+                                break;
+                            default:
+                                $icon = '';
+                                break;
+                            endswitch;
+                        ?>
+
+                            <li class="<?php echo $Odd . ' ' . $first; ?>">
+                                <div class="user-look">
+                                    <img src="<?php echo LOOK . $topuser[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&size=b&direction=2&head_direction=2&gesture=sml&headonly=<?php echo $headonly; ?>" />
+                                </div>
+                                <div class="user-info">
+                                <div id="name"><?php echo $i . '. ' . $topuser['username']; ?></div>
+                                <div id="score"><?php echo $topuser['credits']; ?> creditos</div>
+                                </div>
+                                <div class="top-icon"> 
+                                    <?php if(!empty($icon)): ?>           
+                                        <img src="<?php echo RES; ?>v2/images/<?php echo $icon; ?>.png" />
+                                    <?php endif; ?>    
+                                </div>
+                            </li>
+                        <?php endwhile; ?>
+                        </ul>
+                    </div>
+
+                    <div class="top-users-box">
+                        <div id="header">
+                            <div id="label">TOP 10 Drakos Lilas</div>
+                        </div>
+                        <ul class="other-top">
+                        <?php
+                        $i = 0;
+                        $Odd = 'even';
+                        $icon = '';
+                        $query2 = SQL::query('SELECT us.username, us.look, count(ir.id) count FROM users us INNER JOIN items ir ON ir.user_id = us.id WHERE us.rank < 5 AND ir.base_item = 402 GROUP BY us.id ORDER BY count DESC LIMIT 10');
+                        while($topuser = $query2->fetch_assoc()):
+                            $Odd = $Odd === 'even' ? 'odd' : 'even';
+                            $first = '';
+                            $headonly = 'true';
+                            $i++;
+                            switch($i):
+                            case 1:
+                                $icon = 'trophy_g';
+                                $first = 'first';
+                                $headonly = 'false';
+                                break;
+                            case 2:
+                                $icon = 'trophy_s';
+                                break;
+                            case 3:
+                                $icon = 'trophy_b';
+                                break;
+                            default:
+                                $icon = '';
+                                break;
+                            endswitch;
+                        ?>
+                            <li class="<?php echo $Odd . ' ' . $first; ?>">
+                                <div class="user-look">
+                                    <img src="<?php echo LOOK . $topuser[Server::Get(Server::USER_LOOK_COLUMN)]; ?>&size=b&direction=2&head_direction=2&gesture=sml&headonly=<?php echo $headonly; ?>" />
+                                </div>
+                                <div class="user-info">
+                                <div id="name"><?php echo $i . '. ' . $topuser['username']; ?></div>
+                                <div id="score"><?php echo $topuser['count'] ?> Drakos Lilas</div>
+                                </div>
+                                <div class="top-icon"> 
+                                    <?php if(!empty($icon)): ?>           
+                                        <img src="<?php echo RES; ?>v2/images/<?php echo $icon; ?>.png" />
+                                    <?php endif; ?>    
+                                </div>
+                            </li>
+                        <?php endwhile; ?>
+                        </ul>
+                    </div>
+        </div>

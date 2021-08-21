@@ -1,0 +1,50 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0&appId=656533071187201&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
+	<div class="wrapper" style="width: 1120px;">
+		<div class="column" style="width: 600px;">
+			<div class="plugin maintenance">
+				<div class="title-maintenance">¡Paro por mantenimiento!</div>
+				<div class="content maintenance" style="display: flex;">
+					Lo sentimos, pero no es posible acceder a <?php echo HotelName; ?> por el momento.
+					</br>
+					Volveremos pronto.
+					</br>
+					<img src="<?php echo RES; ?>/CSS/Images/web/maintenance.png" style="float:right" />
+				</div>
+			</div>
+			<div class="plugin">
+				<div class="title-twitter">Twitter: <b>@<?php echo (Config::$Restrictions['maintenance']['twitter']);?></b></div>
+				<div id="content">
+					<center style="margin-top: 10px;">
+					<a class="twitter-timeline" data-tweet-limit="<?php echo Config::$Restrictions['maintenance']['twitterCount']; ?>" data-height="100" data-width="500" href="https://twitter.com/<?php echo (Config::$Restrictions['maintenance']['twitter']);?>">Tweets by<?php echo (Config::$Restrictions['maintenance']['twitter']);?></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+					</center>
+				</div>
+			</div>
+		</div>
+		<div class="column" style="width: 400px;">
+			<div class="plugin">
+				<div class="title-facebook">Facebook: <b><?php echo (Config::$FaceBook['page']['name']);?></b></div>
+				<div class="content">
+					<div id="fb-root"></div>
+					<script>
+						(function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id)) return;
+							js = d.createElement(s); js.id = id;
+							js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=468911076474471";
+							fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+					</script>
+					<center><div class="fb-page" data-href="<?php echo Config::$FaceBook['page']['url']; ?>" data-tabs="timeline" data-width="400" data-height="350" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="<?php echo Config::$FaceBook['page']['url']; ?>" class="fb-xfbml-parse-ignore"><a href="<?php echo Config::$FaceBook['page']['url']; ?>"><?php echo Config::$FaceBook['page']['name']; ?></a></blockquote></div></center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

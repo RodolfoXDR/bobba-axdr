@@ -1,0 +1,184 @@
+
+<?php
+$d = new DateTime();
+
+if(isset($_GET['dailyReward'], $_GET['dailyRid']) && User::$Row['last_dailyReward_time'] != $d->format('Ymd') && $_GET['dailyRid'] == User::$Row['last_dailyReward_id'] && !isset($_SESSION['alertPassed'])):
+    $nextGift = (User::$Row['last_dailyReward_id'] + 1) > 7 ? 1 : (User::$Row['last_dailyReward_id'] + 1);
+    SQL::query('UPDATE xdr_users SET last_dailyReward_time = \'' . $d->format('Ymd') . '\', last_dailyReward_id = \'' . $nextGift . '\' WHERE id = \'' . User::$Data['id'] . '\'');
+    User::GiveReward(User::$Data['id'], $_GET['dailyRid']);
+    $_SESSION['alertPassed'] = true;
+endif;
+?>
+<div id="container">
+        <div id="content" style="position: relative" class="clearfix">
+		<?php Cache::AppendPlugin(1); ?>
+        <div id="wide-personal-info">
+        <div id="habbo-plate">
+    
+                <a href="<?php echo URL; ?>/identity/avatars">
+    
+                <img alt="<?php echo User::$Data['name']; ?>" src="<?php echo LOOK . User::$Data['figure']; ?>&size=b&direction=2&head_direction=2&gesture=sml" width="64" height="110"/>
+    
+            </a>
+    
+        </div>
+    
+    
+    
+        <div id="name-box" class="info-box">
+    
+            <div class="label">Nombre:</div>
+    
+            <div class="content"><?php echo User::$Data['name']; ?></div>
+    
+        </div>
+    
+        <div id="motto-box" class="info-box">
+    
+            <div class="label">Misi&oacute;n:</div>
+    
+            <div class="content"><?php echo User::$Data['motto']; ?></div>
+    
+        </div>
+    
+        <div id="last-logged-in-box" class="info-box">
+    
+            <div class="label">&Uacute;ltima conexi&oacute;n:</div>
+    
+            <div class="content"><?php echo Tool::ParseUnixTime(User::$Row['web_online']); ?></div>
+    
+        </div>
+    
+    
+    <?php if((Site::$Settings['ClientEnabled'] == '2' && User::$Data['rank'] < 4) || (Site::$Settings['ClientEnabled'] == '0')): ?>
+    <div class="enter-hotel-btn">
+        <div class="closed enter-btn">
+            <span>Hotel Cerrado</span>
+            <b></b>
+        </div>
+    </div>
+    <?php else: ?>
+    <div class="enter-hotel-btn">
+        <div class="open enter-btn">
+                <a href="<?php echo URL; ?>/client" target="<?php echo User::$Row['client_token']; ?>" onclick="HabboClient.openOrFocus(this); return false;">Entra a <?php echo LongName; echo Site::$Settings['ClientEnabled'] == '2' ? ' (Solo staffs)' : ''; ?><i></i></a>
+            <b></b>
+        </div>
+    </div>
+    <?php endif; ?>
+    
+    <?php
+        if(User::hasPermission('web.daily_login') && User::$Row['last_dailyReward_time'] != $d->format('Ymd') && !isset($_SESSION['alertPassed'])):
+            $Rewards = Cache::GetAIOConfig("WEB.DailyRewards");
+
+            $userDate = date('Ymd', strtotime(User::$Row['last_dailyReward_time']));
+            $lastRewardReceived = new DateTime($userDate);
+            
+            if($d->diff($lastRewardReceived)->days > 1):
+                SQL::query('UPDATE xdr_users SET last_dailyReward_id = 1 WHERE id = \'' . User::$Data['id'] . '\'');
+                User::$Row['last_dailyReward_id'] = 1;
+            endif;
+
+    ?>
+    <div id="safety-question-dialog" class="modal-dialog">
+        <div class="clearfix">
+            <h2>¡Recompensa Diaria <?php echo HotelName; ?>!</h2>
+
+            <div class="daily-reward-box"> 
+                <?php
+                foreach($Rewards as $reward): 
+                    $isToday = User::$Row['last_dailyReward_id'] == $reward['order'];
+                ?>
+                <div class="day-reward">
+                        <button <?php echo ($isToday) ? '' : 'disabled';?> onclick="rewardMe(<?php echo $reward['order']; ?>)" id="<?php echo $reward['order']; ?>" class="reward-box <?php echo $reward['type']; ?> <?php echo ($isToday) ? 'today' : '';?>">
+                            <div class="reward-item">
+                                <div class="item day-<?php echo $reward['order']; ?>"></div>
+                            </div>
+                            <div class="reward-title"><?php echo $reward['caption']; ?></div>
+                        </button>
+                        <?php if(User::$Row['last_dailyReward_id'] > $reward['order']): ?>
+                            <div class="claim-text">¡Reclamado!</div>
+                        <?php endif; ?>
+                </div>
+                <?php
+                endforeach;
+                ?>
+            </div>
+        </div>
+    </div>
+    <audio id="rewardSound" src="<?php echo RES; ?>v2/media/dailyRewardSound_h.mp3" ></audio>
+    <script type="text/javascript">
+        HabboView.add(function () {
+            if ($("overlay")) {
+                $(document.body).appendChild($("safety-question-dialog"));
+                Utils.showDialogOnOverlay($("safety-question-dialog"));
+            } else {
+                $("safety-question-dialog").setStyle({position:'relative', display:'block', margin:'0 auto 2em auto'});
+            }
+        });
+
+        function rewardMe(id){
+            console.log("[Azure XDR] " + id + " Reward");
+            var audio = document.getElementById("rewardSound");
+            audio.play();
+
+            audio.onended = function() {
+                location.href = "<?php echo URL; ?>/me?dailyReward=true&dailyRid=" + id;
+            }
+        }
+    </script>
+    <?php
+
+    endif;
+    ?>
+
+    </div>
+    <?php Cache::AppendPlugin(2);
+    $Row = Cache::GetArticles(true, 5, 0);
+    $Count = 0;
+    if(count($Row) > 0):
+    ?>
+     <div id="promo-box">
+        <div id="promo-bullets"></div>
+    <?php
+        foreach($Row as $DataRow):
+            if($Count === 0):
+                $Count++;
+                echo ' <div class="promo-container" style="background-image: url(' . $DataRow['BackGroundImage'] . ')">';
+            else:
+                echo ' <div class="promo-container" style="display: none; background-image: url(' . $DataRow['BackGroundImage'] . ')">';
+            endif;
+            $DataURL =  URL . '/articles/' . $DataRow['Id'] . '-' . str_replace(' ', '-', strtolower($DataRow['Title']));
+    ?>
+                <div class="promo-content-container">
+                    <div class="promo-content">
+                        <div class="title"><?php echo $DataRow['Title']; ?></div>
+                        <div class="body"><?php echo $DataRow['Summary']; ?></div>
+                    </div>
+                </div>
+
+                <div class="promo-link-container">
+                    <div class="enter-hotel-btn">
+                        <div class="open enter-btn">
+                            <a href="<?php echo $DataURL; ?>" target="_blank">Leer Más...<i></i></a>
+                            <b></b>
+                            </div>
+                    </div>
+                </div>
+            </div>
+    <?php endforeach; ?>
+    
+    
+    </div>
+    
+    <script type="text/javascript">
+        document.observe("dom:loaded", function() { PromoSlideShow.init(); });
+    </script>
+    <?php endif; ?>
+    
+    <div id="column1" class="column">
+    <?php Cache::AppendPlugin(3); ?>
+    </div>
+
+    <div id="column2" class="column">
+    <?php Cache::AppendPlugin(4); ?>
+    </div>

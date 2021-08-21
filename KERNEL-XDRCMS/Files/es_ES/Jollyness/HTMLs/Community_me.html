@@ -1,0 +1,134 @@
+<div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
+	
+	<!--<?php 
+		//$messages = SQL::query('SELECT id FROM messenger_offline_messages WHERE to_id = \''. User::$Data['id'] .'\'');
+		//if ($messages && $messages->num_rows > 0):
+	?>	
+		<div class="msg__alert">
+			<div class="header">Te han enviado <b><?php //echo $messages->num_rows; ?></b> mensaje(s) mientras estabas desconectado. <a href="<?php echo URL; ?>/messaging">Ver mensajes...</a></div>
+		</div>
+	<?php //endif; ?>-->
+	<div class="user-interface">
+		<div id="overlay">
+			<div id="avatar">
+				<img src="<?php echo LOOK . User::$Data['figure']; ?>&head_direction=3&action=wlk,wav,crr=667&gesture=spk&size=l" alt="Mustache" />
+			</div>
+			<div id="user-info">
+				<div id="username"><?php echo User::$Data['name']; ?></div>
+				<div id="motto"><?php echo User::$Data['motto']; ?></div>
+				<div id="lastc"><b>Última Visita:</b> <?php echo Tool::ParseUnixTime(User::$Row['web_online']); ?></div>
+				<div id="settings">
+					<a class="button settings" href="<?php echo URL;?>/profile">
+						<i class="material-icons dp48">settings_applications</i>Ajustes
+					</a>
+					<?php if(User::hasPermission('ase.access')):?>
+					<a class="button acp" target="_blank" href="<?php echo HHURL;?>">
+						<i class="material-icons dp48">supervisor_account</i>ASE
+					</a>
+					<?php endif; ?>
+				</div>
+			</div>
+			<div id="enter-hotel">
+			<?php if((Site::$Settings['ClientEnabled'] == '2' && User::$Data['rank'] < MinRank) || (Site::$Settings['ClientEnabled'] == '0')): ?>
+				<a class="client large button disabled" href="">
+					<b></b>
+					<span>Desactivado</span>
+					<span class="sub"><?php echo LongName; ?></sub>
+				</a>
+			<?php elseif(Site::$Settings['ClientEnabled'] == '2' && User::$Data['rank'] > MinRank): ?>
+				<a class="client large button" target="_blank" href="<?php echo URL; ?>/client">
+					<b></b>
+					<span>Solo Staffs</span>
+					<span class="sub"><?php echo LongName; ?></sub>
+				</a>			
+			<?php else: ?>
+				<a class="client large button" target="_blank" href="<?php echo URL; ?>/client">
+					<b></b>
+					<span>JUEGA AHORA</span>
+					<span class="sub"><?php echo LongName; ?></sub>
+				</a>
+			<?php endif; ?>
+			</div>
+		</div>
+	</div>
+	
+	<?php
+		$LastArticle = Cache::GetArticles(true, 1, 0);
+		$DataURL =  URL . '/articles/' . $LastArticle[0]['Id'] . '-' . str_replace(' ', '-', strtolower($LastArticle[0]['Title']));
+	?>
+	
+	<div id="article_me_interface">
+		<div id="article_header" style="background: url('<?php echo $LastArticle[0]['BackGroundImage']; ?>') no-repeat #c7c7c7;">
+			<div id="article_title">
+				<a class="links" href="<?php echo $DataURL; ?>" target="_new">
+					<h2><?php echo $LastArticle[0]['Title']; ?></h2>
+				</a>
+			</div>
+			
+			<div id="article_information">
+				<i><div id="article_date"><?php echo (is_numeric($LastArticle[0]['TimeCreated'])) ? date('M d, Y', $LastArticle[0]['TimeCreated']) : '--';?></i> |</div><i><b><?php echo ($LastArticle[0]['Category'] != NULL) ? $LastArticle[0]['Category'] : 'Promo';?></b></i>
+			</div>
+			
+			<div id="article_description">
+				<?php echo $LastArticle[0]['Summary']; ?>
+			</div>
+		</div>
+		<?php 
+			foreach(Cache::GetArticles(true, 3, 1) as $Articles):
+
+				$DataURL =  URL . '/articles/' . $Articles['Id'] . '-' . str_replace(' ', '-', strtolower($Articles['Title']));
+				switch($Articles['Category']):
+					case 0:
+						$Category = "Others";
+						$Color = '#ff6f00';
+						break;
+					case 1:
+						$Category = "Updates";
+						$Color = '#039be5';
+						break;
+					case 2:
+						$Category = "Competitions & polls";
+						$Color = '#00796b';
+						break;
+					case 3:
+						$Category = "Events";
+						$Color = '#c2185b';
+						break;
+					default:
+						$Category = '';
+						$Color = '#607d8b';
+						break;
+				endswitch;
+				
+				?>
+			<div id="mini_article" style="background: <?php echo $Color; ?>">
+				<div id="image" style="background: url('<?php echo $Articles['BackGroundImage']; ?>') no-repeat -638px -195px"></div>
+				<div id="information">
+					<div id="mini_title"><a href="<?php echo $DataURL;?>" target="_new"><?php echo $Articles['Title']; ?></a></div>
+					<div id="mini_data">
+						<i><?php echo (is_numeric($Articles['TimeCreated'])) ? date('M d, Y', $Articles['TimeCreated']) : '--';?></i> | 
+						<i><b><?php echo ($Articles['Category'] != NULL) ? $Category : 'Promo';?></b></i>
+					</div>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	
+	<div class="wrapper" style="width: 1120px;">
+		<!---------- LEFT COLUMN -------->
+		<div class="column" style="width: 500px;">
+			<?php Cache::AppendPlugin(3); ?>
+		</div>
+		
+		<!---------- RIGHT COLUMN -------->
+		<div class="column" style="width: 500px;">
+			<?php Cache::AppendPlugin(4); ?>
+	
+			<div id="hartic__adbox">
+				<div id="title">Publicidad</div>
+				<div id="content">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

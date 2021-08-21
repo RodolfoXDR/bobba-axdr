@@ -1,0 +1,41 @@
+/*---------------------------------------------------*/
+/*  .  ,---.,-.-.,--.          						 */
+/*  |  |    | | |'--.          						 */
+/*  '  `---'` ' ''--'          						 */
+/* Mr.Mustache | iCMS v0.1 DESIGN ~ RELEASE 09252015 */
+/* Materialize ~ Material Design ~ Metro UI 		 */
+/* Revision: 01142016          						 */
+/* Revision: 05142016          						 */
+/* Revision: 05232016          						 */
+/* Revision: 07052016          						 */
+/* Update Revision: 12262016   						 */
+/* LICENSE: PRIVATE		       						 */
+/*---------------------------------------------------*/
+
+.E404{
+    text-align: center;
+    padding: 70px 70px 0;
+}
+
+.E404 > .title{
+	color: #333333;
+    position: inherit;
+    padding: 0;
+    font-size: 30pt;
+    text-transform: capitalize;
+    font-family: Roboto;
+}
+
+.E404 > .content{
+	color: #464646;
+    font-size: 13pt;
+    font-family: Roboto;
+}
+
+span.frank-looking{
+    background: url('Images/web/teaser_frank_looking.png') no-repeat;
+    height: 115px;
+    width: 132px;
+    margin: 20px auto 0 auto;
+	display: block;
+}

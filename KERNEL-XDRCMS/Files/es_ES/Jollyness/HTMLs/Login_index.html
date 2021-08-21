@@ -1,0 +1,172 @@
+<div class="landing">
+	<div class="login__plugin">
+	<script>
+
+		function DeleteCookie(name)
+		{
+			document.cookie = name + '=; Max-Age=0';
+		}
+		
+		function SetCookie(cname, cvalue, exdays)
+		{
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+			var expires = "expires="+d.toUTCString();
+			document.cookie = cname + "=" + cvalue + "; " + expires;
+		}
+
+	  // This is called with the results from from FB.getLoginStatus().
+	  function statusChangeCallback(response) {
+		console.log('statusChangeCallback');
+		console.log(response);
+		if (response.status === 'connected') {
+
+		} else if (response.status === 'not_authorized') {
+		  // The person is logged into Facebook, but not your app.
+		  document.getElementById('status').innerHTML = 'Please log ' +
+			'into this app.';
+		} else {
+		  // The person is not logged into Facebook, so we're not sure if
+		  // they are logged into this app or not.
+		  document.getElementById('status').innerHTML = 'Please log ' +
+			'into Facebook.';
+		}
+	  }
+	  function checkLoginState() {
+		FB.getLoginStatus(function(response) {
+		  statusChangeCallback(response);
+		});
+	  }
+
+		window.assistedLogin = function(FBobject, optresponse) {
+			DeleteCookie("fbhb_val_<?php echo Config::$FaceBook['app']['id']; ?>");
+			FBobject.init({
+				appId: '<?php echo Config::$FaceBook['app']['id']; ?>',
+				version    : 'v2.8',
+				channelUrl : '/fbchannel',
+				status: true,
+				cookie: true,
+				xfbml: true
+			});
+
+			permissions = 'email';
+			defaultAction = function(response) {
+				if (response.authResponse) {
+					fbConnectUrl = "<?php echo URL; ?>/facebook?connect=true";
+					DeleteCookie("fbhb_val_<?php echo Config::$FaceBook['app']['id']; ?>");
+					SetCookie("fbhb_val_<?php echo Config::$FaceBook['app']['id']; ?>", response.authResponse.accessToken, 1);
+					DeleteCookie("fbhb_expr_<?php echo Config::$FaceBook['app']['id']; ?>");
+					SetCookie("fbhb_expr_<?php echo Config::$FaceBook['app']['id']; ?>", response.authResponse.expiresIn, 1);
+					window.location.replace(fbConnectUrl);
+				}
+			};
+
+			if (typeof optresponse == 'undefined')
+				FBobject.login(defaultAction, {scope:permissions});
+			else
+				FBobject.login(optresponse, {scope:permissions});
+
+		};
+	  
+	  
+	  window.fbAsyncInit = function() {
+	  DeleteCookie("fbhb_val_<?php echo Config::$FaceBook['app']['id']; ?>");
+	  FB.init({
+		appId      : '<?php echo Config::$FaceBook['app']['id']; ?>',
+		cookie     : true,  // enable cookies to allow the server to access 
+							// the session
+		xfbml      : true,  // parse social plugins on this page
+		version    : 'v2.8' // use graph api version 2.8
+	  });
+
+	  FB.getLoginStatus(function(response) {
+		statusChangeCallback(response);
+	  });
+
+	  };
+
+	  // Load the SDK asynchronously
+	  (function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+
+	</script>
+	<?php if(isset($_SESSION['login']['error'])): ?>
+		<div class="error"><?php echo Text::Get(...$_SESSION['login']['error']); ?></div>
+	<?php endif; ?>
+	
+		<div class="title">Iniciar Sesión</div>
+		
+		<form action="account/submit" method="post">
+			<input id="credentials.username" name="credentials.username" type="text" placeholder="Email/Usuario" />
+			<input id="credentials.password" name="credentials.password" type="password" placeholder="Contraseña" />
+			<button class="button" type="submit">Conectar</button>
+			<a href="#" onclick="assistedLogin(FB); return false;" class=" button facebook">Facebook Connect</a>
+		</form>
+		
+		<hr />
+		
+		<a href="<?php echo Site::$Settings['RegisterEnabled'] == 1 ? 'quickregister/start' : '#' ;?>" class="register <?php echo Site::$Settings['RegisterEnabled'] == 1 ? '' : 'disabled' ;?>"><?php echo Site::$Settings['RegisterEnabled'] == 1 ? 'Registrarme' : 'Registro Desactivado' ;?></a>
+	
+	</div>
+	
+	<div id="hartic__registers">
+		<div class="title">Últimos Registros</div>
+		<?php 
+			$lasts = Cache::GetAIOConfig('LastRegisters');
+			$i = 0;
+			if(!empty($lasts)):
+				foreach($lasts as $dRow):
+					if($i < 3):
+		?>
+			<div id="character">
+				<div id="base"><img src="<?php echo LOOK . $dRow[2]; ?>&direction=3&gesture=sml&size=m&headonly=1" /></div>
+				<div id="data">
+					<div id="username"><?php echo $dRow[0]; ?></div>
+					<div id="motto"><?php echo $dRow[3]; ?></div>
+				</div>
+			</div>
+		<?php
+						$i++;
+					else:
+						break;
+					endif;
+				endforeach;
+			endif;
+		?>
+	</div>
+	<center>
+			<div id="adbox" style="margin-top: 40px;float: left;">
+				<center>
+					<script src="https://code.jquery.com/jquery-latest.js"></script>
+					<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				
+					<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-7822726885329548" data-ad-slot="6535840616" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:740px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:740px;background-color:transparent;"><iframe width="740" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;width:740px;height:90px;"></iframe></ins></ins></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</center>
+				<script type="text/javascript">
+				$(function(){
+				
+					var TimesMoved = 0;
+					var TimesToBeMove = Math.floor(Math.random() * (2 - 1 + 1)) + 2;
+	
+					$(document).ready(function() {
+						$("#adbox").delay(7500).fadeIn(10000);
+					});
+	
+					setInterval(function(){
+						$("#adbox").fadeIn(5000);
+						googletag.pubads().refresh();
+					}, 300000);
+				});
+				
+				</script>
+			</div>
+		</center>
+</div>

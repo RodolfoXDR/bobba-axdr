@@ -1,0 +1,21 @@
+		<div class="login__plugin" style="width:525px;">	
+		<a href="<?php echo URL; ?>" style="float: right;color: #0092d5;text-decoration: none;">Ya tengo cuenta</a>
+		<?php if ($responseJson['registrationErrors'] != ['empty_field_error_message' => 'Hey, you forgot to fill me!']): ?>
+			<div class="error">
+				<?php foreach($responseJson['registrationErrors'] as $value) echo '' . Text::Get($value) . ' <br />'; ?>
+			</div>
+		<?php endif; ?>
+		
+		<form method="post" action="<?php echo URL; ?>/quickregister/submit" style="margin: 0;width:50%">	
+					<div class="title">Cuenta</div>
+					<input type="text" name="reg.username" id="registration-username" value="" class="register-input" placeholder="Usuario" />
+					<input type="email" name="reg.mail" id="registration-email" value="" class="register-input" placeholder="E-mail" />
+					<div class="title">Contraseña</div>	
+					<input type="password" name="reg.password" id="registration-password" value="" class="register-input" placeholder="Contraseña">
+					<input type="password" name="reg.password2" id="registration-password" value="" class="register-input" placeholder="Repetir Contraseña">	
+					<div class="title">Captcha</div>
+					<div class="g-recaptcha" data-theme="dark" name="g-recaptcha-response" data-sitekey="<?php echo Config::$ReCaptcha['data']['siteKey']; ?>"></div>
+					<button class="register" type="submit">Registrame</button>
+			</form>
+		</div>
+		<div class="habbo-register"></div>

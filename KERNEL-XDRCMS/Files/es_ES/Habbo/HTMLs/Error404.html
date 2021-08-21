@@ -1,0 +1,21 @@
+<div id="container">
+	<div id="content" style="position: relative" class="clearfix">
+        <div id="column1" class="column">
+            <div class="habblet-container ">
+                <div class="cbb clearfix red ">
+                        <h2 class="title">¡Página no encontrada!</h2>
+                        <div id="notfound-content" class="box-content">
+                            <p class="error-text">Lo sentimos, pero no se encuentra la página solicitada.</p> <img id="error-image" src="<?php echo RES; ?>v2/images/error.gif" />
+                            <p class="error-text">Por favor, vuelve a teclear la URL. Si regresas a esta página, utiliza el botón 'Atrás' para volver al inicio.</p>
+                            <?php if(User::$Data['rank'] > 4){ ?>
+                            <p class="error-text"><b>DEBUG</b>: <?php echo $_SERVER['REQUEST_URI']; ?></p>
+                            <?php } ?>
+                        </div>
+                </div>
+            </div>
+            <script type="text/javascript">if (!$(document.body).hasClassName('process-template')) { Rounder.init(); }</script>
+        </div>
+        <div id="column2" class="column">
+        </div>
+    </div>
+</div>

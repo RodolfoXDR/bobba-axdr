@@ -1,0 +1,45 @@
+<div id="container">
+        <div id="content" style="position: relative" class="clearfix">
+            <div class="habblet-container" style="float:left; width:210px;">
+                <div class="cbb settings">
+                    <h2 class="title">Cambiar tu perfil</h2>
+                    <div class="box-content">
+                        <div id="settingsNavigation">
+                            <ul>
+                            <?php
+                            $NavigationPages = [
+                            'PREFERENCIAS' => '/profile?tab=1',
+                            'EMAIL Y VERIFICACIÓN' => '/profile?tab=2',
+                            'MI CONTRASEÑA' => '/profile?tab=3'
+                            ];
+    
+                            $NavigationUrls = [
+                            'PREFERENCIAS' => ['/profile', '/profile?tab=1'],
+                            'EMAIL Y VERIFICACIÓN' => ['/profile?tab=2'],
+                            'MI CONTRASEÑA' => ['/profile?tab=3']
+                            ];
+    
+                            foreach ($NavigationPages as $PageName => $PageUrl):
+                            ?>
+                                <li <?php echo (in_array($_SERVER['REQUEST_URI'], $NavigationUrls[$PageName])) ? 'class="selected"' : ''; ?>><?php if(!in_array($_SERVER['REQUEST_URI'], $NavigationUrls[$PageName])): ?><a href="<?php echo URL . $PageUrl; ?>"><?php endif; ?><?php echo $PageName; ?></a></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="habblet-container" style="float:left; width: 560px;">
+                    <div class="cbb clearfix settings">
+                        <h2 class="title">Email y Verificación</h2>
+                        <div class="box-content">
+                            Esta herramienta esta deshabilitada.
+                        </div>
+                    </div>
+            </div>
+    
+    <script type="text/javascript">
+        if (typeof HabboView != "undefined") {
+            HabboView.run();
+        }
+        document.getElementById("style_<?php echo (isset($_COOKIE['customStyle']) && is_numeric($_COOKIE['customStyle'])) ? $_COOKIE['customStyle'] : '-1'; ?>").setAttribute("selected", true);
+    </script>

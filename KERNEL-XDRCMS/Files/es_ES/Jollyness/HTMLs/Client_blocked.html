@@ -1,0 +1,25 @@
+<?php 
+	$e = isset($_GET['e']) ? $_GET['e'] : 0;
+?>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		
+		<title><?php echo HotelName . ': ' . Site::$PageName; ?></title>
+		
+		<link rel="stylesheet" href="<?php echo RES ?>CSS/v1_blocked.css" />
+		<link rel="stylesheet" href="<?php echo RES ?>CSS/v2_fonts.css" />
+		
+	</head>
+	<body>
+		<div class="pin__box">
+			<h2><?php echo HotelName;?> <div class="bill">Protecci&oacute;n</div></h2>
+			<div class="error"><?php echo Text::Get($e); ?></div>
+			<p>Para acceder al cliente, favor de ingresar el <b>PIN</b> de seguridad...<p>
+			<form method="post" action="/account/client_submit">
+				<input type="password" name="pin" maxlength="5" placeholder="Ingresa el PIN" />
+				<button type="submit">Verificar</button>
+			</form>
+		</div>
+	</body>
+</html>
